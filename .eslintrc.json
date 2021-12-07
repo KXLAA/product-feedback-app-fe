@@ -1,13 +1,7 @@
 {
   "root": true,
-  "extends": [
-    "airbnb",
-    "airbnb/hooks",
-    "prettier"
-  ],
-  "plugins": [
-    "prettier"
-  ],
+  "extends": ["airbnb", "airbnb/hooks", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error",
     "no-unused-vars": "warn",

@@ -1,8 +1,10 @@
 import styled from 'styled-components';
-import React from 'react';
+import { React, useState } from 'react';
 import Header from './Header';
 import Filter from './Filter';
 import RoadMap from './RoadMap';
+import Login from './Login';
+import LoggedIn from './LoggedIn';
 
 const Container = styled.section`
   display: flex;
@@ -10,12 +12,17 @@ const Container = styled.section`
   gap: 24px;
 `;
 
-const SideBar = () => (
-  <Container>
-    <Header />
-    <Filter />
-    <RoadMap />
-  </Container>
-);
+const SideBar = () => {
+  const [auth, setAuth] = useState(false);
+
+  return (
+    <Container>
+      {auth ? <LoggedIn /> : <Login />}
+      <Header />
+      <Filter />
+      <RoadMap />
+    </Container>
+  );
+};
 
 export default SideBar;
