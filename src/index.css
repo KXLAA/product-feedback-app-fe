@@ -112,3 +112,34 @@ h4 {
   line-height: 20px;
   letter-spacing: -0.194444px;
 }
+
+/* Dropdown Styles */
+[data-reach-listbox-option] {
+  width: 255px;
+  background: #ffffff;
+  border: none;
+}
+
+[data-reach-listbox-list] {
+  border: none;
+  background: #ffffff;
+  box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.350492);
+  border-radius: 10px;
+}
+
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-down[data-reach-menu-list],
+.slide-down[data-reach-menu-items] {
+  border-radius: 5px;
+  animation: slide-down 0.2s ease;
+}

@@ -1,0 +1,41 @@
+import React from 'react';
+import styled from 'styled-components';
+import { HiOutlineLightBulb } from 'react-icons/hi';
+import Dropdown from './Dropdown';
+import { Button } from '../../common/ui/Button';
+
+const Container = styled.div`
+  background: #373f68;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const SuggestionCount = styled.div`
+  display: flex;
+  color: #ffffff;
+  gap: 16px;
+
+  h3 {
+    padding-right: 16px;
+  }
+`;
+
+const Icon = styled(HiOutlineLightBulb)`
+  font-size: 24px;
+`;
+
+const Header = () => (
+  <Container>
+    <SuggestionCount>
+      <Icon />
+      <h3>6 Suggestions</h3>
+      <Dropdown />
+    </SuggestionCount>
+    <Button>+ Add Feedback</Button>
+  </Container>
+);
+
+export default Header;
