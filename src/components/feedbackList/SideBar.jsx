@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import FilterBtn from '../common/FilterBtn';
+import FilterBtn from '../common/ui/FilterBtn';
 
 const MianContainer = styled.section`
   display: flex;
@@ -71,24 +71,37 @@ const RoadMapHeader = styled.div`
   }
 `;
 
+const RoadMapContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
 const BulletPoint = styled.div`
   height: 8px;
   width: 8px;
   border-radius: 100%;
   background-color: ${(props) => props.color || 'palevioletred'};
 `;
-const RoadTxt = styled.div`
+const RoadMapTxt = styled.div`
   display: flex;
   justify-content: space-between;
 
   p {
+    padding: 2px;
     font-size: 16px;
     line-height: 23px;
     color: #647196;
   }
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
 `;
 
-const GridItem = () => (
+const SideBar = () => (
   <MianContainer>
     <Header>
       <HeaderImg src="/background-header.png" alt="header-background" />
@@ -112,15 +125,31 @@ const GridItem = () => (
         <h3>Roadmap</h3>
         <a href="/">View</a>
       </RoadMapHeader>
+      <RoadMapContent>
+        <RoadMapTxt>
+          <div>
+            <BulletPoint color="#F49F85" />
+            <p>Planned</p>
+          </div>
+          <p style={{ fontWeight: 700 }}>2</p>
+        </RoadMapTxt>
+        <RoadMapTxt>
+          <div>
+            <BulletPoint color="#AD1FEA" />
+            <p>In-Progress</p>
+          </div>
+          <p style={{ fontWeight: 700 }}>3</p>
+        </RoadMapTxt>
+        <RoadMapTxt>
+          <div>
+            <BulletPoint color="#62BCFA" />
+            <p>In-Progress</p>
+          </div>
+          <p style={{ fontWeight: 700 }}>1</p>
+        </RoadMapTxt>
+      </RoadMapContent>
     </RoadMap>
-    <BulletPoint color="#F49F85" />
-    <BulletPoint color="#AD1FEA" />
-    <BulletPoint color="#62BCFA" />
-    <RoadTxt>
-      <p>Planned</p>
-      <p style={{ fontWeight: 700 }}>2</p>
-    </RoadTxt>
   </MianContainer>
 );
 
-export default GridItem;
+export default SideBar;

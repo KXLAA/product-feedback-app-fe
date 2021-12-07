@@ -1,10 +1,12 @@
 import React from 'react';
-import HomePageGrid from '../components/feedbackList/Layout';
-import GridItem from '../components/feedbackList/GridItem';
+import { HomePageGrid, GridItemSide, GridItemMain } from '../components/feedbackList/Layout';
+import SideBar from '../components/feedbackList/SideBar';
 
 const FeedbackList = () => (
   <HomePageGrid>
-    <GridItem />
+    <GridItemSide>
+      <SideBar />
+    </GridItemSide>
   </HomePageGrid>
 );
 
