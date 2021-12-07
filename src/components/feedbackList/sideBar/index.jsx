@@ -13,7 +13,7 @@ const Container = styled.section`
 `;
 
 const SideBar = () => {
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(true);
 
   return (
     <Container>
