@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   background-color: white;
@@ -59,7 +60,7 @@ const RoadMap = () => (
   <Container>
     <RoadMapHeader>
       <h3>Roadmap</h3>
-      <a href="/">View</a>
+      <Link to="/roadmap">View</Link>
     </RoadMapHeader>
     <RoadMapContent>
       <RoadMapTxt>

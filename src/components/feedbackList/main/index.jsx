@@ -11,12 +11,23 @@ const Container = styled.section`
 `;
 
 const Main = () => {
-  const [empty, setIsEmpty] = useState(true);
+  const [empty, setIsEmpty] = useState(false);
 
   return (
     <Container>
       <Header />
-      {empty ? <Empty /> : <Feedback />}
+      {empty ? (
+        <Empty />
+      ) : (
+        <>
+          <Feedback />
+          <Feedback />
+          <Feedback />
+          <Feedback />
+          <Feedback />
+          <Feedback />
+        </>
+      )}
     </Container>
   );
 };
