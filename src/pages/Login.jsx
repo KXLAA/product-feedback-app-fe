@@ -69,7 +69,7 @@ const SignUp = styled.p`
   }
 `;
 
-function Login() {
+export default function Login() {
   return (
     <Background>
       <MainLayout>
@@ -89,5 +89,3 @@ function Login() {
     </Background>
   );
 }
-
-export default Login;

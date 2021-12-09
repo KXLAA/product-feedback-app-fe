@@ -19,15 +19,15 @@ const Layout = styled(MainLayout)`
   margin: 0 auto;
 `;
 
-const FeedbackDetail = () => (
-  <Layout>
-    <Container>
-      <Header />
-      <Feedback />
-      <Comments />
-      <CommentForm />
-    </Container>
-  </Layout>
-);
-
-export default FeedbackDetail;
+export default function FeedbackDetail() {
+  return (
+    <Layout>
+      <Container>
+        <Header />
+        <Feedback />
+        <Comments />
+        <CommentForm />
+      </Container>
+    </Layout>
+  );
+}

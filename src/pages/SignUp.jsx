@@ -58,7 +58,7 @@ const WideBtn = styled(Button)`
   margin-top: 24px;
 `;
 
-function SignUp() {
+export default function SignUp() {
   return (
     <Background>
       <MainLayout>
@@ -80,5 +80,3 @@ function SignUp() {
     </Background>
   );
 }
-
-export default SignUp;

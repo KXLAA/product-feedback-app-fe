@@ -51,7 +51,9 @@ const Header = () => (
         </Back>
       </Link>
     </Alert>
-    <HeaderBtn>Edit Feedback</HeaderBtn>
+    <Link to="/edit-feedback">
+      <HeaderBtn>Edit Feedback</HeaderBtn>
+    </Link>
   </Container>
 );
 

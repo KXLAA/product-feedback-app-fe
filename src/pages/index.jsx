@@ -5,6 +5,8 @@ import FeedbackDetail from './FeedbackDetail';
 import Login from './Login';
 import SignUp from './SignUp';
 import Roadmap from './Roadmap';
+import NewFeedback from './NewFeedback';
+import EditFeedback from './EditFeedback';
 
 export default function Pages() {
   return (
@@ -15,6 +17,8 @@ export default function Pages() {
         <Route path="/auth/sign-up" element={<SignUp />} />
         <Route path="/feedback" element={<FeedbackDetail />} />
         <Route path="/roadmap" element={<Roadmap />} />
+        <Route path="/new-feedback" element={<NewFeedback />} />
+        <Route path="/edit-feedback" element={<EditFeedback />} />
       </Routes>
     </BrowserRouter>
   );

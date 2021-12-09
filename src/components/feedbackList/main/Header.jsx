@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { HiOutlineLightBulb } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 import Dropdown from './Dropdown';
 import { Button } from '../../common/ui/Button';
 
@@ -34,7 +35,9 @@ const Header = () => (
       <h3>6 Suggestions</h3>
       <Dropdown />
     </SuggestionCount>
-    <Button>+ Add Feedback</Button>
+    <Link to="/new-feedback">
+      <Button>+ Add Feedback</Button>
+    </Link>
   </Container>
 );
 
