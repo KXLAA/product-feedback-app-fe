@@ -10,6 +10,7 @@ import {
   ButtonContainer,
 } from './Common';
 import { Button } from '../common/ui/Button';
+import UpdateDropDown from './UpdateDropDown';
 
 const Cancel = styled(Button)`
   background-color: #3a4374;
@@ -80,7 +81,7 @@ const EditForm = () => (
           <h4>Update Status</h4>
           <p>Change feedback state</p>
         </div>
-        <Input />
+        <UpdateDropDown />
       </InputContainer>
 
       <InputContainer>

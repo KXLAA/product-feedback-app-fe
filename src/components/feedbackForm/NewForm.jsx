@@ -11,6 +11,8 @@ import {
 } from './Common';
 import { Button } from '../common/ui/Button';
 
+import NewDropdown from './NewDropDown';
+
 const Cancel = styled(Button)`
   background-color: #3a4374;
 `;
@@ -49,7 +51,7 @@ const NewForm = () => (
           <h4>Category</h4>
           <p>Choose a category for your feedback</p>
         </div>
-        <Input />
+        <NewDropdown />
       </InputContainer>
       <InputContainer>
         <div>
