@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { HiOutlineLightBulb } from 'react-icons/hi';
@@ -28,12 +29,12 @@ const Icon = styled(HiOutlineLightBulb)`
   font-size: 24px;
 `;
 
-const Header = () => (
+const Header = ({ feedback, setFilterFb, filterFb }) => (
   <Container>
     <SuggestionCount>
       <Icon />
-      <h3>6 Suggestions</h3>
-      <Dropdown />
+      <h3>{feedback?.length} Suggestions</h3>
+      <Dropdown feedback={feedback} setFilterFb={setFilterFb} filterFb={filterFb} />
     </SuggestionCount>
     <Link to="/new-feedback">
       <Button>+ Add Feedback</Button>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { HomePageGrid, GridItemSide, GridItemMain } from '../components/feedbackList/Layout';
@@ -8,11 +9,13 @@ import feedbackService from '../services/feedback';
 
 export default function FeedbackList() {
   const [feedback, setFeedback] = useState([]);
+  const [filterFb, setFilterFb] = useState([]);
 
   useEffect(() => {
     const getAll = async () => {
       const feedbackList = await feedbackService.getAll();
       setFeedback(feedbackList);
+      setFilterFb(feedbackList);
     };
     getAll();
   }, []);
@@ -26,7 +29,7 @@ export default function FeedbackList() {
           <SideBar />
         </GridItemSide>
         <GridItemMain>
-          <Main feedback={feedback} />
+          <Main feedback={feedback} filterFb={filterFb} setFilterFb={setFilterFb} />
         </GridItemMain>
       </HomePageGrid>
     </MainLayout>

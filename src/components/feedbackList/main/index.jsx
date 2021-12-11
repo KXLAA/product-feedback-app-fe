@@ -11,19 +11,19 @@ const Container = styled.section`
   gap: 24px;
 `;
 
-const Main = ({ feedback }) => {
+const Main = ({ feedback, filterFb, setFilterFb }) => {
   const [empty, setIsEmpty] = useState(false);
 
-  console.log(feedback);
+  console.log(filterFb);
 
   return (
     <Container>
-      <Header />
-      {empty ? (
+      <Header feedback={feedback} setFilterFb={setFilterFb} filterFb={filterFb} />
+      {feedback.length === 0 ? (
         <Empty />
       ) : (
         <>
-          {feedback.map((feed) => (
+          {filterFb?.map((feed) => (
             <Feedback feedback={feed} key={feed.id} />
           ))}
         </>

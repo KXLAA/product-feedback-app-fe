@@ -52,6 +52,7 @@ const UserComment = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 `;
 
 const Image = styled.img`

@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import {
   Listbox,
   ListboxInput,
@@ -8,7 +10,7 @@ import {
 } from '@reach/listbox';
 import '@reach/listbox/styles.css';
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -40,8 +42,26 @@ const PopOver = styled(ListboxPopover)`
   }
 `;
 
-const Dropdown = () => {
-  const [value, setValue] = React.useState('Most Upvotes');
+const Dropdown = ({ setFilterFb, feedback, filterFb }) => {
+  const [value, setValue] = useState('Most Upvotes');
+  console.log(value);
+
+  if (value === 'Most Upvotes') {
+    const sort = feedback.sort((a, b) => a.upvotes - b.upvotes);
+    setFilterFb(sort.reverse());
+  }
+  if (value === 'Least Upvotes') {
+    const sort = feedback.sort((a, b) => a.upvotes - b.upvotes);
+    setFilterFb(sort);
+  }
+  if (value === 'Most Comments') {
+    const sort = feedback.sort((a, b) => a.comments.length - b.comments.length);
+    setFilterFb(sort);
+  }
+  if (value === 'Least Comments') {
+    const sort = feedback.sort((a, b) => a.comments.length - b.comments.length);
+    setFilterFb(sort.reverse());
+  }
 
   return (
     <Container>
