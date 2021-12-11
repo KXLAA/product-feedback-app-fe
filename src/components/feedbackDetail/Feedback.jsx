@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { FaComment } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import Upvotes from '../../common/ui/Upvotes';
-import FilterBtn from '../../common/ui/FilterBtn';
+import Upvotes from '../common/ui/Upvotes';
+import FilterBtn from '../common/ui/FilterBtn';
 
 const Container = styled.div`
   background: #ffffff;
@@ -56,20 +55,17 @@ const Comment = styled(FaComment)`
 const Feedback = ({ feedback }) => (
   <Container>
     <DetailsContainer>
-      <Upvotes number={feedback.upvotes} />
+      <Upvotes number={feedback?.upvotes} />
       <div>
-        <h3>
-          <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>
-        </h3>
-
-        <p>{feedback.description}</p>
-        <FilterBtn text={feedback.category} />
+        <h3>{feedback?.title}</h3>
+        <p>{feedback?.description}</p>
+        <FilterBtn text={feedback?.category} />
       </div>
     </DetailsContainer>
 
     <CommentContainer>
       <Comment />
-      <p>{feedback.comments.length}</p>
+      <p>{feedback?.comments?.length}</p>
     </CommentContainer>
   </Container>
 );

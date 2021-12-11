@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { React, useState } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
@@ -10,8 +11,10 @@ const Container = styled.section`
   gap: 24px;
 `;
 
-const Main = () => {
+const Main = ({ feedback }) => {
   const [empty, setIsEmpty] = useState(false);
+
+  console.log(feedback);
 
   return (
     <Container>
@@ -20,12 +23,9 @@ const Main = () => {
         <Empty />
       ) : (
         <>
-          <Feedback />
-          <Feedback />
-          <Feedback />
-          <Feedback />
-          <Feedback />
-          <Feedback />
+          {feedback.map((feed) => (
+            <Feedback feedback={feed} key={feed.id} />
+          ))}
         </>
       )}
     </Container>
