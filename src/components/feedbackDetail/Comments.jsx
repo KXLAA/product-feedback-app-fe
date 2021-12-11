@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import Comment from './Comment';
@@ -16,13 +17,16 @@ const Header = styled.h3`
   color: #3a4374;
 `;
 
-const Comments = () => (
+const Comments = ({ comments }) => (
   <Container>
-    <Header>4 Comments</Header>
-    <Comment />
+    <Header>
+      {comments?.length} {comments?.length === 1 ? 'Comment' : 'Comments'}
+    </Header>
+    {comments?.map((comment) => (
+      <Comment comment={comment} key={comment.id} />
+    ))}
+
     <Reply />
-    <Comment />
-    <Comment />
   </Container>
 );
 

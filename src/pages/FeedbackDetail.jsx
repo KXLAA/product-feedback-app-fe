@@ -10,6 +10,7 @@ import Header from '../components/feedbackDetail/Header';
 import Comments from '../components/feedbackDetail/Comments';
 import CommentForm from '../components/feedbackDetail/CommentForm';
 import feedbackService from '../services/feedback';
+import userService from '../services/user';
 
 const Container = styled.div`
   display: flex;
@@ -26,6 +27,7 @@ const Layout = styled(MainLayout)`
 
 export default function FeedbackDetail() {
   const [data, setData] = useState([]);
+
   const params = useParams();
 
   const getOne = async () => {
@@ -43,7 +45,7 @@ export default function FeedbackDetail() {
       <Container>
         <Header />
         <Feedback feedback={data} />
-        <Comments />
+        <Comments comments={data.comments} />
         <CommentForm />
       </Container>
     </Layout>

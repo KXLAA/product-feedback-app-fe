@@ -15,7 +15,6 @@ export default function Pages() {
         <Route path="/" element={<FeedbackList />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/sign-up" element={<SignUp />} />
-        {/* <Route path="/feedback" element={<FeedbackDetail />} /> */}
         <Route path="/feedback-list/:id" element={<FeedbackDetail />} />
         <Route path="/roadmap" element={<Roadmap />} />
         <Route path="/new-feedback" element={<NewFeedback />} />

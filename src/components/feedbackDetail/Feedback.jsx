@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaComment } from 'react-icons/fa';
 import Upvotes from '../common/ui/Upvotes';
 import FilterBtn from '../common/ui/FilterBtn';
+import userService from '../../services/user';
 
 const Container = styled.div`
   background: #ffffff;
