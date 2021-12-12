@@ -42,26 +42,9 @@ const PopOver = styled(ListboxPopover)`
   }
 `;
 
-const Dropdown = ({ setFilterFb, feedback, filterFb }) => {
+const Dropdown = ({ feedback }) => {
   const [value, setValue] = useState('Most Upvotes');
   console.log(value);
-
-  if (value === 'Most Upvotes') {
-    const sort = feedback.sort((a, b) => a.upvotes - b.upvotes);
-    setFilterFb(sort.reverse());
-  }
-  if (value === 'Least Upvotes') {
-    const sort = feedback.sort((a, b) => a.upvotes - b.upvotes);
-    setFilterFb(sort);
-  }
-  if (value === 'Most Comments') {
-    const sort = feedback.sort((a, b) => a.comments.length - b.comments.length);
-    setFilterFb(sort);
-  }
-  if (value === 'Least Comments') {
-    const sort = feedback.sort((a, b) => a.comments.length - b.comments.length);
-    setFilterFb(sort.reverse());
-  }
 
   return (
     <Container>

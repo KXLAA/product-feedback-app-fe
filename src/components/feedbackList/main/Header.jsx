@@ -29,12 +29,12 @@ const Icon = styled(HiOutlineLightBulb)`
   font-size: 24px;
 `;
 
-const Header = ({ feedback, setFilterFb, filterFb }) => (
+const Header = ({ feedback }) => (
   <Container>
     <SuggestionCount>
       <Icon />
       <h3>{feedback?.length} Suggestions</h3>
-      <Dropdown feedback={feedback} setFilterFb={setFilterFb} filterFb={filterFb} />
+      <Dropdown feedback={feedback} />
     </SuggestionCount>
     <Link to="/new-feedback">
       <Button>+ Add Feedback</Button>

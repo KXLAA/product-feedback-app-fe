@@ -91,36 +91,7 @@ const SignUp = styled.p`
   }
 `;
 
-export default function Login({ setAuthUser }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [notify, setNotify] = useState(null);
-
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedUser');
-    if (loggedUserJSON) {
-      const newUser = JSON.parse(loggedUserJSON);
-      setAuthUser(newUser);
-      feedbackService.setToken(newUser.token);
-    }
-  }, []);
-
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    try {
-      const newUser = await loginService.login({
-        username: username,
-        password: password,
-      });
-      window.localStorage.setItem('loggedUser', JSON.stringify(newUser));
-      feedbackService.setToken(newUser.token);
-      setAuthUser(newUser);
-      setUsername('');
-      setPassword('');
-    } catch (exception) {
-      setNotify('Wrong credentials');
-    }
-  };
+export default function Login({ onChange, logIn, handleLogin }) {
   return (
     <Background>
       <MainLayout>
@@ -130,18 +101,18 @@ export default function Login({ setAuthUser }) {
             type="text"
             placeholder="Korty65"
             id="email"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
+            value={logIn.username}
+            name="username"
+            onChange={onChange}
           />
 
           <Label htmlFor="email">Password</Label>
           <Input
-            name="Password"
+            name="password"
             type="password"
             id="password"
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
+            value={logIn.password}
+            onChange={onChange}
           />
           <WideBtn> Login </WideBtn>
 

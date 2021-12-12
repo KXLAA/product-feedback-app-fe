@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
@@ -79,65 +81,65 @@ const WideBtn = styled.button`
   }
 `;
 
-export default function SignUp() {
-  const [user, setUser] = useState({
-    username: '',
-    name: '',
-    password: '',
-    email: '',
-  });
-  const [createdUser, setCreatedUser] = useState({});
-  const [notify, setNotify] = useState(null);
+export default function SignUp({ handleSignUp, onChange, newUser }) {
+  // const [user, setUser] = useState({
+  //   username: '',
+  //   name: '',
+  //   password: '',
+  //   email: '',
+  // });
+  // const [createdUser, setCreatedUser] = useState({});
+  // const [notify, setNotify] = useState(null);
 
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedUser');
-    if (loggedUserJSON) {
-      const newUser = JSON.parse(loggedUserJSON);
-      feedbackService.setToken(newUser.token);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const loggedUserJSON = window.localStorage.getItem('loggedUser');
+  //   if (loggedUserJSON) {
+  //     const newUser = JSON.parse(loggedUserJSON);
+  //     feedbackService.setToken(newUser.token);
+  //   }
+  // }, []);
 
-  const createUser = async (event) => {
-    event.preventDefault();
+  // const createUser = async (event) => {
+  //   event.preventDefault();
 
-    const newUserObj = {
-      username: user.username,
-      name: user.name,
-      email: user.email,
-      password: user.password,
-    };
+  //   const newUserObj = {
+  //     username: user.username,
+  //     name: user.name,
+  //     email: user.email,
+  //     password: user.password,
+  //   };
 
-    const newUser = await userService.createUser(newUserObj);
-    setCreatedUser(newUser);
-    try {
-      const logInUser = await loginService.login({
-        username: newUser.username,
-        password: newUser.password,
-      });
-      window.localStorage.setItem('loggedUser', JSON.stringify(logInUser));
-      feedbackService.setToken(logInUser.token);
-    } catch (exception) {
-      setNotify('Wrong credentials');
-    }
-    setUser({ username: '', name: '', password: '', email: '' });
-  };
+  //   const newUser = await userService.createUser(newUserObj);
+  //   setCreatedUser(newUser);
+  //   try {
+  //     const logInUser = await loginService.login({
+  //       username: newUser.username,
+  //       password: newUser.password,
+  //     });
+  //     window.localStorage.setItem('loggedUser', JSON.stringify(logInUser));
+  //     feedbackService.setToken(logInUser.token);
+  //   } catch (exception) {
+  //     setNotify('Wrong credentials');
+  //   }
+  //   setUser({ username: '', name: '', password: '', email: '' });
+  // };
 
-  const handleChange = ({ target }) => {
-    setUser((prevUser) => ({ ...prevUser, [target.name]: target.value }));
-  };
+  // const handleChange = ({ target }) => {
+  //   setUser((prevUser) => ({ ...prevUser, [target.name]: target.value }));
+  // };
 
   return (
     <Background>
       <MainLayout>
-        <Form onSubmit={createUser}>
+        <Form onSubmit={handleSignUp}>
           <Label htmlFor="full-name">Full Name</Label>
           <Input
             type="text"
             name="name"
             placeholder="Apple Smith"
             id="name"
-            value={user.name}
-            onChange={handleChange}
+            value={newUser.name}
+            onChange={onChange}
           />
 
           <Label htmlFor="user-name">User Name </Label>
@@ -146,8 +148,8 @@ export default function SignUp() {
             name="username"
             placeholder="AppleSmithy"
             id="username"
-            value={user.username}
-            onChange={handleChange}
+            value={newUser.username}
+            onChange={onChange}
           />
 
           <Label htmlFor="email">Email</Label>
@@ -156,8 +158,8 @@ export default function SignUp() {
             type="email"
             placeholder="hello@example.com"
             id="email"
-            value={user.email}
-            onChange={handleChange}
+            value={newUser.email}
+            onChange={onChange}
           />
 
           <Label htmlFor="password">Password</Label>
@@ -166,12 +168,11 @@ export default function SignUp() {
             type="password"
             id="password"
             placeholder="Password"
-            value={user.password}
-            onChange={handleChange}
+            value={newUser.password}
+            onChange={onChange}
           />
-          <Link to="/">
-            <WideBtn> Sign Up </WideBtn>
-          </Link>
+
+          <WideBtn> Sign Up </WideBtn>
         </Form>
       </MainLayout>
     </Background>

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
@@ -17,12 +19,13 @@ const Container = styled.div`
 
 const UserDetails = styled.div``;
 
-const LoggedIn = ({ newUser }) => (
+const LoggedIn = ({ newUser, handleLogOut }) => (
   <Container>
     <img src={newUser.avatar} alt="avatar" />
     <UserDetails>
       <h3>Welcome</h3>
       <h4>{newUser.name}</h4>
+      <p onClick={handleLogOut}>log Out</p>
     </UserDetails>
   </Container>
 );

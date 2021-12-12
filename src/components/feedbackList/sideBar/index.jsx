@@ -14,14 +14,13 @@ const Container = styled.section`
   gap: 24px;
 `;
 
-const SideBar = () => {
+const SideBar = ({ handleLogOut }) => {
   const loggedUserJSON = window.localStorage.getItem('loggedUser');
   const newUser = JSON.parse(loggedUserJSON);
-  console.log(newUser);
 
   return (
     <Container>
-      {newUser ? <LoggedIn newUser={newUser} /> : <Login />}
+      {newUser ? <LoggedIn newUser={newUser} handleLogOut={handleLogOut} /> : <Login />}
       <Header />
       <Filter />
       <RoadMap />

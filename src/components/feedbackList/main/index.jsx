@@ -11,25 +11,19 @@ const Container = styled.section`
   gap: 24px;
 `;
 
-const Main = ({ feedback, filterFb, setFilterFb }) => {
-  const [empty, setIsEmpty] = useState(false);
-
-  console.log(filterFb);
-
-  return (
-    <Container>
-      <Header feedback={feedback} setFilterFb={setFilterFb} filterFb={filterFb} />
-      {feedback.length === 0 ? (
-        <Empty />
-      ) : (
-        <>
-          {filterFb?.map((feed) => (
-            <Feedback feedback={feed} key={feed.id} />
-          ))}
-        </>
-      )}
-    </Container>
-  );
-};
+const Main = ({ feedback }) => (
+  <Container>
+    <Header feedback={feedback} />
+    {feedback.length === 0 ? (
+      <Empty />
+    ) : (
+      <>
+        {feedback?.map((feed) => (
+          <Feedback feedback={feed} key={feed.id} />
+        ))}
+      </>
+    )}
+  </Container>
+);
 
 export default Main;
