@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import MainLayout from '../components/common/Layout';
 import { Button } from '../components/common/ui/Button';
+import userService from '../services/user';
 
 const Background = styled.div`
   min-height: 100vh;
@@ -50,30 +51,103 @@ const Label = styled.label`
   font-weight: 700;
 `;
 
-const WideBtn = styled(Button)`
+const WideBtn = styled.button`
   width: 100%;
   text-align: center;
   padding: 24px;
   font-size: 16px;
   margin-top: 24px;
+  background: #ad1fea;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: #f2f4fe;
+  cursor: pointer;
+
+  &:hover {
+    color: #ffffff;
+    background: #c75af6;
+    transform: translateX(0rem) translateY(-0.125rem);
+  }
+  &:active {
+    transform: translateX(0rem) translateY(0.125rem);
+  }
 `;
 
 export default function SignUp() {
+  const [user, setUser] = useState({
+    username: '',
+    name: '',
+    password: '',
+    email: '',
+  });
+  const [createdUser, setCreatedUser] = useState({});
+
+  const createUser = async (event) => {
+    event.preventDefault();
+
+    const newUserObj = {
+      username: user.username,
+      name: user.name,
+      email: user.email,
+      password: user.password,
+    };
+
+    const newUser = await userService.createUser(newUserObj);
+    setCreatedUser(newUser);
+    console.log(createdUser);
+    setUser({ username: '', name: '', password: '', email: '' });
+  };
+
+  const handleChange = ({ target }) => {
+    setUser((prevUser) => ({ ...prevUser, [target.name]: target.value }));
+  };
+
   return (
     <Background>
       <MainLayout>
-        <Form>
+        <Form onSubmit={createUser}>
           <Label htmlFor="full-name">Full Name</Label>
-          <Input type="text" name="full-name" placeholder="Apple Smith" id="full-name" />
+          <Input
+            type="text"
+            name="name"
+            placeholder="Apple Smith"
+            id="name"
+            value={user.name}
+            onChange={handleChange}
+          />
 
           <Label htmlFor="user-name">User Name </Label>
-          <Input type="text" name="user-name" placeholder="AppleSmithy" id="user-name" />
+          <Input
+            type="text"
+            name="username"
+            placeholder="AppleSmithy"
+            id="username"
+            value={user.username}
+            onChange={handleChange}
+          />
 
           <Label htmlFor="email">Email</Label>
-          <Input name="email" type="email" placeholder="hello@example.com" id="email" />
+          <Input
+            name="email"
+            type="email"
+            placeholder="hello@example.com"
+            id="email"
+            value={user.email}
+            onChange={handleChange}
+          />
 
           <Label htmlFor="password">Password</Label>
-          <Input name="Password" type="password" id="password" />
+          <Input
+            name="password"
+            type="password"
+            id="password"
+            placeholder="Password"
+            value={user.password}
+            onChange={handleChange}
+          />
           <WideBtn> Sign Up </WideBtn>
         </Form>
       </MainLayout>

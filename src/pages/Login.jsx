@@ -1,8 +1,10 @@
-import React from 'react';
+/* eslint-disable no-undef */
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import MainLayout from '../components/common/Layout';
-import { Button } from '../components/common/ui/Button';
+import loginService from '../services/login';
+import feedbackService from '../services/feedback';
 
 const Background = styled.div`
   min-height: 100vh;
@@ -51,12 +53,30 @@ const Label = styled.label`
   font-weight: 700;
 `;
 
-const WideBtn = styled(Button)`
+const WideBtn = styled.button`
   width: 100%;
   text-align: center;
   padding: 24px;
   font-size: 16px;
   margin-top: 24px;
+  background: #ad1fea;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: #f2f4fe;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    color: #ffffff;
+    background: #c75af6;
+    transform: translateX(0rem) translateY(-0.125rem);
+  }
+  &:active {
+    transform: translateX(0rem) translateY(0.125rem);
+  }
 `;
 
 const SignUp = styled.p`
@@ -70,15 +90,59 @@ const SignUp = styled.p`
 `;
 
 export default function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [user, setUser] = useState(null);
+  const [notify, setNotify] = useState(null);
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedUser');
+    if (loggedUserJSON) {
+      const newUser = JSON.parse(loggedUserJSON);
+      setUser(newUser);
+      feedbackService.setToken(newUser.token);
+    }
+  }, []);
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    try {
+      const newUser = await loginService.login({
+        username: username,
+        password: password,
+      });
+      window.localStorage.setItem('loggedUser', JSON.stringify(newUser));
+      feedbackService.setToken(newUser.token);
+      setUser(newUser);
+      setUsername('');
+      setPassword('');
+    } catch (exception) {
+      setNotify('Wrong credentials');
+    }
+  };
+  console.log(user);
   return (
     <Background>
       <MainLayout>
-        <Form>
-          <Label htmlFor="email">Email</Label>
-          <Input type="text" name="email" placeholder="hello@example.com" id="email" />
+        <Form onSubmit={handleLogin}>
+          <Label htmlFor="email">User Name</Label>
+          <Input
+            type="text"
+            placeholder="Korty65"
+            id="email"
+            value={username}
+            name="Username"
+            onChange={({ target }) => setUsername(target.value)}
+          />
 
           <Label htmlFor="email">Password</Label>
-          <Input name="Password" type="password" id="password" />
+          <Input
+            name="Password"
+            type="password"
+            id="password"
+            value={password}
+            onChange={({ target }) => setPassword(target.value)}
+          />
           <WideBtn> Login </WideBtn>
 
           <SignUp>
