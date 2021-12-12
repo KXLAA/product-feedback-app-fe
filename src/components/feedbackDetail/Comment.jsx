@@ -1,8 +1,11 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import userService from '../../services/user';
+import { Button } from '../common/ui/Button';
 
 const Container = styled.div`
   display: flex;
@@ -38,6 +41,7 @@ const Header = styled.div`
     font-size: 13px;
     line-height: 19px;
     color: #4661e6;
+    cursor: pointer;
   }
 `;
 
@@ -61,9 +65,37 @@ const Image = styled.img`
   height: 40px;
 `;
 
+const Textarea = styled.textarea`
+  width: 90%;
+  resize: none;
+  border: none;
+  overflow: auto;
+  outline: none;
+  background: #f7f8fd;
+  border-radius: 5px;
+  height: 80px;
+  padding: 24px;
+  font-size: 15px;
+  line-height: 22px;
+  color: #8c92b3;
+  margin-bottom: 24px;
+`;
+
+const ReplyFormContainer = styled.div`
+  display: flex;
+  gap: 16px;
+`;
+
+const Btn = styled(Button)`
+  width: 23%;
+  height: fit-content;
+  text-align: center;
+`;
+
 const Comment = ({ comment }) => {
   console.log(comment);
   const [data, setData] = useState([]);
+  const [showFrom, setShowForm] = useState(false);
 
   const getUser = async () => {
     const user = await userService.getUser(comment.user);
@@ -85,9 +117,18 @@ const Comment = ({ comment }) => {
             <h4>{data.name}</h4>
             <p>@{data.username}</p>
           </div>
-          <a href="/">Reply</a>
+          <a href onClick={() => setShowForm(!showFrom)}>
+            Reply
+          </a>
         </Header>
         <Content>{comment.content}</Content>
+
+        {showFrom && (
+          <ReplyFormContainer>
+            <Textarea />
+            <Btn>Post Reply</Btn>
+          </ReplyFormContainer>
+        )}
       </UserComment>
     </Container>
   );
