@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Button = styled.div`
+export const Button = styled.button`
   display: inline;
   padding: 12px 24px;
   background: #ad1fea;
@@ -11,6 +11,7 @@ export const Button = styled.div`
   line-height: 20px;
   color: #f2f4fe;
   cursor: pointer;
+  border: none;
 
   &:hover {
     color: #ffffff;

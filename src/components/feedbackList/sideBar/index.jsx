@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { React, useState } from 'react';
 import Header from './Header';
@@ -13,11 +15,13 @@ const Container = styled.section`
 `;
 
 const SideBar = () => {
-  const [auth, setAuth] = useState(false);
+  const loggedUserJSON = window.localStorage.getItem('loggedUser');
+  const newUser = JSON.parse(loggedUserJSON);
+  console.log(newUser);
 
   return (
     <Container>
-      {auth ? <LoggedIn /> : <Login />}
+      {newUser ? <LoggedIn newUser={newUser} /> : <Login />}
       <Header />
       <Filter />
       <RoadMap />

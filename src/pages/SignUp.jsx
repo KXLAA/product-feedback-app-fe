@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+/* eslint-disable no-undef */
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import MainLayout from '../components/common/Layout';
-import { Button } from '../components/common/ui/Button';
 import userService from '../services/user';
+import loginService from '../services/login';
+import feedbackService from '../services/feedback';
 
 const Background = styled.div`
   min-height: 100vh;
@@ -84,6 +87,15 @@ export default function SignUp() {
     email: '',
   });
   const [createdUser, setCreatedUser] = useState({});
+  const [notify, setNotify] = useState(null);
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedUser');
+    if (loggedUserJSON) {
+      const newUser = JSON.parse(loggedUserJSON);
+      feedbackService.setToken(newUser.token);
+    }
+  }, []);
 
   const createUser = async (event) => {
     event.preventDefault();
@@ -97,7 +109,16 @@ export default function SignUp() {
 
     const newUser = await userService.createUser(newUserObj);
     setCreatedUser(newUser);
-    console.log(createdUser);
+    try {
+      const logInUser = await loginService.login({
+        username: newUser.username,
+        password: newUser.password,
+      });
+      window.localStorage.setItem('loggedUser', JSON.stringify(logInUser));
+      feedbackService.setToken(logInUser.token);
+    } catch (exception) {
+      setNotify('Wrong credentials');
+    }
     setUser({ username: '', name: '', password: '', email: '' });
   };
 
@@ -148,7 +169,9 @@ export default function SignUp() {
             value={user.password}
             onChange={handleChange}
           />
-          <WideBtn> Sign Up </WideBtn>
+          <Link to="/">
+            <WideBtn> Sign Up </WideBtn>
+          </Link>
         </Form>
       </MainLayout>
     </Background>

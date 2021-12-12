@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -10,17 +11,18 @@ const Container = styled.div`
 
   img {
     border-radius: 100%;
+    width: 40px;
   }
 `;
 
 const UserDetails = styled.div``;
 
-const LoggedIn = () => (
+const LoggedIn = ({ newUser }) => (
   <Container>
-    <img src="https://i.pravatar.cc/50" alt="avatar" />
+    <img src={newUser.avatar} alt="avatar" />
     <UserDetails>
       <h3>Welcome</h3>
-      <h4>Test User</h4>
+      <h4>{newUser.name}</h4>
     </UserDetails>
   </Container>
 );

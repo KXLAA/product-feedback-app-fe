@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import {
@@ -17,10 +18,10 @@ const Cancel = styled(Button)`
   background-color: #3a4374;
 `;
 
-const NewForm = () => (
+const NewForm = ({ handleChange, newFeedback, createFeedback }) => (
   <Container>
     <Header />
-    <Form>
+    <Form onSubmit={createFeedback}>
       <svg width="56" height="56" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient cx="103.9%" cy="-10.387%" fx="103.9%" fy="-10.387%" r="166.816%" id="a">
@@ -44,7 +45,7 @@ const NewForm = () => (
           <h4>Feedback Title</h4>
           <p>Add a short, descriptive headline</p>
         </div>
-        <Input />
+        <Input name="title" value={newFeedback.title} onChange={handleChange} />
       </InputContainer>
       <InputContainer>
         <div>
@@ -58,7 +59,7 @@ const NewForm = () => (
           <h4>Feedback Detail</h4>
           <p>Include any specific comments on what should be improved, added, etc.</p>
         </div>
-        <Textarea />
+        <Textarea name="detail" value={newFeedback.detail} onChange={handleChange} />
       </InputContainer>
       <ButtonContainer>
         <Button>Add Feedback</Button>

@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
@@ -89,17 +91,16 @@ const SignUp = styled.p`
   }
 `;
 
-export default function Login() {
+export default function Login({ setAuthUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState(null);
   const [notify, setNotify] = useState(null);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser');
     if (loggedUserJSON) {
       const newUser = JSON.parse(loggedUserJSON);
-      setUser(newUser);
+      setAuthUser(newUser);
       feedbackService.setToken(newUser.token);
     }
   }, []);
@@ -113,14 +114,13 @@ export default function Login() {
       });
       window.localStorage.setItem('loggedUser', JSON.stringify(newUser));
       feedbackService.setToken(newUser.token);
-      setUser(newUser);
+      setAuthUser(newUser);
       setUsername('');
       setPassword('');
     } catch (exception) {
       setNotify('Wrong credentials');
     }
   };
-  console.log(user);
   return (
     <Background>
       <MainLayout>
