@@ -107,6 +107,25 @@ export default function Pages() {
     setNewUser((prevUser) => ({ ...prevUser, [target.name]: target.value }));
   };
 
+  const handleNewFeedback = async (event) => {
+    event.preventDefault();
+
+    const feedbackObject = {
+      title: newFeedback.title,
+      category: newFeedback.category,
+      detail: newFeedback.detail,
+    };
+
+    const createdFeedback = await feedbackService.create(feedbackObject);
+    setFeedback(feedback.concat(createdFeedback));
+    setNewFeedback({ title: '', category: '', detail: '' });
+  };
+
+  const handleNewFeedbackChange = ({ target }) => {
+    setNewFeedback((prevInputData) => ({ ...prevInputData, [target.name]: target.value }));
+    console.log(newFeedback);
+  };
+
   return (
     <BrowserRouter>
       <Routes>
@@ -138,7 +157,17 @@ export default function Pages() {
         />
         <Route path="/feedback-list/:id" element={<FeedbackDetail />} />
         <Route path="/roadmap" element={<Roadmap />} />
-        <Route path="/new-feedback" element={<NewFeedback />} />
+        <Route
+          path="/new-feedback"
+          element={
+            <NewFeedback
+              handleNewFeedback={handleNewFeedback}
+              onChange={handleNewFeedbackChange}
+              newFeedback={newFeedback}
+              mm={logIn}
+            />
+          }
+        />
         <Route path="/edit-feedback" element={<EditFeedback />} />
       </Routes>
     </BrowserRouter>
