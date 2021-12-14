@@ -61,7 +61,12 @@ const NewForm = ({ onChange, newFeedback, handleNewFeedback }) => {
             <h4>Feedback Detail</h4>
             <p>Include any specific comments on what should be improved, added, etc.</p>
           </div>
-          <Textarea name="detail" value={newFeedback.detail} onChange={onChange} />
+          <Textarea
+            name="description"
+            value={newFeedback.description}
+            onChange={onChange}
+            required
+          />
         </InputContainer>
         <ButtonContainer>
           <Button>Add Feedback</Button>

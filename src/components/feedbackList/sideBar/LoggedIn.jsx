@@ -19,12 +19,12 @@ const Container = styled.div`
 
 const UserDetails = styled.div``;
 
-const LoggedIn = ({ newUser, handleLogOut }) => (
+const LoggedIn = ({ authUser, handleLogOut }) => (
   <Container>
-    <img src={newUser.avatar} alt="avatar" />
+    <img src={authUser.avatar} alt="avatar" />
     <UserDetails>
       <h3>Welcome</h3>
-      <h4>{newUser.name}</h4>
+      <h4>{authUser.name}</h4>
       <p onClick={handleLogOut}>log Out</p>
     </UserDetails>
   </Container>

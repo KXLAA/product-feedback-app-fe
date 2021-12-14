@@ -21,7 +21,7 @@ export default function Pages() {
   const [newFeedback, setNewFeedback] = useState({
     title: '',
     category: '',
-    detail: '',
+    description: '',
   });
   const [logIn, setLogIn] = useState({
     username: '',
@@ -44,13 +44,16 @@ export default function Pages() {
   }, []);
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser');
+    const loggedUserJSON = window.localStorage.getItem('loggedUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setAuthUser(user);
+
       feedbackService.setToken(user.token);
     }
   }, []);
+
+  console.log(authUser);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -113,12 +116,12 @@ export default function Pages() {
     const feedbackObject = {
       title: newFeedback.title,
       category: newFeedback.category,
-      detail: newFeedback.detail,
+      description: newFeedback.description,
     };
 
     const createdFeedback = await feedbackService.create(feedbackObject);
     setFeedback(feedback.concat(createdFeedback));
-    setNewFeedback({ title: '', category: '', detail: '' });
+    setNewFeedback({ title: '', category: '', description: '' });
   };
 
   const handleNewFeedbackChange = ({ target }) => {
@@ -131,7 +134,9 @@ export default function Pages() {
       <Routes>
         <Route
           path="/"
-          element={<FeedbackList feedback={feedback} handleLogOut={handleLogOut} />}
+          element={
+            <FeedbackList feedback={feedback} handleLogOut={handleLogOut} authUser={authUser} />
+          }
         />
         <Route
           path="/auth/login"
