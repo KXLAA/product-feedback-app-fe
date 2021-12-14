@@ -18,11 +18,14 @@ export default function Pages() {
   const [authUser, setAuthUser] = useState(null);
   const [notify, setNotify] = useState(null);
   const [feedback, setFeedback] = useState([]);
+  const [category, setCategory] = useState(null);
   const [newFeedback, setNewFeedback] = useState({
     title: '',
-    category: '',
     description: '',
+    category: 'Feature',
   });
+
+  console.log(newFeedback);
   const [logIn, setLogIn] = useState({
     username: '',
     password: '',
@@ -52,8 +55,6 @@ export default function Pages() {
       feedbackService.setToken(user.token);
     }
   }, []);
-
-  console.log(authUser);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -126,7 +127,6 @@ export default function Pages() {
 
   const handleNewFeedbackChange = ({ target }) => {
     setNewFeedback((prevInputData) => ({ ...prevInputData, [target.name]: target.value }));
-    console.log(newFeedback);
   };
 
   return (
@@ -169,7 +169,7 @@ export default function Pages() {
               handleNewFeedback={handleNewFeedback}
               onChange={handleNewFeedbackChange}
               newFeedback={newFeedback}
-              mm={logIn}
+              setNewFeedback={setNewFeedback}
             />
           }
         />

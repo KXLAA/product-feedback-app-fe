@@ -13,12 +13,13 @@ import {
 import { Button } from '../common/ui/Button';
 
 import NewDropdown from './NewDropDown';
+import DropDown from './DropDown';
 
 const Cancel = styled(Button)`
   background-color: #3a4374;
 `;
 
-const NewForm = ({ onChange, newFeedback, handleNewFeedback }) => {
+const NewForm = ({ onChange, newFeedback, handleNewFeedback, setNewFeedback }) => {
   console.log(newFeedback);
   return (
     <Container>
@@ -54,7 +55,7 @@ const NewForm = ({ onChange, newFeedback, handleNewFeedback }) => {
             <h4>Category</h4>
             <p>Choose a category for your feedback</p>
           </div>
-          <NewDropdown />
+          <NewDropdown setNewFeedback={setNewFeedback} />
         </InputContainer>
         <InputContainer>
           <div>

@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 import {
   Listbox,
   ListboxInput,
@@ -8,7 +11,7 @@ import {
 } from '@reach/listbox';
 import '@reach/listbox/styles.css';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const MenuList = styled(ListboxButton)`
@@ -53,12 +56,16 @@ const PopOver = styled(ListboxPopover)`
   }
 `;
 
-const NewDropdown = () => {
-  const [value, setValue] = React.useState('Feature');
+const NewDropdown = ({ setNewFeedback }) => {
+  const [value, setValue] = useState('Feature');
+
+  useEffect(() => {
+    setNewFeedback((prev) => ({ ...prev, category: value }));
+  }, [value]);
 
   return (
     <>
-      <ListboxInput value={value} onChange={setValue}>
+      <ListboxInput name="category" value={value} onChange={setValue}>
         <MenuList arrow />
         <PopOver>
           <ListboxList>

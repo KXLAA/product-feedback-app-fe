@@ -4,13 +4,14 @@ import NewForm from '../components/feedbackForm/NewForm';
 import { Layout } from '../components/feedbackForm/Common';
 import feedbackService from '../services/feedback';
 
-export default function NewFeedback({ handleNewFeedback, onChange, newFeedback }) {
+export default function NewFeedback({ handleNewFeedback, onChange, newFeedback, setNewFeedback }) {
   return (
     <Layout>
       <NewForm
         handleNewFeedback={handleNewFeedback}
         onChange={onChange}
         newFeedback={newFeedback}
+        setNewFeedback={setNewFeedback}
       />
     </Layout>
   );
