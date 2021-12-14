@@ -12,4 +12,9 @@ const createUser = async (newObject) => {
   return response.data;
 };
 
-export default { getUser, createUser };
+const editUser = async (id, newObject) => {
+  const response = await axios.put(`${baseUrl}/${id}`, newObject);
+  return response.data;
+};
+
+export default { getUser, createUser, editUser };

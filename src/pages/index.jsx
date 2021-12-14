@@ -133,7 +133,12 @@ export default function Pages() {
         <Route
           path="/"
           element={
-            <FeedbackList feedback={feedback} handleLogOut={handleLogOut} authUser={authUser} />
+            <FeedbackList
+              feedback={feedback}
+              setFeedback={setFeedback}
+              handleLogOut={handleLogOut}
+              authUser={authUser}
+            />
           }
         />
         <Route

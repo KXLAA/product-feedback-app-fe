@@ -7,7 +7,7 @@ import Main from '../components/feedbackList/main';
 import SideBar from '../components/feedbackList/sideBar/index';
 import MainLayout from '../components/common/Layout';
 
-export default function FeedbackList({ feedback, handleLogOut, authUser }) {
+export default function FeedbackList({ feedback, setFeedback, handleLogOut, authUser }) {
   return (
     <MainLayout>
       <HomePageGrid>
@@ -15,7 +15,7 @@ export default function FeedbackList({ feedback, handleLogOut, authUser }) {
           <SideBar handleLogOut={handleLogOut} authUser={authUser} />
         </GridItemSide>
         <GridItemMain>
-          <Main feedback={feedback} />
+          <Main feedback={feedback} setFeedback={setFeedback} />
         </GridItemMain>
       </HomePageGrid>
     </MainLayout>

@@ -5,6 +5,8 @@ import { FaComment } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Upvotes from '../../common/ui/Upvotes';
 import FilterBtn from '../../common/ui/FilterBtn';
+import feedbackService from '../../../services/feedback';
+import userService from '../../../services/user';
 
 const Container = styled.div`
   background: #ffffff;
@@ -55,25 +57,38 @@ const Comment = styled(FaComment)`
 
 const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('').toLowerCase();
 
-const Feedback = ({ feedback }) => (
-  <Container>
-    <DetailsContainer>
-      <Upvotes number={feedback.upvotes} />
-      <div>
-        <h3>
-          <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>
-        </h3>
+const Feedback = ({ feedback, feedbackList, setFeedback }) => {
+  const handleUpvote = async (event) => {
+    event.preventDefault();
 
-        <p>{feedback.description}</p>
-        <FilterBtn text={capitalize(feedback.category)} />
-      </div>
-    </DetailsContainer>
+    const feedbackObject = {
+      upvotes: feedback.upvotes + 1,
+    };
+    const updatedFeedback = await feedbackService.edit(feedback.id, feedbackObject);
+    // setFeedback(feedbackList.concat(updatedFeedback));
+    setFeedback((prevFeed) => [...prevFeed, updatedFeedback]);
+  };
 
-    <CommentContainer>
-      <Comment />
-      <p>{feedback.comments.length}</p>
-    </CommentContainer>
-  </Container>
-);
+  return (
+    <Container>
+      <DetailsContainer>
+        <Upvotes number={feedback.upvotes} onClick={handleUpvote} />
+        <div>
+          <h3>
+            <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>
+          </h3>
+
+          <p>{feedback.description}</p>
+          <FilterBtn text={capitalize(feedback.category)} />
+        </div>
+      </DetailsContainer>
+
+      <CommentContainer>
+        <Comment />
+        <p>{feedback.comments.length}</p>
+      </CommentContainer>
+    </Container>
+  );
+};
 
 export default Feedback;

@@ -11,7 +11,7 @@ const Container = styled.section`
   gap: 24px;
 `;
 
-const Main = ({ feedback }) => (
+const Main = ({ feedback, setFeedback }) => (
   <Container>
     <Header feedback={feedback} />
     {feedback.length === 0 ? (
@@ -19,7 +19,12 @@ const Main = ({ feedback }) => (
     ) : (
       <>
         {feedback?.map((feed) => (
-          <Feedback feedback={feed} key={feed.id} />
+          <Feedback
+            feedbackList={feedback}
+            feedback={feed}
+            key={feed.id}
+            setFeedback={setFeedback}
+          />
         ))}
       </>
     )}

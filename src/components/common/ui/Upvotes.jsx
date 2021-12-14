@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -38,8 +39,8 @@ const Arrow = styled(GoChevronUp)`
   margin-bottom: 2px;
 `;
 
-const Upvotes = ({ number }) => (
-  <Button>
+const Upvotes = ({ number, onClick }) => (
+  <Button onClick={onClick}>
     <Arrow />
     {number}
   </Button>
