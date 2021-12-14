@@ -53,6 +53,8 @@ const Comment = styled(FaComment)`
   color: #cdd2ee;
 `;
 
+const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('').toLowerCase();
+
 const Feedback = ({ feedback }) => (
   <Container>
     <DetailsContainer>
@@ -63,7 +65,7 @@ const Feedback = ({ feedback }) => (
         </h3>
 
         <p>{feedback.description}</p>
-        <FilterBtn text={feedback.category} />
+        <FilterBtn text={capitalize(feedback.category)} />
       </div>
     </DetailsContainer>
 

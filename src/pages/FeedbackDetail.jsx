@@ -25,7 +25,7 @@ const Layout = styled(MainLayout)`
   margin: 0 auto;
 `;
 
-export default function FeedbackDetail({ setFeedback, feedback }) {
+export default function FeedbackDetail({ setFeedback, feedback, authUser }) {
   const [data, setData] = useState({});
   const [showEditPage, setShowEditPage] = useState(false);
 
@@ -74,7 +74,12 @@ export default function FeedbackDetail({ setFeedback, feedback }) {
       ) : (
         <Layout>
           <Container>
-            <Header showEditPage={showEditPage} setShowEditPage={setShowEditPage} />
+            <Header
+              showEditPage={showEditPage}
+              setShowEditPage={setShowEditPage}
+              authUser={authUser}
+              feedback={data}
+            />
             <Feedback feedback={data} />
             <Comments comments={data.comments} />
             <CommentForm />

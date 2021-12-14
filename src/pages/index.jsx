@@ -160,7 +160,9 @@ export default function Pages() {
         />
         <Route
           path="/feedback-list/:id"
-          element={<FeedbackDetail setFeedback={setFeedback} feedback={feedback} />}
+          element={
+            <FeedbackDetail setFeedback={setFeedback} feedback={feedback} authUser={authUser} />
+          }
         />
         <Route path="/roadmap" element={<Roadmap />} />
         <Route

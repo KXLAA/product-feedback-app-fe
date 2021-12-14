@@ -57,7 +57,7 @@ const PopOver = styled(ListboxPopover)`
 `;
 
 const NewDropdown = ({ setNewFeedback }) => {
-  const [value, setValue] = useState('Feature');
+  const [value, setValue] = useState('feature');
 
   useEffect(() => {
     setNewFeedback((prev) => ({ ...prev, category: value }));
@@ -69,11 +69,11 @@ const NewDropdown = ({ setNewFeedback }) => {
         <MenuList arrow />
         <PopOver>
           <ListboxList>
-            <ListboxOption value="Feature"> Feature </ListboxOption>
-            <ListboxOption value="UI">UI</ListboxOption>
-            <ListboxOption value="UX">UX</ListboxOption>
-            <ListboxOption value="Enhancement">Enhancement</ListboxOption>
-            <ListboxOption value="Bug">Bug</ListboxOption>
+            <ListboxOption value="feature"> Feature </ListboxOption>
+            <ListboxOption value="ui">UI</ListboxOption>
+            <ListboxOption value="ux">UX</ListboxOption>
+            <ListboxOption value="enhancement">Enhancement</ListboxOption>
+            <ListboxOption value="bug">Bug</ListboxOption>
           </ListboxList>
         </PopOver>
       </ListboxInput>

@@ -42,18 +42,24 @@ const HeaderBtn = styled(Button)`
   background-color: #4661e6;
 `;
 
-const Header = ({ showEditPage, setShowEditPage }) => (
-  <Container>
-    <Alert>
-      <Link to="/">
-        <Back>
-          <BiChevronLeft />
-          <p>Go Back</p>
-        </Back>
-      </Link>
-    </Alert>
-    <HeaderBtn onClick={() => setShowEditPage(!showEditPage)}>Edit Feedback</HeaderBtn>
-  </Container>
-);
+const Header = ({ showEditPage, setShowEditPage, authUser, feedback }) => {
+  console.log(feedback, authUser);
+
+  return (
+    <Container>
+      <Alert>
+        <Link to="/">
+          <Back>
+            <BiChevronLeft />
+            <p>Go Back</p>
+          </Back>
+        </Link>
+      </Alert>
+      {feedback.user === authUser.id && (
+        <HeaderBtn onClick={() => setShowEditPage(!showEditPage)}>Edit Feedback</HeaderBtn>
+      )}
+    </Container>
+  );
+};
 
 export default Header;
