@@ -3,11 +3,22 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import { GoKebabHorizontal } from 'react-icons/go';
+import {
+  Menu,
+  MenuList,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  MenuPopover,
+  MenuLink,
+} from '@reach/menu-button';
+import '@reach/menu-button/styles.css';
 
 const Container = styled.div`
   background-color: white;
   border-radius: 10px;
-  padding: 19px;
+  padding: 9px;
   display: flex;
   gap: 16px;
 
@@ -17,16 +28,74 @@ const Container = styled.div`
   }
 `;
 
-const UserDetails = styled.div``;
+const Kebab = styled(GoKebabHorizontal)`
+  color: black;
+  font-size: 24px;
+`;
+
+const UserDetails = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+  p {
+    font-size: 12px;
+  }
+`;
+
+const MenuBtn = styled(MenuButton)`
+  background: none;
+  align-items: center;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  text-align: left;
+  transition: all 0.3s ease;
+  padding: 14px;
+  border-radius: 10px;
+  &:hover {
+    background: #eeeeee;
+  }
+`;
+
+const MenuLi = styled(MenuList)`
+  background: #ffffff;
+  border-radius: 10px;
+  margin-top: 24px;
+  box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.350492);
+  border: none;
+  width: 230px;
+  > [data-reach-menu-item][data-selected] {
+    color: #ad1fea;
+    font-weight: 400;
+    background: none;
+  }
+
+  > [data-reach-menu-items] {
+    width: 100%;
+  }
+`;
 
 const LoggedIn = ({ authUser, handleLogOut }) => (
   <Container>
-    <img src={authUser.avatar} alt="avatar" />
-    <UserDetails>
-      <h3>Welcome</h3>
-      <h4>{authUser.name}</h4>
-      <p onClick={handleLogOut}>log Out</p>
-    </UserDetails>
+    <Menu>
+      <MenuBtn>
+        <img src={authUser.avatar} alt="avatar" />
+        <UserDetails>
+          <div>
+            <h4>{authUser.name}</h4>
+            <p>@{authUser.username}</p>
+          </div>
+          <Kebab />
+        </UserDetails>
+      </MenuBtn>
+      <MenuLi>
+        <MenuItem onSelect={handleLogOut}>Log Out</MenuItem>
+        <MenuItem onSelect={() => {}}>Your Upvotes</MenuItem>
+      </MenuLi>
+    </Menu>
   </Container>
 );
 
