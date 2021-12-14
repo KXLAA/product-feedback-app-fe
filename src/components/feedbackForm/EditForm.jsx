@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import {
@@ -11,6 +12,7 @@ import {
 } from './Common';
 import { Button } from '../common/ui/Button';
 import UpdateDropDown from './UpdateDropDown';
+import DropDown from './DropDown';
 
 const Cancel = styled(Button)`
   background-color: #3a4374;
@@ -26,10 +28,17 @@ const Buttons = styled.div`
   justify-content: space-between;
 `;
 
-const EditForm = () => (
+const EditForm = ({
+  showEditPage,
+  setShowEditPage,
+  data,
+  handleChange,
+  setData,
+  handleEditFeedback,
+}) => (
   <Container>
-    <Header />
-    <Form>
+    <Header showEditPage={showEditPage} setShowEditPage={setShowEditPage} />
+    <Form onClick={handleEditFeedback}>
       <svg
         width="56"
         height="56"
@@ -65,7 +74,7 @@ const EditForm = () => (
           <h4>Feedback Title</h4>
           <p>Add a short, descriptive headline</p>
         </div>
-        <Input />
+        <Input value={data.title} name="title" onChange={handleChange} />
       </InputContainer>
 
       <InputContainer>
@@ -73,7 +82,7 @@ const EditForm = () => (
           <h4>Category</h4>
           <p>Choose a category for your feedback</p>
         </div>
-        <Input />
+        <DropDown data={data} setData={setData} />
       </InputContainer>
 
       <InputContainer>
@@ -81,7 +90,7 @@ const EditForm = () => (
           <h4>Update Status</h4>
           <p>Change feedback state</p>
         </div>
-        <UpdateDropDown />
+        <UpdateDropDown data={data} setData={setData} />
       </InputContainer>
 
       <InputContainer>
@@ -89,7 +98,7 @@ const EditForm = () => (
           <h4>Feedback Detail</h4>
           <p>Include any specific comments on what should be improved, added, etc.</p>
         </div>
-        <Textarea />
+        <Textarea value={data.description} onChange={handleChange} name="description" />
       </InputContainer>
 
       <Buttons>

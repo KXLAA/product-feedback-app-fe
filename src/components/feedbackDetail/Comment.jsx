@@ -106,8 +106,6 @@ const Comment = ({ comment }) => {
     getUser();
   }, []);
 
-  console.log(data);
-
   return (
     <Container>
       <Image src="https://avatars.dicebear.com/api/human/77.svg" alt="user" />

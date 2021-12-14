@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
 import {
   Listbox,
   ListboxInput,
@@ -8,7 +10,7 @@ import {
 } from '@reach/listbox';
 import '@reach/listbox/styles.css';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const MenuList = styled(ListboxButton)`
@@ -53,8 +55,13 @@ const PopOver = styled(ListboxPopover)`
   }
 `;
 
-const UpdateDropDown = () => {
-  const [value, setValue] = React.useState('Suggestion');
+const UpdateDropDown = ({ data, setData }) => {
+  console.log(data);
+  const [value, setValue] = React.useState(data.status);
+
+  useEffect(() => {
+    setData((prev) => ({ ...prev, status: value }));
+  }, [value]);
 
   return (
     <>
@@ -62,10 +69,10 @@ const UpdateDropDown = () => {
         <MenuList arrow />
         <PopOver>
           <ListboxList>
-            <ListboxOption value="Suggestion"> Suggestion </ListboxOption>
-            <ListboxOption value="Planned">Planned</ListboxOption>
-            <ListboxOption value="In-Progress">In-Progress</ListboxOption>
-            <ListboxOption value="Live">Live</ListboxOption>
+            <ListboxOption value="suggestion"> Suggestion </ListboxOption>
+            <ListboxOption value="planned">Planned</ListboxOption>
+            <ListboxOption value="in-progress">In-Progress</ListboxOption>
+            <ListboxOption value="live">Live</ListboxOption>
           </ListboxList>
         </PopOver>
       </ListboxInput>

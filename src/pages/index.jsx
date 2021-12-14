@@ -9,7 +9,6 @@ import Login from './Login';
 import SignUp from './SignUp';
 import Roadmap from './Roadmap';
 import NewFeedback from './NewFeedback';
-import EditFeedback from './EditFeedback';
 import feedbackService from '../services/feedback';
 import loginService from '../services/login';
 import userService from '../services/user';
@@ -18,7 +17,6 @@ export default function Pages() {
   const [authUser, setAuthUser] = useState(null);
   const [notify, setNotify] = useState(null);
   const [feedback, setFeedback] = useState([]);
-  const [category, setCategory] = useState(null);
   const [newFeedback, setNewFeedback] = useState({
     title: '',
     description: '',
@@ -160,7 +158,10 @@ export default function Pages() {
             />
           }
         />
-        <Route path="/feedback-list/:id" element={<FeedbackDetail />} />
+        <Route
+          path="/feedback-list/:id"
+          element={<FeedbackDetail setFeedback={setFeedback} feedback={feedback} />}
+        />
         <Route path="/roadmap" element={<Roadmap />} />
         <Route
           path="/new-feedback"
@@ -173,7 +174,6 @@ export default function Pages() {
             />
           }
         />
-        <Route path="/edit-feedback" element={<EditFeedback />} />
       </Routes>
     </BrowserRouter>
   );

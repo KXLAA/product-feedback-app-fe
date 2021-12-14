@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { BiChevronLeft } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
@@ -46,14 +47,12 @@ const Back = styled.div`
   }
 `;
 
-export const Header = () => (
+export const Header = ({ showEditPage, setShowEditPage }) => (
   <Alert>
-    <Link to="/">
-      <Back>
-        <BiChevronLeft />
-        <p>Go Back</p>
-      </Back>
-    </Link>
+    <Back onClick={() => setShowEditPage(!showEditPage)}>
+      <BiChevronLeft />
+      <p>Go Back</p>
+    </Back>
   </Alert>
 );
 

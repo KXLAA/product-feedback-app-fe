@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { BiChevronLeft } from 'react-icons/bi';
@@ -41,7 +42,7 @@ const HeaderBtn = styled(Button)`
   background-color: #4661e6;
 `;
 
-const Header = () => (
+const Header = ({ showEditPage, setShowEditPage }) => (
   <Container>
     <Alert>
       <Link to="/">
@@ -51,9 +52,7 @@ const Header = () => (
         </Back>
       </Link>
     </Alert>
-    <Link to="/edit-feedback">
-      <HeaderBtn>Edit Feedback</HeaderBtn>
-    </Link>
+    <HeaderBtn onClick={() => setShowEditPage(!showEditPage)}>Edit Feedback</HeaderBtn>
   </Container>
 );
 

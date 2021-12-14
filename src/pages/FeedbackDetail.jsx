@@ -10,7 +10,7 @@ import Header from '../components/feedbackDetail/Header';
 import Comments from '../components/feedbackDetail/Comments';
 import CommentForm from '../components/feedbackDetail/CommentForm';
 import feedbackService from '../services/feedback';
-import userService from '../services/user';
+import EditFeedback from './EditFeedback';
 
 const Container = styled.div`
   display: flex;
@@ -25,14 +25,15 @@ const Layout = styled(MainLayout)`
   margin: 0 auto;
 `;
 
-export default function FeedbackDetail() {
-  const [data, setData] = useState([]);
+export default function FeedbackDetail({ setFeedback, feedback }) {
+  const [data, setData] = useState({});
+  const [showEditPage, setShowEditPage] = useState(false);
 
   const params = useParams();
 
   const getOne = async () => {
-    const feedback = await feedbackService.getOne(params.id);
-    setData(feedback);
+    const feedbackDetail = await feedbackService.getOne(params.id);
+    setData(feedbackDetail);
   };
 
   useEffect(() => {
@@ -40,14 +41,46 @@ export default function FeedbackDetail() {
   }, []);
 
   console.log(data);
+
+  const handleEditFeedback = async (event) => {
+    event.preventDefault();
+
+    const feedbackObject = {
+      title: data.title,
+      category: data.category,
+      description: data.description,
+      status: data.status,
+    };
+
+    const createdFeedback = await feedbackService.edit(params.id, feedbackObject);
+    setFeedback(feedback.concat(createdFeedback));
+  };
+
+  const handleNewFeedbackChange = ({ target }) => {
+    setData((prevInputData) => ({ ...prevInputData, [target.name]: target.value }));
+  };
+
   return (
-    <Layout>
-      <Container>
-        <Header />
-        <Feedback feedback={data} />
-        <Comments comments={data.comments} />
-        <CommentForm />
-      </Container>
-    </Layout>
+    <>
+      {showEditPage ? (
+        <EditFeedback
+          showEditPage={showEditPage}
+          setShowEditPage={setShowEditPage}
+          data={data}
+          handleChange={handleNewFeedbackChange}
+          setData={setData}
+          handleEditFeedback={handleEditFeedback}
+        />
+      ) : (
+        <Layout>
+          <Container>
+            <Header showEditPage={showEditPage} setShowEditPage={setShowEditPage} />
+            <Feedback feedback={data} />
+            <Comments comments={data.comments} />
+            <CommentForm />
+          </Container>
+        </Layout>
+      )}
+    </>
   );
 }
