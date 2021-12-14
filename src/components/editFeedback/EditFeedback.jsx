@@ -41,12 +41,13 @@ const EditFeedback = ({ showEditPage, setShowEditPage, feedback }) => {
   const updateFeedback = useMutation((update) => feedbackService.update(update), {
     onSuccess: () => {
       queryClient.invalidateQueries('feedback', feedback.id);
+      setShowEditPage(!showEditPage);
     },
   });
 
   const deleteFeedback = useMutation((deleted) => feedbackService.deleteFeedback(deleted), {
     onSuccess: () => {
-      queryClient.invalidateQueries('feedback', feedback.id);
+      queryClient.invalidateQueries('feedbackList');
       navigate('/');
     },
   });

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useMutation, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   Form,
@@ -26,7 +27,7 @@ const NewFeedback = ({ toggleAddPage, feedback }) => {
 
   const addFeedback = useMutation((newFeedback) => feedbackService.create(newFeedback), {
     onSuccess: () => {
-      queryClient.invalidateQueries('feedback', feedback.id);
+      queryClient.invalidateQueries('feedbackList');
       toggleAddPage();
     },
   });

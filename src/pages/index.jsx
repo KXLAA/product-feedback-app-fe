@@ -3,6 +3,7 @@
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import FeedbackList from './FeedbackList';
 import FeedbackDetail from './FeedbackDetail';
 import Login from './Login';
@@ -15,12 +16,6 @@ import userService from '../services/user';
 export default function Pages() {
   const [authUser, setAuthUser] = useState(null);
   const [notify, setNotify] = useState(null);
-  const [feedback, setFeedback] = useState([]);
-  const [newFeedback, setNewFeedback] = useState({
-    title: '',
-    description: '',
-    category: 'Feature',
-  });
 
   const [logIn, setLogIn] = useState({
     username: '',
@@ -33,14 +28,6 @@ export default function Pages() {
     password: '',
     email: '',
   });
-
-  useEffect(() => {
-    const getAll = async () => {
-      const feedbackList = await feedbackService.getAll();
-      setFeedback(feedbackList);
-    };
-    getAll();
-  }, []);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser');
@@ -107,68 +94,43 @@ export default function Pages() {
     setNewUser((prevUser) => ({ ...prevUser, [target.name]: target.value }));
   };
 
-  const handleNewFeedback = async (event) => {
-    event.preventDefault();
-
-    const feedbackObject = {
-      title: newFeedback.title,
-      category: newFeedback.category,
-      description: newFeedback.description,
-    };
-
-    const createdFeedback = await feedbackService.create(feedbackObject);
-    setFeedback(feedback.concat(createdFeedback));
-    setNewFeedback({ title: '', category: '', description: '' });
-  };
-
-  const handleNewFeedbackChange = ({ target }) => {
-    setNewFeedback((prevInputData) => ({ ...prevInputData, [target.name]: target.value }));
-  };
+  const { data, isLoading, isError, error } = useQuery('feedbackList', feedbackService.getAll);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <FeedbackList
-              feedback={feedback}
-              setFeedback={setFeedback}
-              handleLogOut={handleLogOut}
-              authUser={authUser}
+    <>
+      {isLoading ? (
+        'Loading'
+      ) : (
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <FeedbackList feedback={data} handleLogOut={handleLogOut} authUser={authUser} />
+              }
             />
-          }
-        />
-        <Route
-          path="/auth/login"
-          element={
-            <Login
-              handleLogin={handleLogin}
-              onChange={handleLogInChange}
-              logIn={logIn}
-              mm={logIn}
+            <Route
+              path="/auth/login"
+              element={
+                <Login handleLogin={handleLogin} onChange={handleLogInChange} logIn={logIn} />
+              }
             />
-          }
-        />
-        <Route
-          path="/auth/sign-up"
-          element={
-            <SignUp
-              handleSignUp={handleSignUp}
-              onChange={handleSignUpChange}
-              newUser={newUser}
-              mm={logIn}
+            <Route
+              path="/auth/sign-up"
+              element={
+                <SignUp
+                  handleSignUp={handleSignUp}
+                  onChange={handleSignUpChange}
+                  newUser={newUser}
+                  mm={logIn}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="/feedback-list/:id"
-          element={
-            <FeedbackDetail setFeedback={setFeedback} feedback={feedback} authUser={authUser} />
-          }
-        />
-        <Route path="/roadmap" element={<Roadmap />} />
-      </Routes>
-    </BrowserRouter>
+            <Route path="/feedback-list/:id" element={<FeedbackDetail authUser={authUser} />} />
+            <Route path="/roadmap" element={<Roadmap />} />
+          </Routes>
+        </BrowserRouter>
+      )}
+    </>
   );
 }

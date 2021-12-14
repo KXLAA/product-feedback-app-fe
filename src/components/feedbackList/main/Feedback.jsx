@@ -57,7 +57,7 @@ const Comment = styled(FaComment)`
 
 const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('').toLowerCase();
 
-const Feedback = ({ feedback, feedbackList, setFeedback }) => {
+const Feedback = ({ feedback, setFeedback }) => {
   const handleUpvote = async (event) => {
     event.preventDefault();
 

@@ -14,11 +14,7 @@ const Container = styled.section`
 `;
 
 const Main = ({ feedback, setFeedback, toggleAddPage }) => {
-  const { data, isLoading, isError, error } = useQuery('feedbackList', feedbackService.getAll);
-
-  if (isLoading) {
-    return 'Loading Feedback';
-  }
+  console.log(feedback);
   return (
     <Container>
       <Header feedback={feedback} toggleAddPage={toggleAddPage} />
@@ -26,8 +22,13 @@ const Main = ({ feedback, setFeedback, toggleAddPage }) => {
         <Empty />
       ) : (
         <>
-          {data?.map((feed) => (
-            <Feedback feedbackList={data} feedback={feed} key={feed.id} setFeedback={setFeedback} />
+          {feedback?.map((feed) => (
+            <Feedback
+              feedbackList={feedback}
+              feedback={feed}
+              key={feed.id}
+              setFeedback={setFeedback}
+            />
           ))}
         </>
       )}
