@@ -10,6 +10,7 @@ export default function EditFeedback({
   setData,
   handleChange,
   handleEditFeedback,
+  handleDelete,
 }) {
   return (
     <Layout>
@@ -20,6 +21,7 @@ export default function EditFeedback({
         setData={setData}
         handleChange={handleChange}
         handleEditFeedback={handleEditFeedback}
+        handleDelete={handleDelete}
       />
     </Layout>
   );

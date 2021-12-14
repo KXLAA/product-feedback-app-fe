@@ -60,6 +60,12 @@ export default function FeedbackDetail({ setFeedback, feedback, authUser }) {
     setData((prevInputData) => ({ ...prevInputData, [target.name]: target.value }));
   };
 
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    await feedbackService.deleteFeedback(params.id);
+    setFeedback(feedback.filter((feedbackToDelete) => feedbackToDelete.id !== params.id));
+  };
+
   return (
     <>
       {showEditPage ? (
@@ -70,6 +76,7 @@ export default function FeedbackDetail({ setFeedback, feedback, authUser }) {
           handleChange={handleNewFeedbackChange}
           setData={setData}
           handleEditFeedback={handleEditFeedback}
+          handleDelete={handleDelete}
         />
       ) : (
         <Layout>

@@ -35,6 +35,7 @@ const EditForm = ({
   handleChange,
   setData,
   handleEditFeedback,
+  handleDelete,
 }) => (
   <Container>
     <Header showEditPage={showEditPage} setShowEditPage={setShowEditPage} />
@@ -102,7 +103,7 @@ const EditForm = ({
       </InputContainer>
 
       <Buttons>
-        <Delete>Delete</Delete>
+        <Delete onClick={handleDelete}>Delete</Delete>
 
         <ButtonContainer>
           <Cancel>Cancel</Cancel>
