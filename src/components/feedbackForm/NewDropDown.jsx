@@ -56,11 +56,11 @@ const PopOver = styled(ListboxPopover)`
   }
 `;
 
-const NewDropdown = ({ setNewFeedback }) => {
+const NewDropdown = ({ setFields, fields }) => {
   const [value, setValue] = useState('feature');
 
   useEffect(() => {
-    setNewFeedback((prev) => ({ ...prev, category: value }));
+    setFields((prev) => ({ ...prev, category: value }));
   }, [value]);
 
   return (

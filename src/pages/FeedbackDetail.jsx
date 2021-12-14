@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import MainLayout from '../components/common/Layout';
 import Feedback from '../components/feedbackDetail/Feedback';
 import Header from '../components/feedbackDetail/Header';
 import Comments from '../components/feedbackDetail/Comments';
 import CommentForm from '../components/feedbackDetail/CommentForm';
 import feedbackService from '../services/feedback';
-import EditFeedback from './EditFeedback';
+import EditFeedback from '../components/editFeedback/EditFeedback';
 
 const Container = styled.div`
   display: flex;
@@ -25,46 +25,17 @@ const Layout = styled(MainLayout)`
   margin: 0 auto;
 `;
 
-export default function FeedbackDetail({ setFeedback, feedback, authUser }) {
-  const [data, setData] = useState({});
-  const [showEditPage, setShowEditPage] = useState(false);
-
+export default function FeedbackDetail({ authUser }) {
   const params = useParams();
-
-  const getOne = async () => {
-    const feedbackDetail = await feedbackService.getOne(params.id);
-    setData(feedbackDetail);
-  };
-
-  useEffect(() => {
-    getOne();
-  }, []);
-
-  console.log(data);
-
-  const handleEditFeedback = async (event) => {
-    event.preventDefault();
-
-    const feedbackObject = {
-      title: data.title,
-      category: data.category,
-      description: data.description,
-      status: data.status,
-    };
-
-    const createdFeedback = await feedbackService.edit(params.id, feedbackObject);
-    setFeedback(feedback.concat(createdFeedback));
-  };
-
-  const handleNewFeedbackChange = ({ target }) => {
-    setData((prevInputData) => ({ ...prevInputData, [target.name]: target.value }));
-  };
-
-  const handleDelete = async (event) => {
-    event.preventDefault();
-    await feedbackService.deleteFeedback(params.id);
-    setFeedback(feedback.filter((feedbackToDelete) => feedbackToDelete.id !== params.id));
-  };
+  const feedbackId = params.id;
+  const { data, isLoading } = useQuery(
+    ['feedback', feedbackId],
+    () => feedbackService.getOne(feedbackId),
+    {
+      enabled: Boolean(feedbackId),
+    }
+  );
+  const [showEditPage, setShowEditPage] = useState(false);
 
   return (
     <>
@@ -72,11 +43,7 @@ export default function FeedbackDetail({ setFeedback, feedback, authUser }) {
         <EditFeedback
           showEditPage={showEditPage}
           setShowEditPage={setShowEditPage}
-          data={data}
-          handleChange={handleNewFeedbackChange}
-          setData={setData}
-          handleEditFeedback={handleEditFeedback}
-          handleDelete={handleDelete}
+          feedback={data}
         />
       ) : (
         <Layout>
@@ -87,8 +54,8 @@ export default function FeedbackDetail({ setFeedback, feedback, authUser }) {
               authUser={authUser}
               feedback={data}
             />
-            <Feedback feedback={data} />
-            <Comments comments={data.comments} />
+            <Feedback feedback={data} isLoading={isLoading} />
+            <Comments comments={data?.comments} />
             <CommentForm />
           </Container>
         </Layout>

@@ -10,7 +10,7 @@ import {
 } from '@reach/listbox';
 import '@reach/listbox/styles.css';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const MenuList = styled(ListboxButton)`
@@ -55,12 +55,11 @@ const PopOver = styled(ListboxPopover)`
   }
 `;
 
-const UpdateDropDown = ({ data, setData }) => {
-  console.log(data);
-  const [value, setValue] = React.useState(data.status);
+const UpdateDropDown = ({ fields, setFields }) => {
+  const [value, setValue] = useState(fields.status);
 
   useEffect(() => {
-    setData((prev) => ({ ...prev, status: value }));
+    setFields((prev) => ({ ...prev, category: value }));
   }, [value]);
 
   return (

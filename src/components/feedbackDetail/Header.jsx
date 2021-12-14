@@ -55,7 +55,7 @@ const Header = ({ showEditPage, setShowEditPage, authUser, feedback }) => {
           </Back>
         </Link>
       </Alert>
-      {feedback.user === authUser?.id && (
+      {feedback?.user === authUser?.id && (
         <HeaderBtn onClick={() => setShowEditPage(!showEditPage)}>Edit Feedback</HeaderBtn>
       )}
     </Container>

@@ -56,13 +56,11 @@ const PopOver = styled(ListboxPopover)`
   }
 `;
 
-const DropDown = ({ data, setData }) => {
-  const [value, setValue] = useState(data.category);
-
-  console.log(value);
+const DropDown = ({ fields, setFields }) => {
+  const [value, setValue] = useState(fields.category);
 
   useEffect(() => {
-    setData((prev) => ({ ...prev, category: value }));
+    setFields((prev) => ({ ...prev, category: value }));
   }, [value]);
 
   return (

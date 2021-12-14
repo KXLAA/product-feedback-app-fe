@@ -8,7 +8,6 @@ import FeedbackDetail from './FeedbackDetail';
 import Login from './Login';
 import SignUp from './SignUp';
 import Roadmap from './Roadmap';
-import NewFeedback from './NewFeedback';
 import feedbackService from '../services/feedback';
 import loginService from '../services/login';
 import userService from '../services/user';
@@ -23,7 +22,6 @@ export default function Pages() {
     category: 'Feature',
   });
 
-  console.log(newFeedback);
   const [logIn, setLogIn] = useState({
     username: '',
     password: '',
@@ -170,17 +168,6 @@ export default function Pages() {
           }
         />
         <Route path="/roadmap" element={<Roadmap />} />
-        <Route
-          path="/new-feedback"
-          element={
-            <NewFeedback
-              handleNewFeedback={handleNewFeedback}
-              onChange={handleNewFeedbackChange}
-              newFeedback={newFeedback}
-              setNewFeedback={setNewFeedback}
-            />
-          }
-        />
       </Routes>
     </BrowserRouter>
   );

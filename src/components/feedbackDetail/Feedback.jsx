@@ -2,9 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaComment } from 'react-icons/fa';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import Upvotes from '../common/ui/Upvotes';
 import FilterBtn from '../common/ui/FilterBtn';
 import userService from '../../services/user';
+import feedbackService from '../../services/feedback';
 
 const Container = styled.div`
   background: #ffffff;
@@ -53,22 +56,27 @@ const Comment = styled(FaComment)`
   color: #cdd2ee;
 `;
 
-const Feedback = ({ feedback }) => (
-  <Container>
-    <DetailsContainer>
-      <Upvotes number={feedback?.upvotes} />
-      <div>
-        <h3>{feedback?.title}</h3>
-        <p>{feedback?.description}</p>
-        <FilterBtn text={feedback?.category} />
-      </div>
-    </DetailsContainer>
+const Feedback = ({ feedback, isLoading }) => {
+  if (isLoading) {
+    return 'Loading';
+  }
+  return (
+    <Container>
+      <DetailsContainer>
+        <Upvotes number={feedback?.upvotes} />
+        <div>
+          <h3>{feedback?.title}</h3>
+          <p>{feedback?.description}</p>
+          <FilterBtn text={feedback?.category} />
+        </div>
+      </DetailsContainer>
 
-    <CommentContainer>
-      <Comment />
-      <p>{feedback?.comments?.length}</p>
-    </CommentContainer>
-  </Container>
-);
+      <CommentContainer>
+        <Comment />
+        <p>{feedback?.comments?.length}</p>
+      </CommentContainer>
+    </Container>
+  );
+};
 
 export default Feedback;

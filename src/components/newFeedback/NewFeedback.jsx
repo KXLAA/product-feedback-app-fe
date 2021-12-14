@@ -1,24 +1,50 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Container, Form, InputContainer, Input, Textarea, ButtonContainer } from './Common';
+import { useMutation, useQueryClient } from 'react-query';
+import {
+  Container,
+  Form,
+  InputContainer,
+  Input,
+  Textarea,
+  ButtonContainer,
+} from '../feedbackForm/Common';
 import { Button } from '../common/ui/Button';
-import Header from '../newFeedback/Header';
-import NewDropdown from './NewDropDown';
-import DropDown from './DropDown';
+import Header from './Header';
+import NewDropdown from '../feedbackForm/NewDropDown';
+import feedbackService from '../../services/feedback';
 
 const Cancel = styled(Button)`
   background-color: #3a4374;
 `;
 
-const NewForm = ({ onChange, newFeedback, handleNewFeedback, setNewFeedback }) => {
-  console.log(newFeedback);
+const NewFeedback = ({ toggleAddPage, feedback }) => {
+  const [fields, setFields] = useState({ ...feedback });
+  const queryClient = useQueryClient();
+
+  const addFeedback = useMutation((newFeedback) => feedbackService.create(newFeedback), {
+    onSuccess: () => {
+      queryClient.invalidateQueries('feedback', feedback.id);
+      toggleAddPage();
+    },
+  });
+
+  const handleAddFeedback = (event) => {
+    event.preventDefault();
+    addFeedback.mutate(fields);
+  };
+
+  const handleOnChange = (event) => {
+    const { name, value } = event.target;
+    setFields({ ...fields, [name]: value });
+  };
 
   return (
     <Container>
-      <Header />
-      <Form onSubmit={handleNewFeedback}>
+      <Header toggleAddPage={toggleAddPage} />
+      <Form onSubmit={handleAddFeedback}>
         <svg width="56" height="56" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient cx="103.9%" cy="-10.387%" fx="103.9%" fy="-10.387%" r="166.816%" id="a">
@@ -42,34 +68,29 @@ const NewForm = ({ onChange, newFeedback, handleNewFeedback, setNewFeedback }) =
             <h4>Feedback Title</h4>
             <p>Add a short, descriptive headline</p>
           </div>
-          <Input name="title" value={newFeedback.title} onChange={onChange} />
+          <Input value={fields.title} name="title" onChange={handleOnChange} />
         </InputContainer>
         <InputContainer>
           <div>
             <h4>Category</h4>
             <p>Choose a category for your feedback</p>
           </div>
-          <NewDropdown setNewFeedback={setNewFeedback} />
+          <NewDropdown setFields={setFields} fields={fields} />
         </InputContainer>
         <InputContainer>
           <div>
             <h4>Feedback Detail</h4>
             <p>Include any specific comments on what should be improved, added, etc.</p>
           </div>
-          <Textarea
-            name="description"
-            value={newFeedback.description}
-            onChange={onChange}
-            required
-          />
+          <Textarea value={fields.description} onChange={handleOnChange} name="description" />
         </InputContainer>
         <ButtonContainer>
           <Button>Add Feedback</Button>
-          <Cancel>Cancel</Cancel>
+          <Cancel onClick={toggleAddPage}>Cancel</Cancel>
         </ButtonContainer>
       </Form>
     </Container>
   );
 };
 
-export default NewForm;
+export default NewFeedback;

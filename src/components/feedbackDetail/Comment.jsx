@@ -112,14 +112,14 @@ const Comment = ({ comment }) => {
       <UserComment>
         <Header>
           <div>
-            <h4>{data.name}</h4>
-            <p>@{data.username}</p>
+            <h4>{data?.name}</h4>
+            <p>@{data?.username}</p>
           </div>
           <a href onClick={() => setShowForm(!showFrom)}>
             Reply
           </a>
         </Header>
-        <Content>{comment.content}</Content>
+        <Content>{comment?.content}</Content>
 
         {showFrom && (
           <ReplyFormContainer>

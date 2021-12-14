@@ -79,7 +79,7 @@ const Feedback = ({ feedback, feedbackList, setFeedback }) => {
           </h3>
 
           <p>{feedback.description}</p>
-          <FilterBtn text={capitalize(feedback.category)} />
+          <FilterBtn text={capitalize(feedback?.category)} />
         </div>
       </DetailsContainer>
 
