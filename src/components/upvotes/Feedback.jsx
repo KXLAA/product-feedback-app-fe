@@ -5,7 +5,7 @@ import { FaComment } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import Upvotes from '../common/ui/Upvotes';
-import FilterBtn from '../common/ui/FilterBtn';
+import Tags from '../common/ui/Tags';
 import feedbackService from '../../services/feedback';
 
 const Container = styled.div`
@@ -56,8 +56,6 @@ const Comment = styled(FaComment)`
   color: #cdd2ee;
 `;
 
-const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('').toLowerCase();
-
 const Feedback = ({ liked, serverUser }) => {
   const { data, isLoading } = useQuery(['upvoted', liked], () => feedbackService.getOne(liked), {
     enabled: Boolean(liked),
@@ -75,7 +73,7 @@ const Feedback = ({ liked, serverUser }) => {
           </h3>
 
           <p>{data?.description}</p>
-          <FilterBtn text={data?.category} />
+          <Tags text={data?.category} />
         </div>
       </DetailsContainer>
 

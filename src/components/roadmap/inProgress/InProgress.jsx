@@ -3,7 +3,7 @@ import React from 'react';
 import InProgressItem from './InProgressItem';
 import { Header } from '../Common';
 
-function InProgress({ inProgress }) {
+function InProgress({ inProgress, serverUser }) {
   return (
     <>
       <Header>
@@ -11,7 +11,7 @@ function InProgress({ inProgress }) {
         <p>Currently being developed</p>
       </Header>
       {inProgress?.map((progress) => (
-        <InProgressItem key={progress.id} progress={progress} />
+        <InProgressItem key={progress.id} progress={progress} serverUser={serverUser} />
       ))}
     </>
   );

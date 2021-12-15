@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaComment } from 'react-icons/fa';
 import Upvotes from '../common/ui/Upvotes';
-import FilterBtn from '../common/ui/FilterBtn';
+import Tags from '../common/ui/Tags';
 
 const Container = styled.div`
   background: #ffffff;
@@ -63,7 +63,7 @@ const Feedback = ({ feedback, isLoading, serverUser }) => {
         <div>
           <h3>{feedback?.title}</h3>
           <p>{feedback?.description}</p>
-          <FilterBtn text={feedback?.category} />
+          <Tags text={feedback?.category} />
         </div>
       </DetailsContainer>
 

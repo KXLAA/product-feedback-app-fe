@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import React from 'react';
-import FilterBtn from '../../common/ui/FilterBtn';
+import { Link } from 'react-router-dom';
+import Tags from '../../common/ui/Tags';
 import Upvotes from '../../common/ui/Upvotes';
 import {
   Container,
@@ -18,7 +19,7 @@ const Card = styled(Container)`
   border-top: solid #62bcfa 6px;
 `;
 
-const LiveItem = ({ live }) => (
+const LiveItem = ({ live, serverUser }) => (
   <Card>
     <RoadMapTxt>
       <div>
@@ -27,15 +28,17 @@ const LiveItem = ({ live }) => (
       </div>
     </RoadMapTxt>
     <Content>
-      <h3>{live?.title}</h3>
+      <Link to={`/feedback-list/${live?.id}`}>
+        <h3>{live?.title}</h3>
+      </Link>
       <p>{live?.description}</p>
     </Content>
     <FilterContainer>
-      <FilterBtn text={live?.category} />
+      <Tags text={live?.category} />
     </FilterContainer>
 
     <Actions>
-      <Upvotes feedback={live} />
+      <Upvotes feedback={live} serverUser={serverUser} />
       <Comment>
         <CommentIcon />
         <p>{live?.comments?.length}</p>

@@ -9,7 +9,7 @@ import Header from '../components/roadmap/Header';
 import NewFeedback from '../components/newFeedback/NewFeedback';
 import { Layout } from '../components/feedbackForm/Common';
 
-export default function Roadmap({ feedback }) {
+export default function Roadmap({ feedback, serverUser }) {
   const planned = feedback.filter((feed) => feed?.status === 'planned');
   const live = feedback.filter((feed) => feed?.status === 'live');
   const inProgress = feedback.filter((feed) => feed?.status === 'in-progress');
@@ -30,15 +30,15 @@ export default function Roadmap({ feedback }) {
           <Header toggleEdit={toggleEdit} />
           <PageGrid>
             <ItemContainer>
-              <Planned planned={planned} />
+              <Planned planned={planned} serverUser={serverUser} />
             </ItemContainer>
 
             <ItemContainer>
-              <InProgress inProgress={inProgress} />
+              <InProgress inProgress={inProgress} serverUser={serverUser} />
             </ItemContainer>
 
             <ItemContainer>
-              <Live live={live} />
+              <Live live={live} serverUser={serverUser} />
             </ItemContainer>
           </PageGrid>
         </MainLayout>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FaComment } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Upvotes from '../../common/ui/Upvotes';
-import FilterBtn from '../../common/ui/FilterBtn';
+import Tags from '../../common/ui/Tags';
 
 const Container = styled.div`
   background: #ffffff;
@@ -53,8 +53,6 @@ const Comment = styled(FaComment)`
   color: #cdd2ee;
 `;
 
-const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('').toLowerCase();
-
 const Feedback = ({ feedback, serverUser }) => (
   <Container>
     <DetailsContainer>
@@ -65,7 +63,7 @@ const Feedback = ({ feedback, serverUser }) => (
         </h3>
 
         <p>{feedback.description}</p>
-        <FilterBtn text={capitalize(feedback?.category)} />
+        <Tags text={feedback?.category} />
       </div>
     </DetailsContainer>
 

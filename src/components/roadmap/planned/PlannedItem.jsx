@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import styled from 'styled-components';
-import { FaComment } from 'react-icons/fa';
 import React from 'react';
-import FilterBtn from '../../common/ui/FilterBtn';
+import { Link } from 'react-router-dom';
+import Tags from '../../common/ui/Tags';
 import Upvotes from '../../common/ui/Upvotes';
 import {
   Container,
@@ -19,7 +19,7 @@ const Card = styled(Container)`
   border-top: solid #f49f85 6px;
 `;
 
-const PlannedItem = ({ planned }) => (
+const PlannedItem = ({ planned, serverUser }) => (
   <Card>
     <RoadMapTxt>
       <div>
@@ -28,15 +28,18 @@ const PlannedItem = ({ planned }) => (
       </div>
     </RoadMapTxt>
     <Content>
-      <h3>{planned?.title}</h3>
+      <Link to={`/feedback-list/${planned?.id}`}>
+        <h3>{planned?.title}</h3>
+      </Link>
+
       <p>{planned?.description}</p>
     </Content>
     <FilterContainer>
-      <FilterBtn text={planned?.category} />
+      <Tags text={planned?.category} />
     </FilterContainer>
 
     <Actions>
-      <Upvotes feedback={planned} />
+      <Upvotes feedback={planned} serverUser={serverUser} />
       <Comment>
         <CommentIcon />
         <p>{planned?.comments?.length}</p>

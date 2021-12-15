@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import React from 'react';
-import FilterBtn from '../../common/ui/FilterBtn';
+import { Link } from 'react-router-dom';
+import Tags from '../../common/ui/Tags';
 import Upvotes from '../../common/ui/Upvotes';
 import {
   Container,
@@ -17,7 +18,7 @@ import {
 const Card = styled(Container)`
   border-top: solid #ad1fea 6px;
 `;
-const InProgressItem = ({ progress }) => (
+const InProgressItem = ({ progress, serverUser }) => (
   <Card>
     <RoadMapTxt>
       <div>
@@ -26,15 +27,17 @@ const InProgressItem = ({ progress }) => (
       </div>
     </RoadMapTxt>
     <Content>
-      <h3>{progress?.title}</h3>
+      <Link to={`/feedback-list/${progress?.id}`}>
+        <h3>{progress?.title}</h3>
+      </Link>
       <p>{progress?.description}</p>
     </Content>
     <FilterContainer>
-      <FilterBtn text={progress?.category} />
+      <Tags text={progress?.category} />
     </FilterContainer>
 
     <Actions>
-      <Upvotes feedback={progress} />
+      <Upvotes feedback={progress} serverUser={serverUser} />
       <Comment>
         <CommentIcon />
         <p>{progress?.comments?.length}</p>

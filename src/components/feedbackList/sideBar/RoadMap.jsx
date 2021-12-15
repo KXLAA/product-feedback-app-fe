@@ -86,7 +86,7 @@ const RoadMap = ({ feedback }) => {
         <RoadMapTxt>
           <div>
             <BulletPoint color="#62BCFA" />
-            <p>In-Progress</p>
+            <p>Live</p>
           </div>
           <p style={{ fontWeight: 700 }}>{live?.length}</p>
         </RoadMapTxt>

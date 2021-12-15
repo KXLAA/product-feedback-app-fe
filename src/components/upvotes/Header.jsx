@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
-import { HiOutlineLightBulb } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { BiChevronLeft } from 'react-icons/bi';
-import { Button } from '../common/ui/Button';
 
 const Container = styled.div`
   background: #ffff;

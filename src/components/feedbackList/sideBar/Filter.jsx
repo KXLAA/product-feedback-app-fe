@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import FilterBtn from '../../common/ui/FilterBtn';
+import FilterBtn from '../FilterBtn';
 
 const Container = styled.div`
   background-color: white;

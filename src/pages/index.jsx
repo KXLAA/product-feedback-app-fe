@@ -143,7 +143,10 @@ export default function Pages() {
               element={<FeedbackDetail authUser={authUser} serverUser={getUser?.data} />}
             />
 
-            <Route path="/roadmap" element={<Roadmap feedback={getFeedbackList?.data} />} />
+            <Route
+              path="/roadmap"
+              element={<Roadmap feedback={getFeedbackList?.data} serverUser={getUser?.data} />}
+            />
 
             <Route path="/your-upvotes" element={<Upvotes serverUser={getUser?.data} />} />
           </Routes>
