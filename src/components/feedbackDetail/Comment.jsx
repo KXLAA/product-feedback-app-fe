@@ -4,6 +4,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useQuery } from 'react-query';
 import userService from '../../services/user';
 import { Button } from '../common/ui/Button';
 
@@ -93,22 +94,19 @@ const Btn = styled(Button)`
 `;
 
 const Comment = ({ comment }) => {
-  console.log(comment);
-  const [data, setData] = useState([]);
   const [showFrom, setShowForm] = useState(false);
 
-  const getUser = async () => {
-    const user = await userService.getUser(comment.user);
-    setData(user);
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
+  const { data, isLoading } = useQuery(
+    ['user', comment.user],
+    () => userService.getUser(comment.user),
+    {
+      enabled: Boolean(comment.user),
+    }
+  );
 
   return (
     <Container>
-      <Image src="https://avatars.dicebear.com/api/human/77.svg" alt="user" />
+      <Image src={data?.avatar} alt="user" />
       <UserComment>
         <Header>
           <div>

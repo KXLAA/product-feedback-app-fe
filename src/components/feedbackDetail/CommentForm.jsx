@@ -1,8 +1,11 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useMutation, useQueryClient } from 'react-query';
 import { Button } from '../common/ui/Button';
+import feedbackService from '../../services/feedback';
 
-const Container = styled.div`
+const Form = styled.form`
   background: #ffffff;
   border-radius: 10px;
   padding: 24px 32px;
@@ -41,22 +44,48 @@ const Cta = styled.div`
   }
 `;
 
-const CommentForm = () => {
+const CommentForm = ({ feedback }) => {
   const [characterCount, setCharacterCount] = useState(250);
+  const [content, setContent] = useState('');
+  const queryClient = useQueryClient();
+
+  const createComment = useMutation((update) => feedbackService.createComment(update), {
+    onSuccess: () => {
+      queryClient.invalidateQueries('feedback', feedback.id);
+    },
+  });
+
+  const handleOnChange = (event) => {
+    const { value } = event.target;
+    setContent(value);
+    setCharacterCount(250 - value.length);
+  };
+
+  const commentObj = {
+    id: feedback?.id,
+    content: content,
+  };
+
+  const handleCreateComment = (event) => {
+    event.preventDefault();
+    createComment.mutate(commentObj);
+    setContent('');
+  };
 
   return (
-    <Container>
+    <Form onSubmit={handleCreateComment}>
       <Header>Add Comment</Header>
       <Textarea
         placeholder="Type your comment here"
         maxLength="250"
-        onChange={(e) => setCharacterCount(250 - e.target.value.length)}
+        value={content}
+        onChange={handleOnChange}
       />
       <Cta>
         <p>{characterCount} Characters left</p>
         <Button>Post Comment</Button>
       </Cta>
-    </Container>
+    </Form>
   );
 };
 

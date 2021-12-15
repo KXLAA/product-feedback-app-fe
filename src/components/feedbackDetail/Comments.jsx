@@ -17,27 +17,6 @@ const Header = styled.h3`
   color: #3a4374;
 `;
 
-const Textarea = styled.textarea`
-  width: 80%;
-  resize: none;
-  border: none;
-  overflow: auto;
-  outline: none;
-  background: #f7f8fd;
-  border-radius: 5px;
-  height: 80px;
-  padding: 24px;
-  font-size: 15px;
-  line-height: 22px;
-  color: #8c92b3;
-  margin-bottom: 24px;
-`;
-
-const ReplyFormContainer = styled.div`
-  display: flex;
-  gap: 16px;
-`;
-
 const Comments = ({ comments }) => (
   <Container>
     <Header>

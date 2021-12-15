@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 const baseUrl = 'http://localhost:4000/api/feedback-list';
+const commentUrl = 'http://localhost:4000/api/comments';
+const replyUrl = 'http://localhost:4000/api/replies';
 
 let token = null;
 
@@ -45,13 +47,31 @@ const deleteFeedback = async (id) => {
   return response.data;
 };
 
-const edit = async (id, newObject) => {
+const createComment = async ({ id, ...newObject }) => {
   const config = {
     headers: { Authorization: token },
   };
 
-  const response = await axios.put(`${baseUrl}/${id}`, newObject, config);
+  const response = await axios.post(`${commentUrl}/${id}`, newObject, config);
   return response.data;
 };
 
-export default { getAll, getOne, setToken, create, update, deleteFeedback, edit };
+const createReply = async ({ id, ...newObject }) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+
+  const response = await axios.post(`${replyUrl}/${id}`, newObject, config);
+  return response.data;
+};
+
+export default {
+  getAll,
+  getOne,
+  setToken,
+  create,
+  update,
+  deleteFeedback,
+  createComment,
+  createReply,
+};
