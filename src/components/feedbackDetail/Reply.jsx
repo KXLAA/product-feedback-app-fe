@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { TiDelete } from 'react-icons/ti';
 import feedbackService from '../../services/feedback';
 
 const Container = styled.div`
@@ -34,17 +35,34 @@ const Header = styled.div`
   }
 `;
 
-const Content = styled.p`
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 22px;
-  color: #647196;
+const Delete = styled(TiDelete)`
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 19px;
+  color: #d73737;
+  cursor: pointer;
+  align-self: flex-start;
+`;
+
+const Content = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  p {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 22px;
+    color: #647196;
+    width: 90%;
+  }
 `;
 
 const UserComment = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 `;
 
 const Image = styled.img`
@@ -53,13 +71,23 @@ const Image = styled.img`
   height: 40px;
 `;
 
-const Reply = ({ reply, comment }) => {
-  console.log(comment);
+const Reply = ({ reply, authUser }) => {
   const queryClient = useQueryClient();
-  const { data, isLoading } = useQuery(['reply', reply], () => feedbackService.getReply(reply), {
-    enabled: !!reply,
+  const { data, isLoading } = useQuery(['reply', reply], () => feedbackService.getReply(reply), {});
+
+  const deleteReply = useMutation((replyToDel) => feedbackService.deleteReply(replyToDel), {
+    onSuccess: () => {
+      queryClient.invalidateQueries('feedback');
+    },
   });
 
+  const handleDeleteReply = () => {
+    deleteReply.mutate(reply);
+  };
+
+  if (isLoading) {
+    return 'Loading';
+  }
   return (
     <Container>
       <Image src={data?.user?.avatar} alt={data?.user?.name} />
@@ -70,7 +98,10 @@ const Reply = ({ reply, comment }) => {
             <p>{data?.user?.username}</p>
           </div>
         </Header>
-        <Content>{data?.content}</Content>
+        <Content>
+          <p>{data?.content}</p>
+          {data?.user?.id === authUser?.id && <Delete href onClick={handleDeleteReply} />}
+        </Content>
       </UserComment>
     </Container>
   );

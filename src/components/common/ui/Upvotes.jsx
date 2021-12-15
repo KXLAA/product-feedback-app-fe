@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { GoChevronUp } from 'react-icons/go';
+import { useMutation, useQueryClient } from 'react-query';
+import feedbackService from '../../../services/feedback';
 
 const Button = styled.div`
   width: 40px;
@@ -39,15 +41,35 @@ const Arrow = styled(GoChevronUp)`
   margin-bottom: 2px;
 `;
 
-const Upvotes = ({ number, onClick }) => (
-  <Button onClick={onClick}>
-    <Arrow />
-    {number}
-  </Button>
-);
+const Upvotes = ({ feedback }) => {
+  const queryClient = useQueryClient();
+  const upVote = useMutation((vote) => feedbackService.update(vote), {
+    onSuccess: () => {
+      queryClient.invalidateQueries('feedbackList');
+      queryClient.invalidateQueries('feedback');
+    },
+  });
+
+  const voteObj = {
+    id: feedback?.id,
+    upvotes: feedback?.upvotes + 1,
+  };
+
+  const handleUpvote = (event) => {
+    event.preventDefault();
+    upVote.mutate(voteObj);
+  };
+
+  return (
+    <Button onClick={handleUpvote}>
+      <Arrow />
+      {feedback?.upvotes}
+    </Button>
+  );
+};
 
 export default Upvotes;
 
-Upvotes.propTypes = {
-  number: PropTypes.number.isRequired,
-};
+// Upvotes.propTypes = {
+//   number: PropTypes.number.isRequired,
+// };

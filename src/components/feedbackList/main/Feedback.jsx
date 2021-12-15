@@ -1,13 +1,10 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import React from 'react';
 import styled from 'styled-components';
 import { FaComment } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Upvotes from '../../common/ui/Upvotes';
 import FilterBtn from '../../common/ui/FilterBtn';
-import feedbackService from '../../../services/feedback';
-import userService from '../../../services/user';
 
 const Container = styled.div`
   background: #ffffff;
@@ -58,44 +55,25 @@ const Comment = styled(FaComment)`
 
 const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('').toLowerCase();
 
-const Feedback = ({ feedback, setFeedback }) => {
-  const queryClient = useQueryClient();
-  const upVote = useMutation((vote) => feedbackService.update(vote), {
-    onSuccess: () => {
-      queryClient.invalidateQueries('feedbackList');
-    },
-  });
+const Feedback = ({ feedback }) => (
+  <Container>
+    <DetailsContainer>
+      <Upvotes feedback={feedback} />
+      <div>
+        <h3>
+          <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>
+        </h3>
 
-  const voteObj = {
-    id: feedback.id,
-    upvotes: feedback.upvotes + 1,
-  };
+        <p>{feedback.description}</p>
+        <FilterBtn text={capitalize(feedback?.category)} />
+      </div>
+    </DetailsContainer>
 
-  const handleUpvote = (event) => {
-    event.preventDefault();
-    upVote.mutate(voteObj);
-  };
-
-  return (
-    <Container>
-      <DetailsContainer>
-        <Upvotes number={feedback.upvotes} onClick={handleUpvote} />
-        <div>
-          <h3>
-            <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>
-          </h3>
-
-          <p>{feedback.description}</p>
-          <FilterBtn text={capitalize(feedback?.category)} />
-        </div>
-      </DetailsContainer>
-
-      <CommentContainer>
-        <Comment />
-        <p>{feedback.comments.length}</p>
-      </CommentContainer>
-    </Container>
-  );
-};
+    <CommentContainer>
+      <Comment />
+      <p>{feedback.comments.length}</p>
+    </CommentContainer>
+  </Container>
+);
 
 export default Feedback;

@@ -56,6 +56,15 @@ const createComment = async ({ id, ...newObject }) => {
   return response.data;
 };
 
+const deleteComment = async (id) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+
+  const response = await axios.delete(`${commentUrl}/${id}`, config);
+  return response.data;
+};
+
 const createReply = async ({ id, ...newObject }) => {
   const config = {
     headers: { Authorization: token },
@@ -75,6 +84,15 @@ const getReplies = async () => {
   return response.data;
 };
 
+const deleteReply = async (id) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+
+  const response = await axios.delete(`${replyUrl}/${id}`, config);
+  return response.data;
+};
+
 export default {
   getAll,
   getOne,
@@ -83,7 +101,9 @@ export default {
   update,
   deleteFeedback,
   createComment,
+  deleteComment,
   createReply,
   getReplies,
+  deleteReply,
   getReply,
 };

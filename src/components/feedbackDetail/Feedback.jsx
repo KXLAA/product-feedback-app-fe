@@ -63,7 +63,7 @@ const Feedback = ({ feedback, isLoading }) => {
   return (
     <Container>
       <DetailsContainer>
-        <Upvotes number={feedback?.upvotes} />
+        <Upvotes feedback={feedback} />
         <div>
           <h3>{feedback?.title}</h3>
           <p>{feedback?.description}</p>

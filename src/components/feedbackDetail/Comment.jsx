@@ -5,6 +5,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { RiReplyFill } from 'react-icons/ri';
+import { TiDelete } from 'react-icons/ti';
 import userService from '../../services/user';
 import { Button } from '../common/ui/Button';
 import feedbackService from '../../services/feedback';
@@ -21,31 +23,44 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
 
-  div {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+const UserContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 
-    h4 {
-      color: #3a4374;
-    }
-
-    p {
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 20px;
-      color: #647196;
-    }
+  h4 {
+    color: #3a4374;
   }
 
-  a {
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 19px;
-    color: #4661e6;
-    cursor: pointer;
+  p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #647196;
   }
+`;
+
+const CtaContainer = styled.div`
+  display: flex;
+  gap: 24px;
+`;
+
+const Delete = styled(TiDelete)`
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 19px;
+  color: #d73737;
+  cursor: pointer;
+`;
+
+const ReplyBtn = styled(RiReplyFill)`
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 19px;
+  color: #4661e6;
+  cursor: pointer;
 `;
 
 const Content = styled.p`
@@ -95,7 +110,7 @@ const Btn = styled(Button)`
   text-align: center;
 `;
 
-const Comment = ({ comment, feedback }) => {
+const Comment = ({ comment, authUser }) => {
   const [showFrom, setShowForm] = useState(false);
   const [characterCount, setCharacterCount] = useState(250);
   const [content, setContent] = useState('');
@@ -108,10 +123,15 @@ const Comment = ({ comment, feedback }) => {
       enabled: Boolean(comment.user),
     }
   );
-
   const oneReply = comment?.replies?.map((reply) => reply);
 
   const createReply = useMutation((reply) => feedbackService.createReply(reply), {
+    onSuccess: () => {
+      queryClient.invalidateQueries('feedback');
+    },
+  });
+
+  const deleteComment = useMutation((commentToDel) => feedbackService.deleteComment(commentToDel), {
     onSuccess: () => {
       queryClient.invalidateQueries('feedback');
     },
@@ -131,22 +151,34 @@ const Comment = ({ comment, feedback }) => {
   const handleCreateReply = (event) => {
     event.preventDefault();
     createReply.mutate(replyObj);
+    setShowForm(!showFrom);
     setContent('');
   };
 
+  const handleDeleteComment = () => {
+    deleteComment.mutate(comment?.id);
+  };
+
+  console.log(comment);
+
+  if (isLoading) {
+    return 'Loading';
+  }
   return (
     <>
       <Container>
         <Image src={data?.avatar} alt="user" />
         <UserComment>
           <Header>
-            <div>
+            <UserContainer>
               <h4>{data?.name}</h4>
               <p>@{data?.username}</p>
-            </div>
-            <a href onClick={() => setShowForm(!showFrom)}>
-              Reply
-            </a>
+            </UserContainer>
+
+            <CtaContainer>
+              <ReplyBtn href onClick={() => setShowForm(!showFrom)} />
+              {comment?.user === authUser?.id && <Delete href onClick={handleDeleteComment} />}
+            </CtaContainer>
           </Header>
           <Content>{comment?.content}</Content>
 
@@ -164,7 +196,7 @@ const Comment = ({ comment, feedback }) => {
         </UserComment>
       </Container>
       {oneReply?.map((reply) => (
-        <Reply reply={reply} key={reply.id} comment={comment} />
+        <Reply reply={reply} key={reply.id} authUser={authUser} />
       ))}
     </>
   );
