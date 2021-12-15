@@ -2,11 +2,13 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import userService from '../../services/user';
 import { Button } from '../common/ui/Button';
+import feedbackService from '../../services/feedback';
+import Reply from './Reply';
 
 const Container = styled.div`
   display: flex;
@@ -82,7 +84,7 @@ const Textarea = styled.textarea`
   margin-bottom: 24px;
 `;
 
-const ReplyFormContainer = styled.div`
+const Form = styled.form`
   display: flex;
   gap: 16px;
 `;
@@ -93,8 +95,11 @@ const Btn = styled(Button)`
   text-align: center;
 `;
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, feedback }) => {
   const [showFrom, setShowForm] = useState(false);
+  const [characterCount, setCharacterCount] = useState(250);
+  const [content, setContent] = useState('');
+  const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery(
     ['user', comment.user],
@@ -104,29 +109,64 @@ const Comment = ({ comment }) => {
     }
   );
 
-  return (
-    <Container>
-      <Image src={data?.avatar} alt="user" />
-      <UserComment>
-        <Header>
-          <div>
-            <h4>{data?.name}</h4>
-            <p>@{data?.username}</p>
-          </div>
-          <a href onClick={() => setShowForm(!showFrom)}>
-            Reply
-          </a>
-        </Header>
-        <Content>{comment?.content}</Content>
+  const oneReply = comment?.replies?.map((reply) => reply);
 
-        {showFrom && (
-          <ReplyFormContainer>
-            <Textarea />
-            <Btn>Post Reply</Btn>
-          </ReplyFormContainer>
-        )}
-      </UserComment>
-    </Container>
+  const createReply = useMutation((reply) => feedbackService.createReply(reply), {
+    onSuccess: () => {
+      queryClient.invalidateQueries('feedback');
+    },
+  });
+
+  const handleOnChange = (event) => {
+    const { value } = event.target;
+    setContent(value);
+    setCharacterCount(250 - value.length);
+  };
+
+  const replyObj = {
+    id: comment?.id,
+    content: content,
+  };
+
+  const handleCreateReply = (event) => {
+    event.preventDefault();
+    createReply.mutate(replyObj);
+    setContent('');
+  };
+
+  return (
+    <>
+      <Container>
+        <Image src={data?.avatar} alt="user" />
+        <UserComment>
+          <Header>
+            <div>
+              <h4>{data?.name}</h4>
+              <p>@{data?.username}</p>
+            </div>
+            <a href onClick={() => setShowForm(!showFrom)}>
+              Reply
+            </a>
+          </Header>
+          <Content>{comment?.content}</Content>
+
+          {showFrom && (
+            <Form onSubmit={handleCreateReply}>
+              <Textarea
+                placeholder="Type your reply here"
+                maxLength="250"
+                value={content}
+                onChange={handleOnChange}
+              />
+              <Btn>Post Reply</Btn>
+            </Form>
+          )}
+        </UserComment>
+      </Container>
+      {oneReply?.map((reply) => (
+        <Reply reply={reply} key={reply.id} comment={comment} />
+      ))}
+    </>
   );
 };
 

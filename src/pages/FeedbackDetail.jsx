@@ -55,7 +55,7 @@ export default function FeedbackDetail({ authUser }) {
               feedback={data}
             />
             <Feedback feedback={data} isLoading={isLoading} />
-            <Comments comments={data?.comments} />
+            <Comments comments={data?.comments} feedback={data} />
             <CommentForm feedback={data} />
           </Container>
         </Layout>

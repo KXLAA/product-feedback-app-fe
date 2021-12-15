@@ -1,5 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import feedbackService from '../../services/feedback';
 
 const Container = styled.div`
   display: flex;
@@ -50,23 +53,27 @@ const Image = styled.img`
   height: 40px;
 `;
 
-const Reply = () => (
-  <Container>
-    <Image src="https://avatars.dicebear.com/api/human/339.svg" alt="user" />
-    <UserComment>
-      <Header>
-        <div>
-          <h4>James Skinner</h4>
-          <p>@hummingbird1</p>
-        </div>
-      </Header>
-      <Content>
-        Also, please allow styles to be applied based on system preferences. I would love to be able
-        to browse Frontend Mentor in the evening after my device’s dark mode turns on without the
-        bright background it currently has.
-      </Content>
-    </UserComment>
-  </Container>
-);
+const Reply = ({ reply, comment }) => {
+  console.log(comment);
+  const queryClient = useQueryClient();
+  const { data, isLoading } = useQuery(['reply', reply], () => feedbackService.getReply(reply), {
+    enabled: !!reply,
+  });
+
+  return (
+    <Container>
+      <Image src={data?.user?.avatar} alt={data?.user?.name} />
+      <UserComment>
+        <Header>
+          <div>
+            <h4>{data?.user?.name}</h4>
+            <p>{data?.user?.username}</p>
+          </div>
+        </Header>
+        <Content>{data?.content}</Content>
+      </UserComment>
+    </Container>
+  );
+};
 
 export default Reply;

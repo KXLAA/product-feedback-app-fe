@@ -17,16 +17,14 @@ const Header = styled.h3`
   color: #3a4374;
 `;
 
-const Comments = ({ comments }) => (
+const Comments = ({ comments, feedback }) => (
   <Container>
     <Header>
       {comments?.length} {comments?.length === 1 ? 'Comment' : 'Comments'}
     </Header>
     {comments?.map((comment) => (
-      <Comment comment={comment} key={comment.id} />
+      <Comment comment={comment} key={comment.id} feedback={feedback} />
     ))}
-
-    <Reply />
   </Container>
 );
 

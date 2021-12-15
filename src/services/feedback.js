@@ -65,6 +65,16 @@ const createReply = async ({ id, ...newObject }) => {
   return response.data;
 };
 
+const getReply = async (id) => {
+  const response = await axios.get(`${replyUrl}/${id}`);
+  return response.data;
+};
+
+const getReplies = async () => {
+  const response = await axios.get(replyUrl);
+  return response.data;
+};
+
 export default {
   getAll,
   getOne,
@@ -74,4 +84,6 @@ export default {
   deleteFeedback,
   createComment,
   createReply,
+  getReplies,
+  getReply,
 };
