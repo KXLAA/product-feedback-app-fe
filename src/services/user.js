@@ -12,7 +12,7 @@ const createUser = async (newObject) => {
   return response.data;
 };
 
-const editUser = async (id, newObject) => {
+const editUser = async ({ id, ...newObject }) => {
   const response = await axios.put(`${baseUrl}/${id}`, newObject);
   return response.data;
 };

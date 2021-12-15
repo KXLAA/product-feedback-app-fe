@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -56,36 +57,42 @@ const RoadMapTxt = styled.div`
   }
 `;
 
-const RoadMap = () => (
-  <Container>
-    <RoadMapHeader>
-      <h3>Roadmap</h3>
-      <Link to="/roadmap">View</Link>
-    </RoadMapHeader>
-    <RoadMapContent>
-      <RoadMapTxt>
-        <div>
-          <BulletPoint color="#F49F85" />
-          <p>Planned</p>
-        </div>
-        <p style={{ fontWeight: 700 }}>2</p>
-      </RoadMapTxt>
-      <RoadMapTxt>
-        <div>
-          <BulletPoint color="#AD1FEA" />
-          <p>In-Progress</p>
-        </div>
-        <p style={{ fontWeight: 700 }}>3</p>
-      </RoadMapTxt>
-      <RoadMapTxt>
-        <div>
-          <BulletPoint color="#62BCFA" />
-          <p>In-Progress</p>
-        </div>
-        <p style={{ fontWeight: 700 }}>1</p>
-      </RoadMapTxt>
-    </RoadMapContent>
-  </Container>
-);
+const RoadMap = ({ feedback }) => {
+  const planned = feedback.filter((feed) => feed?.status === 'planned');
+  const live = feedback.filter((feed) => feed?.status === 'live');
+  const inProgress = feedback.filter((feed) => feed?.status === 'in-progress');
+
+  return (
+    <Container>
+      <RoadMapHeader>
+        <h3>Roadmap</h3>
+        <Link to="/roadmap">View</Link>
+      </RoadMapHeader>
+      <RoadMapContent>
+        <RoadMapTxt>
+          <div>
+            <BulletPoint color="#F49F85" />
+            <p>Planned</p>
+          </div>
+          <p style={{ fontWeight: 700 }}>{planned?.length}</p>
+        </RoadMapTxt>
+        <RoadMapTxt>
+          <div>
+            <BulletPoint color="#AD1FEA" />
+            <p>In-Progress</p>
+          </div>
+          <p style={{ fontWeight: 700 }}>{inProgress?.length}</p>
+        </RoadMapTxt>
+        <RoadMapTxt>
+          <div>
+            <BulletPoint color="#62BCFA" />
+            <p>In-Progress</p>
+          </div>
+          <p style={{ fontWeight: 700 }}>{live?.length}</p>
+        </RoadMapTxt>
+      </RoadMapContent>
+    </Container>
+  );
+};
 
 export default RoadMap;

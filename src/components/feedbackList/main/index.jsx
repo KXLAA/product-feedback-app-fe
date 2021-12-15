@@ -13,7 +13,7 @@ const Container = styled.section`
   gap: 24px;
 `;
 
-const Main = ({ feedback, setFeedback, toggleAddPage }) => (
+const Main = ({ feedback, setFeedback, toggleAddPage, serverUser }) => (
   <Container>
     <Header feedback={feedback} toggleAddPage={toggleAddPage} />
     {feedback?.length === 0 ? (
@@ -26,6 +26,7 @@ const Main = ({ feedback, setFeedback, toggleAddPage }) => (
             feedback={feed}
             key={feed.id}
             setFeedback={setFeedback}
+            serverUser={serverUser}
           />
         ))}
       </>

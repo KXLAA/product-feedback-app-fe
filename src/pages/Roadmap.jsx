@@ -10,7 +10,6 @@ import NewFeedback from '../components/newFeedback/NewFeedback';
 import { Layout } from '../components/feedbackForm/Common';
 
 export default function Roadmap({ feedback }) {
-  console.log(feedback);
   const planned = feedback.filter((feed) => feed?.status === 'planned');
   const live = feedback.filter((feed) => feed?.status === 'live');
   const inProgress = feedback.filter((feed) => feed?.status === 'in-progress');

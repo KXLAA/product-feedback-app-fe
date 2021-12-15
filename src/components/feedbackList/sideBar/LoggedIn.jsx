@@ -14,6 +14,7 @@ import {
   MenuLink,
 } from '@reach/menu-button';
 import '@reach/menu-button/styles.css';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   background-color: white;
@@ -78,25 +79,29 @@ const MenuLi = styled(MenuList)`
   }
 `;
 
-const LoggedIn = ({ authUser, handleLogOut }) => (
-  <Container>
-    <Menu>
-      <MenuBtn>
-        <img src={authUser.avatar} alt="avatar" />
-        <UserDetails>
-          <div>
-            <h4>{authUser.name}</h4>
-            <p>@{authUser.username}</p>
-          </div>
-          <Kebab />
-        </UserDetails>
-      </MenuBtn>
-      <MenuLi>
-        <MenuItem onSelect={handleLogOut}>Log Out</MenuItem>
-        <MenuItem onSelect={() => {}}>Your Upvotes</MenuItem>
-      </MenuLi>
-    </Menu>
-  </Container>
-);
+const LoggedIn = ({ authUser, handleLogOut }) => {
+  const navigate = useNavigate();
+
+  return (
+    <Container>
+      <Menu>
+        <MenuBtn>
+          <img src={authUser.avatar} alt="avatar" />
+          <UserDetails>
+            <div>
+              <h4>{authUser.name}</h4>
+              <p>@{authUser.username}</p>
+            </div>
+            <Kebab />
+          </UserDetails>
+        </MenuBtn>
+        <MenuLi>
+          <MenuItem onSelect={handleLogOut}>Log Out</MenuItem>
+          <MenuItem onSelect={() => navigate('/your-upvotes')}>Your Upvotes</MenuItem>
+        </MenuLi>
+      </Menu>
+    </Container>
+  );
+};
 
 export default LoggedIn;

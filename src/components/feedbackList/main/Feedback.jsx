@@ -55,10 +55,10 @@ const Comment = styled(FaComment)`
 
 const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('').toLowerCase();
 
-const Feedback = ({ feedback }) => (
+const Feedback = ({ feedback, serverUser }) => (
   <Container>
     <DetailsContainer>
-      <Upvotes feedback={feedback} />
+      <Upvotes feedback={feedback} serverUser={serverUser} />
       <div>
         <h3>
           <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>

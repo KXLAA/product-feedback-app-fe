@@ -12,6 +12,7 @@ import Roadmap from './Roadmap';
 import feedbackService from '../services/feedback';
 import loginService from '../services/login';
 import userService from '../services/user';
+import Upvotes from './Upvotes';
 
 export default function Pages() {
   const navigate = useNavigate();
@@ -97,9 +98,11 @@ export default function Pages() {
     setNewUser((prevUser) => ({ ...prevUser, [target.name]: target.value }));
   };
 
+  const getFeedbackList = useQuery('feedbackList', feedbackService.getAll);
+
   const { data, isLoading, isError } = useQuery('feedbackList', feedbackService.getAll);
 
-  console.log(data);
+  const getUser = useQuery(['user', authUser?.id], () => userService.getUser(authUser?.id));
 
   return (
     <>
@@ -111,7 +114,12 @@ export default function Pages() {
             <Route
               path="/"
               element={
-                <FeedbackList feedback={data} handleLogOut={handleLogOut} authUser={authUser} />
+                <FeedbackList
+                  feedback={getFeedbackList?.data}
+                  handleLogOut={handleLogOut}
+                  authUser={authUser}
+                  serverUser={getUser?.data}
+                />
               }
             />
             <Route
@@ -127,12 +135,14 @@ export default function Pages() {
                   handleSignUp={handleSignUp}
                   onChange={handleSignUpChange}
                   newUser={newUser}
-                  mm={logIn}
                 />
               }
             />
             <Route path="/feedback-list/:id" element={<FeedbackDetail authUser={authUser} />} />
-            <Route path="/roadmap" element={<Roadmap feedback={data} />} />
+
+            <Route path="/roadmap" element={<Roadmap feedback={getFeedbackList?.data} />} />
+
+            <Route path="/your-upvotes" element={<Upvotes feedback={getFeedbackList?.data} />} />
           </Routes>
         </>
       )}

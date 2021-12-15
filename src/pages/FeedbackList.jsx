@@ -9,7 +9,13 @@ import MainLayout from '../components/common/Layout';
 import NewFeedback from '../components/newFeedback/NewFeedback';
 import { Layout } from '../components/feedbackForm/Common';
 
-export default function FeedbackList({ feedback, setFeedback, handleLogOut, authUser }) {
+export default function FeedbackList({
+  feedback,
+  setFeedback,
+  handleLogOut,
+  authUser,
+  serverUser,
+}) {
   const [showAddPage, setShowAddPage] = useState(false);
 
   const toggleAddPage = () => {
@@ -26,10 +32,15 @@ export default function FeedbackList({ feedback, setFeedback, handleLogOut, auth
         <MainLayout>
           <HomePageGrid>
             <GridItemSide>
-              <SideBar handleLogOut={handleLogOut} authUser={authUser} />
+              <SideBar handleLogOut={handleLogOut} authUser={authUser} feedback={feedback} />
             </GridItemSide>
             <GridItemMain>
-              <Main feedback={feedback} setFeedback={setFeedback} toggleAddPage={toggleAddPage} />
+              <Main
+                feedback={feedback}
+                setFeedback={setFeedback}
+                toggleAddPage={toggleAddPage}
+                serverUser={serverUser}
+              />
             </GridItemMain>
           </HomePageGrid>
         </MainLayout>

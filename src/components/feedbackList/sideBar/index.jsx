@@ -14,12 +14,12 @@ const Container = styled.section`
   gap: 24px;
 `;
 
-const SideBar = ({ handleLogOut, authUser }) => (
+const SideBar = ({ handleLogOut, authUser, feedback }) => (
   <Container>
     {authUser ? <LoggedIn authUser={authUser} handleLogOut={handleLogOut} /> : <Login />}
     <Header />
     <Filter />
-    <RoadMap />
+    <RoadMap feedback={feedback} />
   </Container>
 );
 
