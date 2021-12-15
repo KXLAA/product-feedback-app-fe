@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MainLayout from '../components/common/Layout';
 import loginService from '../services/login';
 import feedbackService from '../services/feedback';
@@ -92,6 +92,13 @@ const SignUp = styled.p`
 `;
 
 export default function Login({ onChange, logIn, handleLogin }) {
+  const navigate = useNavigate();
+
+  const userLogIn = () => {
+    handleLogin();
+    navigate('/');
+  };
+
   return (
     <Background>
       <MainLayout>

@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import MainLayout from '../components/common/Layout';
 import userService from '../services/user';
 import loginService from '../services/login';
@@ -82,6 +82,7 @@ const WideBtn = styled.button`
 `;
 
 export default function SignUp({ handleSignUp, onChange, newUser }) {
+  const navigate = useNavigate();
   // const [user, setUser] = useState({
   //   username: '',
   //   name: '',

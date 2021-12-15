@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import styled from 'styled-components';
 import { FaComment } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -58,15 +59,21 @@ const Comment = styled(FaComment)`
 const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('').toLowerCase();
 
 const Feedback = ({ feedback, setFeedback }) => {
-  const handleUpvote = async (event) => {
-    event.preventDefault();
+  const queryClient = useQueryClient();
+  const upVote = useMutation((vote) => feedbackService.update(vote), {
+    onSuccess: () => {
+      queryClient.invalidateQueries('feedbackList');
+    },
+  });
 
-    const feedbackObject = {
-      upvotes: feedback.upvotes + 1,
-    };
-    const updatedFeedback = await feedbackService.edit(feedback.id, feedbackObject);
-    // setFeedback(feedbackList.concat(updatedFeedback));
-    setFeedback((prevFeed) => [...prevFeed, updatedFeedback]);
+  const voteObj = {
+    id: feedback.id,
+    upvotes: feedback.upvotes + 1,
+  };
+
+  const handleUpvote = (event) => {
+    event.preventDefault();
+    upVote.mutate(voteObj);
   };
 
   return (

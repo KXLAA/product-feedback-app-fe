@@ -131,6 +131,8 @@ export default function Pages() {
           </Routes>
         </BrowserRouter>
       )}
+
+      {isError && <p>error</p>}
     </>
   );
 }
