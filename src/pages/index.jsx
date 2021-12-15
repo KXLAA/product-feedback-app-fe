@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import FeedbackList from './FeedbackList';
 import FeedbackDetail from './FeedbackDetail';
@@ -14,8 +14,9 @@ import loginService from '../services/login';
 import userService from '../services/user';
 
 export default function Pages() {
+  const navigate = useNavigate();
   const [authUser, setAuthUser] = useState(null);
-  const [notify, setNotify] = useState(null);
+  // const [notify, setNotify] = useState(null);
 
   const [logIn, setLogIn] = useState({
     username: '',
@@ -41,6 +42,7 @@ export default function Pages() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    navigate('/');
     try {
       const user = await loginService.login({
         username: logIn.username,
@@ -51,7 +53,7 @@ export default function Pages() {
       setAuthUser(user);
       setLogIn({ username: '', password: '' });
     } catch (exception) {
-      setNotify('Wrong credentials');
+      // setNotify('Wrong credentials');
     }
   };
 
@@ -69,6 +71,7 @@ export default function Pages() {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
+    navigate('/');
     const newUserObj = {
       username: newUser.username,
       name: newUser.name,
@@ -85,7 +88,7 @@ export default function Pages() {
       feedbackService.setToken(user.token);
       setAuthUser(user);
     } catch (exception) {
-      setNotify('Wrong credentials');
+      // setNotify('Wrong credentials');
     }
     setNewUser({ username: '', name: '', password: '', email: '' });
   };
@@ -94,14 +97,16 @@ export default function Pages() {
     setNewUser((prevUser) => ({ ...prevUser, [target.name]: target.value }));
   };
 
-  const { data, isLoading, isError, error } = useQuery('feedbackList', feedbackService.getAll);
+  const { data, isLoading, isError } = useQuery('feedbackList', feedbackService.getAll);
+
+  console.log(data);
 
   return (
     <>
       {isLoading ? (
         'Loading'
       ) : (
-        <BrowserRouter>
+        <>
           <Routes>
             <Route
               path="/"
@@ -127,9 +132,9 @@ export default function Pages() {
               }
             />
             <Route path="/feedback-list/:id" element={<FeedbackDetail authUser={authUser} />} />
-            <Route path="/roadmap" element={<Roadmap />} />
+            <Route path="/roadmap" element={<Roadmap feedback={data} />} />
           </Routes>
-        </BrowserRouter>
+        </>
       )}
 
       {isError && <p>error</p>}

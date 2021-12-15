@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Comment from './Comment';
-import Reply from './Reply';
 
 const Container = styled.div`
   background: #ffffff;

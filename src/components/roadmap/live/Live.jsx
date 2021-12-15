@@ -1,15 +1,17 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Header } from '../Common';
 import LiveItem from './LiveItem';
 
-const Live = () => (
+const Live = ({ live }) => (
   <>
     <Header>
-      <h3>Live (1)</h3>
+      <h3>Live ({live?.length})</h3>
       <p>Released features</p>
     </Header>
-    <LiveItem />
-    <LiveItem />
+    {live?.map((liveItem) => (
+      <LiveItem key={liveItem.id} live={liveItem} />
+    ))}
   </>
 );
 

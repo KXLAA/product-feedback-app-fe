@@ -44,7 +44,7 @@ const Cta = styled.div`
   }
 `;
 
-const CommentForm = ({ feedback }) => {
+const CommentForm = ({ feedback, authUser }) => {
   const [characterCount, setCharacterCount] = useState(250);
   const [content, setContent] = useState('');
   const queryClient = useQueryClient();
@@ -80,6 +80,7 @@ const CommentForm = ({ feedback }) => {
         maxLength="250"
         value={content}
         onChange={handleOnChange}
+        disabled={!authUser}
       />
       <Cta>
         <p>{characterCount} Characters left</p>

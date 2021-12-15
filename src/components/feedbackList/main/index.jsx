@@ -13,27 +13,24 @@ const Container = styled.section`
   gap: 24px;
 `;
 
-const Main = ({ feedback, setFeedback, toggleAddPage }) => {
-  console.log(feedback);
-  return (
-    <Container>
-      <Header feedback={feedback} toggleAddPage={toggleAddPage} />
-      {feedback?.length === 0 ? (
-        <Empty />
-      ) : (
-        <>
-          {feedback?.map((feed) => (
-            <Feedback
-              feedbackList={feedback}
-              feedback={feed}
-              key={feed.id}
-              setFeedback={setFeedback}
-            />
-          ))}
-        </>
-      )}
-    </Container>
-  );
-};
+const Main = ({ feedback, setFeedback, toggleAddPage }) => (
+  <Container>
+    <Header feedback={feedback} toggleAddPage={toggleAddPage} />
+    {feedback?.length === 0 ? (
+      <Empty />
+    ) : (
+      <>
+        {feedback?.map((feed) => (
+          <Feedback
+            feedbackList={feedback}
+            feedback={feed}
+            key={feed.id}
+            setFeedback={setFeedback}
+          />
+        ))}
+      </>
+    )}
+  </Container>
+);
 
 export default Main;

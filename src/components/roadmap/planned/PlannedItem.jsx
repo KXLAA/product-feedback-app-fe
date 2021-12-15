@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { FaComment } from 'react-icons/fa';
 import React from 'react';
@@ -18,7 +19,7 @@ const Card = styled(Container)`
   border-top: solid #f49f85 6px;
 `;
 
-const PlannedItem = () => (
+const PlannedItem = ({ planned }) => (
   <Card>
     <RoadMapTxt>
       <div>
@@ -27,18 +28,18 @@ const PlannedItem = () => (
       </div>
     </RoadMapTxt>
     <Content>
-      <h3>More comprehensive reports</h3>
-      <p>It would be great to see a more detailed breakdown of solutions.</p>
+      <h3>{planned?.title}</h3>
+      <p>{planned?.description}</p>
     </Content>
     <FilterContainer>
-      <FilterBtn text="Feature" />
+      <FilterBtn text={planned?.category} />
     </FilterContainer>
 
     <Actions>
-      <Upvotes number="80" />
+      <Upvotes feedback={planned} />
       <Comment>
         <CommentIcon />
-        <p>2</p>
+        <p>{planned?.comments?.length}</p>
       </Comment>
     </Actions>
   </Card>

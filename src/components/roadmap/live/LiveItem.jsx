@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import React from 'react';
 import FilterBtn from '../../common/ui/FilterBtn';
@@ -17,27 +18,27 @@ const Card = styled(Container)`
   border-top: solid #62bcfa 6px;
 `;
 
-const LiveItem = () => (
+const LiveItem = ({ live }) => (
   <Card>
     <RoadMapTxt>
       <div>
         <BulletPoint color="#62BCFA" />
-        <p>Planned</p>
+        <p>Live</p>
       </div>
     </RoadMapTxt>
     <Content>
-      <h3>More comprehensive reports</h3>
-      <p>It would be great to see a more detailed breakdown of solutions.</p>
+      <h3>{live?.title}</h3>
+      <p>{live?.description}</p>
     </Content>
     <FilterContainer>
-      <FilterBtn text="Feature" />
+      <FilterBtn text={live?.category} />
     </FilterContainer>
 
     <Actions>
-      <Upvotes number="80" />
+      <Upvotes feedback={live} />
       <Comment>
         <CommentIcon />
-        <p>2</p>
+        <p>{live?.comments?.length}</p>
       </Comment>
     </Actions>
   </Card>

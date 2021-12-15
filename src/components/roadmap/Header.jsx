@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { BiChevronLeft } from 'react-icons/bi';
@@ -39,7 +40,7 @@ const Back = styled.div`
   }
 `;
 
-const Header = () => (
+const Header = ({ toggleEdit }) => (
   <Container>
     <Alert>
       <Link to="/">
@@ -51,7 +52,7 @@ const Header = () => (
 
       <h3>Roadmap</h3>
     </Alert>
-    <Button>+ Add Feedback</Button>
+    <Button onClick={toggleEdit}>+ Add Feedback</Button>
   </Container>
 );
 

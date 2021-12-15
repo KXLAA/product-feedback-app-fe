@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { GoChevronUp } from 'react-icons/go';
 import { useMutation, useQueryClient } from 'react-query';
@@ -9,7 +9,6 @@ import feedbackService from '../../../services/feedback';
 const Button = styled.div`
   width: 40px;
   height: 53px;
-  display: inline;
   transition: all 0.3s ease;
   background: #f2f4fe;
   border-radius: 10px;
@@ -22,6 +21,7 @@ const Button = styled.div`
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 8px 12px;
 
   &:hover {

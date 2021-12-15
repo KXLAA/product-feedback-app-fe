@@ -112,7 +112,6 @@ const Btn = styled(Button)`
 
 const Comment = ({ comment, authUser }) => {
   const [showFrom, setShowForm] = useState(false);
-  const [characterCount, setCharacterCount] = useState(250);
   const [content, setContent] = useState('');
   const queryClient = useQueryClient();
 
@@ -140,7 +139,6 @@ const Comment = ({ comment, authUser }) => {
   const handleOnChange = (event) => {
     const { value } = event.target;
     setContent(value);
-    setCharacterCount(250 - value.length);
   };
 
   const replyObj = {
@@ -159,11 +157,10 @@ const Comment = ({ comment, authUser }) => {
     deleteComment.mutate(comment?.id);
   };
 
-  console.log(comment);
-
   if (isLoading) {
     return 'Loading';
   }
+
   return (
     <>
       <Container>
@@ -189,6 +186,7 @@ const Comment = ({ comment, authUser }) => {
                 maxLength="250"
                 value={content}
                 onChange={handleOnChange}
+                disabled={!authUser}
               />
               <Btn>Post Reply</Btn>
             </Form>

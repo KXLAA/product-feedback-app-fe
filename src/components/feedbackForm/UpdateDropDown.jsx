@@ -59,7 +59,7 @@ const UpdateDropDown = ({ fields, setFields }) => {
   const [value, setValue] = useState(fields.status);
 
   useEffect(() => {
-    setFields((prev) => ({ ...prev, category: value }));
+    setFields((prev) => ({ ...prev, status: value }));
   }, [value]);
 
   return (

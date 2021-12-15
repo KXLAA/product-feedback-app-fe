@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import React from 'react';
 import FilterBtn from '../../common/ui/FilterBtn';
@@ -16,27 +17,27 @@ import {
 const Card = styled(Container)`
   border-top: solid #ad1fea 6px;
 `;
-const InProgressItem = () => (
+const InProgressItem = ({ progress }) => (
   <Card>
     <RoadMapTxt>
       <div>
         <BulletPoint color="#AD1FEA" />
-        <p>Planned</p>
+        <p>In Progress</p>
       </div>
     </RoadMapTxt>
     <Content>
-      <h3>More comprehensive reports</h3>
-      <p>It would be great to see a more detailed breakdown of solutions.</p>
+      <h3>{progress?.title}</h3>
+      <p>{progress?.description}</p>
     </Content>
     <FilterContainer>
-      <FilterBtn text="Feature" />
+      <FilterBtn text={progress?.category} />
     </FilterContainer>
 
     <Actions>
-      <Upvotes number="80" />
+      <Upvotes feedback={progress} />
       <Comment>
         <CommentIcon />
-        <p>2</p>
+        <p>{progress?.comments?.length}</p>
       </Comment>
     </Actions>
   </Card>

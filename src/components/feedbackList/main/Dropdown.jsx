@@ -44,7 +44,6 @@ const PopOver = styled(ListboxPopover)`
 
 const Dropdown = ({ feedback }) => {
   const [value, setValue] = useState('Most Upvotes');
-  console.log(value);
 
   return (
     <Container>
