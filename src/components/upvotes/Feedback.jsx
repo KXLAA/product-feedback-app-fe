@@ -2,8 +2,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaComment } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import Upvotes from '../common/ui/Upvotes';
 import FilterBtn from '../common/ui/FilterBtn';
+import feedbackService from '../../services/feedback';
 
 const Container = styled.div`
   background: #ffffff;
@@ -12,6 +15,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 24px;
 `;
 
 const DetailsContainer = styled.div`
@@ -52,24 +56,32 @@ const Comment = styled(FaComment)`
   color: #cdd2ee;
 `;
 
-const Feedback = ({ feedback, isLoading, serverUser }) => {
-  if (isLoading) {
-    return 'Loading';
-  }
+const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('').toLowerCase();
+
+const Feedback = ({ liked, serverUser }) => {
+  const { data, isLoading } = useQuery(['upvoted', liked], () => feedbackService.getOne(liked), {
+    enabled: Boolean(liked),
+  });
+
+  console.log(data);
+
   return (
     <Container>
       <DetailsContainer>
-        <Upvotes feedback={feedback} serverUser={serverUser} />
+        <Upvotes feedback={data} serverUser={serverUser} />
         <div>
-          <h3>{feedback?.title}</h3>
-          <p>{feedback?.description}</p>
-          <FilterBtn text={feedback?.category} />
+          <h3>
+            <Link to={`/feedback-list/${liked}`}>{data?.title}</Link>
+          </h3>
+
+          <p>{data?.description}</p>
+          <FilterBtn text={data?.category} />
         </div>
       </DetailsContainer>
 
       <CommentContainer>
         <Comment />
-        <p>{feedback?.comments?.length}</p>
+        <p>{data?.comments.length}</p>
       </CommentContainer>
     </Container>
   );

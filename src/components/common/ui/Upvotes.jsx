@@ -18,7 +18,7 @@ const Button = styled.div`
   line-height: 19px;
   text-align: center;
   letter-spacing: -0.180556px;
-  color: ${(props) => props.color || '##3a4374'};
+  color: ${(props) => props.color || '#3a4374'};
   cursor: pointer;
   display: flex;
   flex-direction: column;
