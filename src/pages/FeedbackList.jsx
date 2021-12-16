@@ -15,6 +15,9 @@ export default function FeedbackList({
   handleLogOut,
   authUser,
   serverUser,
+  setFilter,
+  filter,
+  setSort,
 }) {
   const [showAddPage, setShowAddPage] = useState(false);
 
@@ -32,10 +35,17 @@ export default function FeedbackList({
         <MainLayout>
           <HomePageGrid>
             <GridItemSide>
-              <SideBar handleLogOut={handleLogOut} authUser={authUser} feedback={feedback} />
+              <SideBar
+                handleLogOut={handleLogOut}
+                authUser={authUser}
+                feedback={feedback}
+                setFilter={setFilter}
+                filter={filter}
+              />
             </GridItemSide>
             <GridItemMain>
               <Main
+                setSort={setSort}
                 feedback={feedback}
                 setFeedback={setFeedback}
                 toggleAddPage={toggleAddPage}

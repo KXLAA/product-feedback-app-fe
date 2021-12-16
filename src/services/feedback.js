@@ -15,6 +15,11 @@ const getAll = async () => {
   return response.data;
 };
 
+const getFeedback = async (filter, sort = '&sort=mostUpvotes') => {
+  const response = await axios.get(`${baseUrl}?category=${filter}${sort}`);
+  return response.data;
+};
+
 const getOne = async (id) => {
   const response = await axios.get(`${baseUrl}/${id}`);
   return response.data;
@@ -106,4 +111,5 @@ export default {
   getReplies,
   deleteReply,
   getReply,
+  getFeedback,
 };

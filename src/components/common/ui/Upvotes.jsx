@@ -29,12 +29,6 @@ const Button = styled.div`
     background: #cfd7ff;
     transform: translateX(0rem) translateY(-0.125rem);
   }
-
-  &:active {
-    background: #4661e6;
-    color: #ffffff;
-    transform: translateX(0rem) translateY(-0.125rem);
-  }
 `;
 
 const Arrow = styled(GoChevronUp)`

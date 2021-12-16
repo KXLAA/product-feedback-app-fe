@@ -28,6 +28,7 @@ const NewFeedback = ({ toggleAddPage, feedback }) => {
   const addFeedback = useMutation((newFeedback) => feedbackService.create(newFeedback), {
     onSuccess: () => {
       queryClient.invalidateQueries('feedbackList');
+      queryClient.invalidateQueries('feedback');
       toggleAddPage();
     },
   });

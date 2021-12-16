@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import {
@@ -42,13 +43,34 @@ const PopOver = styled(ListboxPopover)`
   }
 `;
 
-const Dropdown = ({ feedback }) => {
-  const [value, setValue] = useState('Most Upvotes');
+const Dropdown = ({ feedback, setSort }) => {
+  let sortVal = 'Most Upvotes';
+  const [value, setValue] = useState(sortVal);
+
+  const handleChange = (value) => {
+    setValue(value);
+    if (value === 'Least Upvotes') {
+      setSort('&sort=leastUpvotes');
+      sortVal = 'Least Upvotes';
+    }
+    if (value === 'Most Upvotes') {
+      setSort('&sort=mostUpvotes');
+      sortVal = 'Most Upvotes';
+    }
+    if (value === 'Most Comments') {
+      setSort('&sort=mostComments');
+      sortVal = 'Most Comments';
+    }
+    if (value === 'Least Comments') {
+      setSort('&sort=leastComments');
+      sortVal = 'Least Comments';
+    }
+  };
 
   return (
     <Container>
       <span id="my-label">Sort by :</span>
-      <ListboxInput value={value} onChange={setValue}>
+      <ListboxInput value={value} onChange={handleChange}>
         <MenuList arrow />
         <PopOver>
           <ListboxList>

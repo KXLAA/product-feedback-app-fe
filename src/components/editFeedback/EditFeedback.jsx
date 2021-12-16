@@ -41,6 +41,7 @@ const EditFeedback = ({ showEditPage, setShowEditPage, feedback }) => {
   const updateFeedback = useMutation((update) => feedbackService.update(update), {
     onSuccess: () => {
       queryClient.invalidateQueries('feedbackList');
+      queryClient.invalidateQueries('feedback');
       setShowEditPage(!showEditPage);
     },
   });
@@ -48,6 +49,7 @@ const EditFeedback = ({ showEditPage, setShowEditPage, feedback }) => {
   const deleteFeedback = useMutation((deleted) => feedbackService.deleteFeedback(deleted), {
     onSuccess: () => {
       queryClient.invalidateQueries('feedbackList');
+      queryClient.invalidateQueries('feedback');
       navigate('/');
     },
   });

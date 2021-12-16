@@ -14,13 +14,17 @@ const Container = styled.section`
   gap: 24px;
 `;
 
-const SideBar = ({ handleLogOut, authUser, feedback }) => (
-  <Container>
-    {authUser ? <LoggedIn authUser={authUser} handleLogOut={handleLogOut} /> : <Login />}
-    <Header />
-    <Filter />
-    <RoadMap feedback={feedback} />
-  </Container>
-);
+const SideBar = ({ handleLogOut, authUser, feedback, setFilter, filter }) => {
+  console.log('sideBar', feedback);
+
+  return (
+    <Container>
+      {authUser ? <LoggedIn authUser={authUser} handleLogOut={handleLogOut} /> : <Login />}
+      <Header />
+      <Filter setFilter={setFilter} filter={filter} />
+      <RoadMap feedback={feedback} />
+    </Container>
+  );
+};
 
 export default SideBar;

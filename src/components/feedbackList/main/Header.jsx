@@ -29,12 +29,12 @@ const Icon = styled(HiOutlineLightBulb)`
   font-size: 24px;
 `;
 
-const Header = ({ feedback, toggleAddPage }) => (
+const Header = ({ feedback, toggleAddPage, setSort }) => (
   <Container>
     <SuggestionCount>
       <Icon />
       <h3>{feedback?.length} Suggestions</h3>
-      <Dropdown feedback={feedback} />
+      <Dropdown feedback={feedback} setSort={setSort} />
     </SuggestionCount>
 
     <Button onClick={toggleAddPage}>+ Add Feedback</Button>

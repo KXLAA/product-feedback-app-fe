@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import FeedbackList from './FeedbackList';
 import FeedbackDetail from './FeedbackDetail';
 import Login from './Login';
@@ -98,11 +98,16 @@ export default function Pages() {
     setNewUser((prevUser) => ({ ...prevUser, [target.name]: target.value }));
   };
 
-  const getFeedbackList = useQuery('feedbackList', feedbackService.getAll);
+  const [filter, setFilter] = useState('all');
+  const [sort, setSort] = useState('&sort=mostUpvotes');
 
-  const { data, isLoading, isError } = useQuery('feedbackList', feedbackService.getAll);
+  const { data, isLoading, isError } = useQuery(['feedbackList', filter, sort], () =>
+    feedbackService.getFeedback(filter, sort)
+  );
 
-  const getUser = useQuery(['user', authUser?.id], () => userService.getUser(authUser?.id));
+  const getUser = useQuery(['user', authUser?.id], () => userService.getUser(authUser?.id), {
+    enabled: !!authUser,
+  });
 
   return (
     <>
@@ -115,7 +120,11 @@ export default function Pages() {
               path="/"
               element={
                 <FeedbackList
-                  feedback={getFeedbackList?.data}
+                  feedback={data}
+                  setFilter={setFilter}
+                  filter={filter}
+                  setSort={setSort}
+                  sort={sort}
                   handleLogOut={handleLogOut}
                   authUser={authUser}
                   serverUser={getUser?.data}
@@ -145,7 +154,7 @@ export default function Pages() {
 
             <Route
               path="/roadmap"
-              element={<Roadmap feedback={getFeedbackList?.data} serverUser={getUser?.data} />}
+              element={<Roadmap feedback={data} serverUser={getUser?.data} />}
             />
 
             <Route path="/your-upvotes" element={<Upvotes serverUser={getUser?.data} />} />
