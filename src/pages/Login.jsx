@@ -68,6 +68,7 @@ const WideBtn = styled.button`
   color: #f2f4fe;
   cursor: pointer;
   border: none;
+  outline: none;
 
   &:hover {
     color: #ffffff;
@@ -89,7 +90,23 @@ const SignUp = styled.p`
   }
 `;
 
-export default function Login({ onChange, logIn, handleLogin }) {
+const Error = styled.div`
+  text-align: left;
+
+  p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #d73737;
+  }
+`;
+
+export default function Login({ onChange, logIn, handleLogin, notify, setNotify }) {
+  console.log(notify);
+
+  const borderRed = notify === 'Wrong credentials' ? 'solid 1.5px red' : 'none';
+
   return (
     <Background>
       <MainLayout>
@@ -98,21 +115,34 @@ export default function Login({ onChange, logIn, handleLogin }) {
           <Input
             type="text"
             placeholder="Korty65"
-            id="email"
             value={logIn.username}
             name="username"
             onChange={onChange}
+            required
+            style={{ border: `${borderRed}` }}
           />
 
           <Label htmlFor="email">Password</Label>
           <Input
             name="password"
             type="password"
-            id="password"
             value={logIn.password}
             onChange={onChange}
+            required="true"
+            style={{ border: `${borderRed}` }}
           />
+          {/* {notify === 'Can’t be empty' && (
+            <Error>
+              <p>{notify}</p>
+            </Error>
+          )} */}
+
           <WideBtn> Login </WideBtn>
+          {notify === 'Wrong credentials' && (
+            <Error>
+              <p>Wrong credentials</p>
+            </Error>
+          )}
 
           <SignUp>
             Not signed in ? <Link to="/auth/sign-up">Sign up</Link> here{' '}

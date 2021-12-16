@@ -17,7 +17,7 @@ import Upvotes from './Upvotes';
 export default function Pages() {
   const navigate = useNavigate();
   const [authUser, setAuthUser] = useState(null);
-  // const [notify, setNotify] = useState(null);
+  const [notify, setNotify] = useState(null);
 
   const [logIn, setLogIn] = useState({
     username: '',
@@ -43,7 +43,6 @@ export default function Pages() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    navigate('/');
     try {
       const user = await loginService.login({
         username: logIn.username,
@@ -52,11 +51,17 @@ export default function Pages() {
       window.localStorage.setItem('loggedUser', JSON.stringify(user));
       feedbackService.setToken(user.token);
       setAuthUser(user);
+      navigate('/');
       setLogIn({ username: '', password: '' });
-    } catch (exception) {
-      // setNotify('Wrong credentials');
+    } catch (error) {
+      setNotify('Wrong credentials');
+      setTimeout(() => {
+        setNotify(null);
+      }, 5000);
     }
   };
+
+  console.log(notify);
 
   const handleLogInChange = ({ target }) => {
     setLogIn((prevLogin) => ({
@@ -72,15 +77,16 @@ export default function Pages() {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
-    navigate('/');
+
     const newUserObj = {
       username: newUser.username,
       name: newUser.name,
       email: newUser.email,
       password: newUser.password,
     };
-    const createdUser = await userService.createUser(newUserObj);
+
     try {
+      const createdUser = await userService.createUser(newUserObj);
       const user = await loginService.login({
         username: createdUser.username,
         password: createdUser.password,
@@ -88,10 +94,12 @@ export default function Pages() {
       window.localStorage.setItem('loggedUser', JSON.stringify(user));
       feedbackService.setToken(user.token);
       setAuthUser(user);
-    } catch (exception) {
-      // setNotify('Wrong credentials');
+      navigate('/');
+      setNewUser({ username: '', name: '', password: '', email: '' });
+    } catch (error) {
+      console.log(error.message);
+      setNotify('oops username already exists');
     }
-    setNewUser({ username: '', name: '', password: '', email: '' });
   };
 
   const handleSignUpChange = ({ target }) => {
@@ -134,7 +142,13 @@ export default function Pages() {
             <Route
               path="/auth/login"
               element={
-                <Login handleLogin={handleLogin} onChange={handleLogInChange} logIn={logIn} />
+                <Login
+                  handleLogin={handleLogin}
+                  onChange={handleLogInChange}
+                  logIn={logIn}
+                  notify={notify}
+                  setNotify={setNotify}
+                />
               }
             />
             <Route

@@ -70,6 +70,8 @@ const WideBtn = styled.button`
   line-height: 20px;
   color: #f2f4fe;
   cursor: pointer;
+  outline: none;
+  border: none;
 
   &:hover {
     color: #ffffff;
@@ -83,51 +85,6 @@ const WideBtn = styled.button`
 
 export default function SignUp({ handleSignUp, onChange, newUser }) {
   const navigate = useNavigate();
-  // const [user, setUser] = useState({
-  //   username: '',
-  //   name: '',
-  //   password: '',
-  //   email: '',
-  // });
-  // const [createdUser, setCreatedUser] = useState({});
-  // const [notify, setNotify] = useState(null);
-
-  // useEffect(() => {
-  //   const loggedUserJSON = window.localStorage.getItem('loggedUser');
-  //   if (loggedUserJSON) {
-  //     const newUser = JSON.parse(loggedUserJSON);
-  //     feedbackService.setToken(newUser.token);
-  //   }
-  // }, []);
-
-  // const createUser = async (event) => {
-  //   event.preventDefault();
-
-  //   const newUserObj = {
-  //     username: user.username,
-  //     name: user.name,
-  //     email: user.email,
-  //     password: user.password,
-  //   };
-
-  //   const newUser = await userService.createUser(newUserObj);
-  //   setCreatedUser(newUser);
-  //   try {
-  //     const logInUser = await loginService.login({
-  //       username: newUser.username,
-  //       password: newUser.password,
-  //     });
-  //     window.localStorage.setItem('loggedUser', JSON.stringify(logInUser));
-  //     feedbackService.setToken(logInUser.token);
-  //   } catch (exception) {
-  //     setNotify('Wrong credentials');
-  //   }
-  //   setUser({ username: '', name: '', password: '', email: '' });
-  // };
-
-  // const handleChange = ({ target }) => {
-  //   setUser((prevUser) => ({ ...prevUser, [target.name]: target.value }));
-  // };
 
   return (
     <Background>
@@ -141,6 +98,7 @@ export default function SignUp({ handleSignUp, onChange, newUser }) {
             id="name"
             value={newUser.name}
             onChange={onChange}
+            required
           />
 
           <Label htmlFor="user-name">User Name </Label>
@@ -151,6 +109,7 @@ export default function SignUp({ handleSignUp, onChange, newUser }) {
             id="username"
             value={newUser.username}
             onChange={onChange}
+            required
           />
 
           <Label htmlFor="email">Email</Label>
@@ -161,6 +120,7 @@ export default function SignUp({ handleSignUp, onChange, newUser }) {
             id="email"
             value={newUser.email}
             onChange={onChange}
+            required
           />
 
           <Label htmlFor="password">Password</Label>
@@ -171,6 +131,7 @@ export default function SignUp({ handleSignUp, onChange, newUser }) {
             placeholder="Password"
             value={newUser.password}
             onChange={onChange}
+            required
           />
 
           <WideBtn> Sign Up </WideBtn>
