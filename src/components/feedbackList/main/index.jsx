@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
 import { React } from 'react';
 import styled from 'styled-components';
-import { useQuery } from 'react-query';
 import Header from './Header';
 import Feedback from './Feedback';
 import Empty from './Empty';
-import feedbackService from '../../../services/feedback';
 
 const Container = styled.section`
   display: flex;
@@ -13,9 +11,9 @@ const Container = styled.section`
   gap: 24px;
 `;
 
-const Main = ({ feedback, setFeedback, toggleAddPage, serverUser, setSort }) => (
+const Main = ({ feedback, setFeedback, toggleAddPage, serverUser, setSort, sort }) => (
   <Container>
-    <Header setSort={setSort} feedback={feedback} toggleAddPage={toggleAddPage} />
+    <Header setSort={setSort} feedback={feedback} toggleAddPage={toggleAddPage} sort={sort} />
     {feedback?.length === 0 ? (
       <Empty />
     ) : (

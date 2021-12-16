@@ -4,15 +4,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { GoKebabHorizontal } from 'react-icons/go';
-import {
-  Menu,
-  MenuList,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  MenuPopover,
-  MenuLink,
-} from '@reach/menu-button';
+import { Menu, MenuList, MenuButton, MenuItem } from '@reach/menu-button';
 import '@reach/menu-button/styles.css';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,12 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-undef */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MainLayout from '../components/common/Layout';
-import loginService from '../services/login';
-import feedbackService from '../services/feedback';
 
 const Background = styled.div`
   min-height: 100vh;
@@ -92,13 +90,6 @@ const SignUp = styled.p`
 `;
 
 export default function Login({ onChange, logIn, handleLogin }) {
-  const navigate = useNavigate();
-
-  const userLogIn = () => {
-    handleLogin();
-    navigate('/');
-  };
-
   return (
     <Background>
       <MainLayout>

@@ -6,7 +6,6 @@ import { Container, Form, InputContainer, Input, Textarea, ButtonContainer } fro
 import { Button } from '../common/ui/Button';
 import Header from '../newFeedback/Header';
 import NewDropdown from './NewDropDown';
-import DropDown from './DropDown';
 
 const Cancel = styled(Button)`
   background-color: #3a4374;

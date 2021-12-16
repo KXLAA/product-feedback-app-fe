@@ -2,7 +2,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BiChevronLeft } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
 
 const Alert = styled.div`
   display: flex;

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { GoChevronUp } from 'react-icons/go';
 import { useMutation, useQueryClient } from 'react-query';

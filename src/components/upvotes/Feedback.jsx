@@ -57,7 +57,7 @@ const Comment = styled(FaComment)`
 `;
 
 const Feedback = ({ liked, serverUser }) => {
-  const { data, isLoading } = useQuery(['upvoted', liked], () => feedbackService.getOne(liked), {
+  const { data } = useQuery(['upvoted', liked], () => feedbackService.getOne(liked), {
     enabled: Boolean(liked),
   });
 

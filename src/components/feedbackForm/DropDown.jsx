@@ -2,7 +2,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import {
-  Listbox,
   ListboxInput,
   ListboxButton,
   ListboxPopover,

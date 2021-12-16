@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import FeedbackList from './FeedbackList';
 import FeedbackDetail from './FeedbackDetail';
 import Login from './Login';
@@ -99,10 +99,10 @@ export default function Pages() {
   };
 
   const [filter, setFilter] = useState('all');
-  const [sort, setSort] = useState('&sort=mostUpvotes');
+  const [sort, setSort] = useState({ query: '&sort=mostUpvotes', value: 'Most Upvotes' });
 
   const { data, isLoading, isError } = useQuery(['feedbackList', filter, sort], () =>
-    feedbackService.getFeedback(filter, sort)
+    feedbackService.getFeedback(filter, sort.query)
   );
 
   const getUser = useQuery(['user', authUser?.id], () => userService.getUser(authUser?.id), {

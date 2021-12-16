@@ -2,7 +2,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import {
-  Listbox,
   ListboxInput,
   ListboxButton,
   ListboxPopover,
@@ -56,7 +55,7 @@ const PopOver = styled(ListboxPopover)`
   }
 `;
 
-const NewDropdown = ({ setFields, fields }) => {
+const NewDropdown = ({ setFields }) => {
   const [value, setValue] = useState('feature');
 
   useEffect(() => {

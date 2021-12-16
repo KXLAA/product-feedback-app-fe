@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { BiChevronLeft } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
 import React from 'react';
 
 export const Layout = styled.div`

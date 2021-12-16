@@ -18,6 +18,7 @@ export default function FeedbackList({
   setFilter,
   filter,
   setSort,
+  sort,
 }) {
   const [showAddPage, setShowAddPage] = useState(false);
 
@@ -46,6 +47,7 @@ export default function FeedbackList({
             <GridItemMain>
               <Main
                 setSort={setSort}
+                sort={sort}
                 feedback={feedback}
                 setFeedback={setFeedback}
                 toggleAddPage={toggleAddPage}

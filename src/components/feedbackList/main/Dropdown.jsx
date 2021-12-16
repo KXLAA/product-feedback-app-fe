@@ -43,27 +43,22 @@ const PopOver = styled(ListboxPopover)`
   }
 `;
 
-const Dropdown = ({ feedback, setSort }) => {
-  let sortVal = 'Most Upvotes';
-  const [value, setValue] = useState(sortVal);
+const Dropdown = ({ feedback, setSort, sort }) => {
+  const [value, setValue] = useState(sort.value);
 
   const handleChange = (value) => {
     setValue(value);
     if (value === 'Least Upvotes') {
-      setSort('&sort=leastUpvotes');
-      sortVal = 'Least Upvotes';
+      setSort({ query: '&sort=leastUpvotes', value: 'Least Upvotes' });
     }
     if (value === 'Most Upvotes') {
-      setSort('&sort=mostUpvotes');
-      sortVal = 'Most Upvotes';
+      setSort({ query: '&sort=mostUpvotes', value: 'Most Upvotes' });
     }
     if (value === 'Most Comments') {
-      setSort('&sort=mostComments');
-      sortVal = 'Most Comments';
+      setSort({ query: '&sort=mostComments', value: 'Most Comments' });
     }
     if (value === 'Least Comments') {
-      setSort('&sort=leastComments');
-      sortVal = 'Least Comments';
+      setSort({ query: '&sort=leastComments', value: 'Least Comments' });
     }
   };
 

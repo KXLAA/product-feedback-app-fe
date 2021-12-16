@@ -2,7 +2,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { HiOutlineLightBulb } from 'react-icons/hi';
-import { Link } from 'react-router-dom';
 import Dropdown from './Dropdown';
 import { Button } from '../../common/ui/Button';
 
@@ -29,12 +28,12 @@ const Icon = styled(HiOutlineLightBulb)`
   font-size: 24px;
 `;
 
-const Header = ({ feedback, toggleAddPage, setSort }) => (
+const Header = ({ feedback, toggleAddPage, setSort, sort }) => (
   <Container>
     <SuggestionCount>
       <Icon />
       <h3>{feedback?.length} Suggestions</h3>
-      <Dropdown feedback={feedback} setSort={setSort} />
+      <Dropdown feedback={feedback} setSort={setSort} sort={sort} />
     </SuggestionCount>
 
     <Button onClick={toggleAddPage}>+ Add Feedback</Button>
