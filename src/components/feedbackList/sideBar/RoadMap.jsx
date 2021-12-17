@@ -58,9 +58,9 @@ const RoadMapTxt = styled.div`
 `;
 
 const RoadMap = ({ feedback }) => {
-  const planned = feedback.filter((feed) => feed?.status === 'planned');
-  const live = feedback.filter((feed) => feed?.status === 'live');
-  const inProgress = feedback.filter((feed) => feed?.status === 'in-progress');
+  const planned = feedback?.filter((feed) => feed?.status === 'planned');
+  const live = feedback?.filter((feed) => feed?.status === 'live');
+  const inProgress = feedback?.filter((feed) => feed?.status === 'in-progress');
 
   return (
     <Container>

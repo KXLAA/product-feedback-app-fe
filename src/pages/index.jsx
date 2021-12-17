@@ -14,6 +14,7 @@ import loginService from '../services/login';
 import userService from '../services/user';
 import Upvotes from './Upvotes';
 import Alerts from '../components/common/Alerts';
+import NotFound from './NotFound';
 
 export default function Pages() {
   const navigate = useNavigate();
@@ -130,6 +131,7 @@ export default function Pages() {
         <>
           {notify && <Alerts notify={notify} showAlert={showAlert} setShowAlert={setShowAlert} />}
           <Routes>
+            <Route path="*" element={<NotFound />} />
             <Route
               path="/"
               element={

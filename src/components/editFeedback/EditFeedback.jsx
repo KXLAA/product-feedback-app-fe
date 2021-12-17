@@ -13,20 +13,11 @@ import {
   ButtonContainer,
   Layout,
 } from '../feedbackForm/Common';
-import { Button } from '../common/ui/Button';
+import { ButtonThree, ButtonError, ButtonOne } from '../common/ui/Button';
 import UpdateDropDown from '../feedbackForm/UpdateDropDown';
 import DropDown from '../feedbackForm/DropDown';
 import feedbackService from '../../services/feedback';
 import Header from './Header';
-
-const Cancel = styled(Button)`
-  background-color: #3a4374;
-`;
-
-const Delete = styled(Button)`
-  background-color: #d73737;
-  align-self: flex-start;
-`;
 
 const Buttons = styled.div`
   display: flex;
@@ -137,12 +128,12 @@ const EditFeedback = ({ showEditPage, setShowEditPage, feedback }) => {
           </InputContainer>
 
           <Buttons>
-            <Delete onClick={handleDeleteFeedback}>Delete</Delete>
+            <ButtonError onClick={handleDeleteFeedback}>Delete</ButtonError>
 
             <ButtonContainer>
-              <Cancel>Cancel</Cancel>
+              <ButtonThree>Cancel</ButtonThree>
 
-              <Button>Edit Feedback</Button>
+              <ButtonOne>Edit Feedback</ButtonOne>
             </ButtonContainer>
           </Buttons>
         </Form>

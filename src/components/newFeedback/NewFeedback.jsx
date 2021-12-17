@@ -12,14 +12,11 @@ import {
   Textarea,
   ButtonContainer,
 } from '../feedbackForm/Common';
-import { Button } from '../common/ui/Button';
+import { ButtonOne, ButtonThree } from '../common/ui/Button';
 import Header from './Header';
 import NewDropdown from '../feedbackForm/NewDropDown';
 import feedbackService from '../../services/feedback';
 
-const Cancel = styled(Button)`
-  background-color: #3a4374;
-`;
 const Error = styled.div`
   text-align: center;
   color: #d73737;
@@ -96,8 +93,8 @@ const NewFeedback = ({ toggleAddPage, feedback, authUser }) => {
           <Textarea value={fields.description} onChange={handleOnChange} name="description" />
         </InputContainer>
         <ButtonContainer>
-          <Button disabled={!authUser}>Add Feedback</Button>
-          <Cancel onClick={toggleAddPage}>Cancel</Cancel>
+          <ButtonOne disabled={!authUser}>Add Feedback</ButtonOne>
+          <ButtonThree onClick={toggleAddPage}>Cancel</ButtonThree>
         </ButtonContainer>
         {!authUser && (
           <Error>

@@ -8,7 +8,7 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { RiReplyFill } from 'react-icons/ri';
 import { TiDelete } from 'react-icons/ti';
 import userService from '../../services/user';
-import { Button } from '../common/ui/Button';
+import { ButtonOne } from '../common/ui/Button';
 import feedbackService from '../../services/feedback';
 import Reply from './Reply';
 
@@ -104,7 +104,7 @@ const Form = styled.form`
   gap: 16px;
 `;
 
-const Btn = styled(Button)`
+const Btn = styled(ButtonOne)`
   width: 23%;
   height: fit-content;
   text-align: center;

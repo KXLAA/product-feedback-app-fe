@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useMutation, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
-import { Button } from '../common/ui/Button';
+import { ButtonOne } from '../common/ui/Button';
 import feedbackService from '../../services/feedback';
 
 const Form = styled.form`
@@ -99,9 +99,9 @@ const CommentForm = ({ feedback, authUser }) => {
           </Error>
         )}
 
-        <Button type="button" disabled={!authUser}>
+        <ButtonOne type="button" disabled={!authUser}>
           Post Comment
-        </Button>
+        </ButtonOne>
       </Cta>
     </Form>
   );

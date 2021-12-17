@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { HiOutlineLightBulb } from 'react-icons/hi';
 import Dropdown from './Dropdown';
-import { Button } from '../../common/ui/Button';
+import { ButtonOne } from '../../common/ui/Button';
 
 const Container = styled.div`
   background: #373f68;
@@ -36,7 +36,7 @@ const Header = ({ feedback, toggleAddPage, setSort, sort }) => (
       <Dropdown feedback={feedback} setSort={setSort} sort={sort} />
     </SuggestionCount>
 
-    <Button onClick={toggleAddPage}>+ Add Feedback</Button>
+    <ButtonOne onClick={toggleAddPage}>+ Add Feedback</ButtonOne>
   </Container>
 );
 
