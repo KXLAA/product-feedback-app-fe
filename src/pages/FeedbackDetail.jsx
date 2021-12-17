@@ -25,7 +25,7 @@ const Layout = styled(MainLayout)`
   margin: 0 auto;
 `;
 
-export default function FeedbackDetail({ authUser, serverUser }) {
+export default function FeedbackDetail({ authUser, serverUser, setShowAlert, setNotify }) {
   const params = useParams();
   const feedbackId = params.id;
   const { data, isLoading } = useQuery(
@@ -54,7 +54,13 @@ export default function FeedbackDetail({ authUser, serverUser }) {
               authUser={authUser}
               feedback={data}
             />
-            <Feedback feedback={data} isLoading={isLoading} serverUser={serverUser} />
+            <Feedback
+              feedback={data}
+              isLoading={isLoading}
+              serverUser={serverUser}
+              setShowAlert={setShowAlert}
+              setNotify={setNotify}
+            />
             <Comments comments={data?.comments} feedback={data} authUser={authUser} />
             <CommentForm feedback={data} authUser={authUser} />
           </Container>

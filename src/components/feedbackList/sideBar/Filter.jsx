@@ -36,9 +36,9 @@ const Button = styled.div`
 const Filter = ({ setFilter, filter }) => (
   <Container>
     <Button
-      bg={filter === 'all' && '#4661e6'}
-      color={filter === 'all' && '#ffffff'}
-      onClick={() => setFilter('all')}
+      bg={filter === '' && '#4661e6'}
+      color={filter === '' && '#ffffff'}
+      onClick={() => setFilter('')}
     >
       All
     </Button>

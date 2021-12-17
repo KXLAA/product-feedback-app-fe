@@ -19,6 +19,8 @@ export default function FeedbackList({
   filter,
   setSort,
   sort,
+  setNotify,
+  setShowAlert,
 }) {
   const [showAddPage, setShowAddPage] = useState(false);
 
@@ -52,6 +54,8 @@ export default function FeedbackList({
                 setFeedback={setFeedback}
                 toggleAddPage={toggleAddPage}
                 serverUser={serverUser}
+                setShowAlert={setShowAlert}
+                setNotify={setNotify}
               />
             </GridItemMain>
           </HomePageGrid>

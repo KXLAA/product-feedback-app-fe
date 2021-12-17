@@ -15,7 +15,7 @@ const getAll = async () => {
   return response.data;
 };
 
-const getFeedback = async (filter, sort = '&sort=mostUpvotes') => {
+const getFeedback = async (filter, sort) => {
   const response = await axios.get(`${baseUrl}?category=${filter}${sort}`);
   return response.data;
 };
@@ -99,7 +99,6 @@ const deleteReply = async (id) => {
 };
 
 export default {
-  getAll,
   getOne,
   setToken,
   create,

@@ -36,7 +36,7 @@ const Arrow = styled(GoChevronUp)`
   margin-bottom: 2px;
 `;
 
-const Upvotes = ({ feedback, serverUser }) => {
+const Upvotes = ({ feedback, serverUser, setNotify, setShowAlert }) => {
   const queryClient = useQueryClient();
   const upVote = useMutation((vote) => feedbackService.update(vote), {
     onSuccess: () => {
@@ -68,6 +68,11 @@ const Upvotes = ({ feedback, serverUser }) => {
   };
 
   const handleUpvote = () => {
+    if (!serverUser) {
+      setNotify('You Need To Be Signed In To Do That ');
+      setShowAlert(true);
+    }
+
     addToLiked.mutate(likedObj);
     if (serverUser?.liked.some((like) => like === feedback?.id)) {
       upVote.mutate(removeVoteObj);

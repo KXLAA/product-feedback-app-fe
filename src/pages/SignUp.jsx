@@ -132,6 +132,7 @@ export default function SignUp({ handleSignUp, onChange, newUser }) {
             value={newUser.password}
             onChange={onChange}
             required
+            minlength="5"
           />
 
           <WideBtn> Sign Up </WideBtn>

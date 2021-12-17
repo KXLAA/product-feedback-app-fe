@@ -13,11 +13,13 @@ import feedbackService from '../services/feedback';
 import loginService from '../services/login';
 import userService from '../services/user';
 import Upvotes from './Upvotes';
+import Alerts from '../components/common/Alerts';
 
 export default function Pages() {
   const navigate = useNavigate();
   const [authUser, setAuthUser] = useState(null);
-  const [notify, setNotify] = useState(null);
+  const [notify, setNotify] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
 
   const [logIn, setLogIn] = useState({
     username: '',
@@ -60,8 +62,6 @@ export default function Pages() {
       }, 5000);
     }
   };
-
-  console.log(notify);
 
   const handleLogInChange = ({ target }) => {
     setLogIn((prevLogin) => ({
@@ -106,10 +106,10 @@ export default function Pages() {
     setNewUser((prevUser) => ({ ...prevUser, [target.name]: target.value }));
   };
 
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState('');
   const [sort, setSort] = useState({ query: '&sort=mostUpvotes', value: 'Most Upvotes' });
 
-  const { data, isLoading, isError } = useQuery(['feedbackList', filter, sort], () =>
+  const { data, isLoading, isError } = useQuery(['feedbackList', filter, sort.query], () =>
     feedbackService.getFeedback(filter, sort.query)
   );
 
@@ -117,12 +117,18 @@ export default function Pages() {
     enabled: !!authUser,
   });
 
+  useEffect(() => {
+    const timer = setTimeout(() => setNotify(null), 5000);
+    return () => clearTimeout(timer);
+  }, [notify]);
+
   return (
     <>
       {isLoading ? (
         'Loading'
       ) : (
         <>
+          {notify && <Alerts notify={notify} showAlert={showAlert} setShowAlert={setShowAlert} />}
           <Routes>
             <Route
               path="/"
@@ -136,6 +142,8 @@ export default function Pages() {
                   handleLogOut={handleLogOut}
                   authUser={authUser}
                   serverUser={getUser?.data}
+                  setShowAlert={setShowAlert}
+                  setNotify={setNotify}
                 />
               }
             />
@@ -147,6 +155,7 @@ export default function Pages() {
                   onChange={handleLogInChange}
                   logIn={logIn}
                   notify={notify}
+                  setShowAlert={setShowAlert}
                   setNotify={setNotify}
                 />
               }
@@ -163,7 +172,14 @@ export default function Pages() {
             />
             <Route
               path="/feedback-list/:id"
-              element={<FeedbackDetail authUser={authUser} serverUser={getUser?.data} />}
+              element={
+                <FeedbackDetail
+                  authUser={authUser}
+                  serverUser={getUser?.data}
+                  setNotify={setNotify}
+                  setShowAlert={setShowAlert}
+                />
+              }
             />
 
             <Route

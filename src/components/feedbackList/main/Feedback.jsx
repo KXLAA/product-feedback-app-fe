@@ -53,10 +53,15 @@ const Comment = styled(FaComment)`
   color: #cdd2ee;
 `;
 
-const Feedback = ({ feedback, serverUser }) => (
+const Feedback = ({ feedback, serverUser, setNotify, setShowAlert }) => (
   <Container>
     <DetailsContainer>
-      <Upvotes feedback={feedback} serverUser={serverUser} />
+      <Upvotes
+        feedback={feedback}
+        serverUser={serverUser}
+        setShowAlert={setShowAlert}
+        setNotify={setNotify}
+      />
       <div>
         <h3>
           <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>

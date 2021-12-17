@@ -11,7 +11,16 @@ const Container = styled.section`
   gap: 24px;
 `;
 
-const Main = ({ feedback, setFeedback, toggleAddPage, serverUser, setSort, sort }) => (
+const Main = ({
+  feedback,
+  setFeedback,
+  toggleAddPage,
+  serverUser,
+  setSort,
+  sort,
+  setNotify,
+  setShowAlert,
+}) => (
   <Container>
     <Header setSort={setSort} feedback={feedback} toggleAddPage={toggleAddPage} sort={sort} />
     {feedback?.length === 0 ? (
@@ -25,6 +34,8 @@ const Main = ({ feedback, setFeedback, toggleAddPage, serverUser, setSort, sort 
             key={feed.id}
             setFeedback={setFeedback}
             serverUser={serverUser}
+            setShowAlert={setShowAlert}
+            setNotify={setNotify}
           />
         ))}
       </>

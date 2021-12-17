@@ -52,14 +52,19 @@ const Comment = styled(FaComment)`
   color: #cdd2ee;
 `;
 
-const Feedback = ({ feedback, isLoading, serverUser }) => {
+const Feedback = ({ feedback, isLoading, serverUser, setShowAlert, setNotify }) => {
   if (isLoading) {
     return 'Loading';
   }
   return (
     <Container>
       <DetailsContainer>
-        <Upvotes feedback={feedback} serverUser={serverUser} />
+        <Upvotes
+          feedback={feedback}
+          serverUser={serverUser}
+          setNotify={setNotify}
+          setShowAlert={setShowAlert}
+        />
         <div>
           <h3>{feedback?.title}</h3>
           <p>{feedback?.description}</p>
