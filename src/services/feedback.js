@@ -10,11 +10,6 @@ const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-const getAll = async () => {
-  const response = await axios.get(baseUrl);
-  return response.data;
-};
-
 const getFeedback = async (filter, sort) => {
   const response = await axios.get(`${baseUrl}?category=${filter}${sort}`);
   return response.data;

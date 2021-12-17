@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useMutation, useQueryClient } from 'react-query';
+import { Link } from 'react-router-dom';
 import { Button } from '../common/ui/Button';
 import feedbackService from '../../services/feedback';
 
@@ -35,12 +36,18 @@ const Textarea = styled.textarea`
 const Cta = styled.div`
   display: flex;
   justify-content: space-between;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+  color: #647196;
+`;
 
-  p {
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 22px;
-    color: #647196;
+const Error = styled.div`
+  color: #d73737;
+  font-weight: bold;
+
+  a {
+    text-decoration: underline;
   }
 `;
 
@@ -83,8 +90,18 @@ const CommentForm = ({ feedback, authUser }) => {
         disabled={!authUser}
       />
       <Cta>
-        <p>{characterCount} Characters left</p>
-        <Button>Post Comment</Button>
+        {authUser ? (
+          <p>{characterCount} Characters left</p>
+        ) : (
+          <Error>
+            Please <Link to="/auth/login">Sign in</Link> or <Link to="/auth/sign-up">Sign up </Link>
+            to comment.
+          </Error>
+        )}
+
+        <Button type="button" disabled={!authUser}>
+          Post Comment
+        </Button>
       </Cta>
     </Form>
   );

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useMutation, useQueryClient } from 'react-query';
+import { Link } from 'react-router-dom';
 import {
   Container,
   Form,
@@ -19,8 +20,17 @@ import feedbackService from '../../services/feedback';
 const Cancel = styled(Button)`
   background-color: #3a4374;
 `;
+const Error = styled.div`
+  text-align: center;
+  color: #d73737;
+  font-weight: bold;
 
-const NewFeedback = ({ toggleAddPage, feedback }) => {
+  a {
+    text-decoration: underline;
+  }
+`;
+
+const NewFeedback = ({ toggleAddPage, feedback, authUser }) => {
   const [fields, setFields] = useState({ ...feedback });
   const queryClient = useQueryClient();
 
@@ -86,9 +96,15 @@ const NewFeedback = ({ toggleAddPage, feedback }) => {
           <Textarea value={fields.description} onChange={handleOnChange} name="description" />
         </InputContainer>
         <ButtonContainer>
-          <Button>Add Feedback</Button>
+          <Button disabled={!authUser}>Add Feedback</Button>
           <Cancel onClick={toggleAddPage}>Cancel</Cancel>
         </ButtonContainer>
+        {!authUser && (
+          <Error>
+            Please <Link to="/auth/login">Sign in</Link> or <Link to="/auth/sign-up">Sign up </Link>
+            to comment.
+          </Error>
+        )}
       </Form>
     </Container>
   );

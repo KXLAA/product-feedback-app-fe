@@ -32,7 +32,7 @@ export default function FeedbackList({
     <>
       {showAddPage ? (
         <Layout>
-          <NewFeedback toggleAddPage={toggleAddPage} feedback={feedback} />
+          <NewFeedback toggleAddPage={toggleAddPage} feedback={feedback} authUser={authUser} />
         </Layout>
       ) : (
         <MainLayout>

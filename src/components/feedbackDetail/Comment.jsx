@@ -173,7 +173,8 @@ const Comment = ({ comment, authUser }) => {
             </UserContainer>
 
             <CtaContainer>
-              <ReplyBtn href onClick={() => setShowForm(!showFrom)} />
+              {authUser && <ReplyBtn href onClick={() => setShowForm(!showFrom)} />}
+
               {comment?.user === authUser?.id && <Delete href onClick={handleDeleteComment} />}
             </CtaContainer>
           </Header>
