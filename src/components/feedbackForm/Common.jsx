@@ -46,15 +46,6 @@ const Back = styled.div`
   }
 `;
 
-export const Header = ({ showEditPage, setShowEditPage }) => (
-  <Alert>
-    <Back onClick={() => setShowEditPage(!showEditPage)}>
-      <BiChevronLeft />
-      <p>Go Back</p>
-    </Back>
-  </Alert>
-);
-
 export const Form = styled.form`
   background: #ffffff;
   display: flex;

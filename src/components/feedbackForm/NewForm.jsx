@@ -1,15 +1,10 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import styled from 'styled-components';
 import { Container, Form, InputContainer, Input, Textarea, ButtonContainer } from './Common';
-import { Button } from '../common/ui/Button';
+import { ButtonThree, ButtonOne } from '../common/ui/Button';
 import Header from '../newFeedback/Header';
 import NewDropdown from './NewDropDown';
-
-const Cancel = styled(Button)`
-  background-color: #3a4374;
-`;
 
 const NewForm = ({ onChange, newFeedback, handleNewFeedback, setNewFeedback }) => {
   console.log(newFeedback);
@@ -63,8 +58,8 @@ const NewForm = ({ onChange, newFeedback, handleNewFeedback, setNewFeedback }) =
           />
         </InputContainer>
         <ButtonContainer>
-          <Button>Add Feedback</Button>
-          <Cancel>Cancel</Cancel>
+          <ButtonOne>Add Feedback</ButtonOne>
+          <ButtonThree>Cancel</ButtonThree>
         </ButtonContainer>
       </Form>
     </Container>

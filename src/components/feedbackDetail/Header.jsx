@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { BiChevronLeft } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
-import { Button } from '../common/ui/Button';
+import { ButtonTwo } from '../common/ui/Button';
 
 const Container = styled.div`
   border-radius: 10px;
@@ -38,10 +38,6 @@ const Back = styled.div`
   }
 `;
 
-const HeaderBtn = styled(Button)`
-  background-color: #4661e6;
-`;
-
 const Header = ({ showEditPage, setShowEditPage, authUser, feedback }) => (
   <Container>
     <Alert>
@@ -53,7 +49,7 @@ const Header = ({ showEditPage, setShowEditPage, authUser, feedback }) => (
       </Link>
     </Alert>
     {feedback?.user === authUser?.id && (
-      <HeaderBtn onClick={() => setShowEditPage(!showEditPage)}>Edit Feedback</HeaderBtn>
+      <ButtonTwo onClick={() => setShowEditPage(!showEditPage)}>Edit Feedback</ButtonTwo>
     )}
   </Container>
 );

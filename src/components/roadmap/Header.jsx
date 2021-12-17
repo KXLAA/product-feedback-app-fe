@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { BiChevronLeft } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
-import { Button } from '../common/ui/Button';
+import { ButtonOne } from '../common/ui/Button';
 
 const Container = styled.div`
   background: #373f68;
@@ -52,7 +52,7 @@ const Header = ({ toggleEdit }) => (
 
       <h3>Roadmap</h3>
     </Alert>
-    <Button onClick={toggleEdit}>+ Add Feedback</Button>
+    <ButtonOne onClick={toggleEdit}>+ Add Feedback</ButtonOne>
   </Container>
 );
 

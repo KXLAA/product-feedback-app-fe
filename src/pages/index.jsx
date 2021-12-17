@@ -15,6 +15,7 @@ import userService from '../services/user';
 import Upvotes from './Upvotes';
 import Alerts from '../components/common/Alerts';
 import NotFound from './NotFound';
+import Loading from '../components/common/Loading';
 
 export default function Pages() {
   const navigate = useNavigate();
@@ -126,7 +127,7 @@ export default function Pages() {
   return (
     <>
       {isLoading ? (
-        'Loading'
+        <Loading />
       ) : (
         <>
           {notify && <Alerts notify={notify} showAlert={showAlert} setShowAlert={setShowAlert} />}

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from '../../common/ui/Button';
+import { ButtonOne } from '../../common/ui/Button';
 
 const Container = styled.div`
   height: 650px;
@@ -58,7 +58,7 @@ const Empty = () => (
           to improve our app.
         </p>
       </EmptyTxt>
-      <Button>+ Add Feedback</Button>
+      <ButtonOne>+ Add Feedback</ButtonOne>
     </EmptyContainer>
   </Container>
 );
