@@ -1,7 +1,9 @@
+/* eslint-disable import/no-named-as-default */
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ButtonOne } from '../../common/ui/Button';
+import device from '../../common/MediaQueries';
 
 const Container = styled.div`
   background-color: white;

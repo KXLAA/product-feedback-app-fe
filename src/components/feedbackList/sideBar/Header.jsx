@@ -1,11 +1,19 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import device from '../../common/MediaQueries';
 
 const Container = styled.header`
   height: 137px;
   display: flex;
   position: relative;
   align-items: flex-end;
+
+  @media ${device.tablet} {
+    flex: 1;
+    height: max-content;
+  }
 `;
 
 const HeaderImg = styled.img`

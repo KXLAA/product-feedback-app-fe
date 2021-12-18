@@ -1,12 +1,19 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import device from '../../common/MediaQueries';
 
 const Container = styled.div`
   background-color: white;
   border-radius: 10px;
   padding: 24px;
+
+  @media ${device.tablet} {
+    flex: 1;
+  }
 `;
 
 const RoadMapHeader = styled.div`

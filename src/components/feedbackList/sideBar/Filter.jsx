@@ -1,6 +1,8 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import device from '../../common/MediaQueries';
 
 const Container = styled.div`
   background-color: white;
@@ -9,6 +11,10 @@ const Container = styled.div`
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+
+  @media ${device.tablet} {
+    flex: 1;
+  }
 `;
 const Button = styled.div`
   display: inline-block;
