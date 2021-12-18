@@ -62,7 +62,7 @@ const EditFeedback = ({ showEditPage, setShowEditPage, feedback }) => {
 
   return (
     <Layout>
-      <Container>
+      <Container className="form-animation">
         <Header showEditPage={showEditPage} setShowEditPage={setShowEditPage} />
         <Form onSubmit={handleUpdateFeedback}>
           <svg

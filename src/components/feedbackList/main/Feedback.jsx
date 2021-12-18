@@ -54,7 +54,7 @@ const Comment = styled(FaComment)`
 `;
 
 const Feedback = ({ feedback, serverUser, setNotify, setShowAlert }) => (
-  <Container>
+  <Container className="item-animation">
     <DetailsContainer>
       <Upvotes
         feedback={feedback}

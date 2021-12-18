@@ -15,7 +15,7 @@ const Container = styled.section`
 `;
 
 const SideBar = ({ handleLogOut, authUser, feedback, setFilter, filter }) => (
-  <Container>
+  <Container className="fade-in">
     {authUser ? <LoggedIn authUser={authUser} handleLogOut={handleLogOut} /> : <Login />}
     <Header />
     <Filter setFilter={setFilter} filter={filter} />

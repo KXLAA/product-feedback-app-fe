@@ -50,7 +50,7 @@ const NewFeedback = ({ toggleAddPage, feedback, authUser }) => {
   };
 
   return (
-    <Container>
+    <Container className="form-animation">
       <Header toggleAddPage={toggleAddPage} />
       <Form onSubmit={handleAddFeedback}>
         <svg width="56" height="56" xmlns="http://www.w3.org/2000/svg">

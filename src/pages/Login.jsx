@@ -109,7 +109,7 @@ export default function Login({ onChange, logIn, handleLogin, notify, setNotify 
 
   return (
     <Background>
-      <MainLayout>
+      <MainLayout className="fade-in">
         <Form onSubmit={handleLogin}>
           <Label htmlFor="email">User Name</Label>
           <Input

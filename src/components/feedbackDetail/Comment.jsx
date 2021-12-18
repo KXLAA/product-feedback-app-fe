@@ -163,7 +163,7 @@ const Comment = ({ comment, authUser }) => {
 
   return (
     <>
-      <Container>
+      <Container className="fade-in">
         <Image src={data?.avatar} alt="user" />
         <UserComment>
           <Header>
@@ -181,7 +181,7 @@ const Comment = ({ comment, authUser }) => {
           <Content>{comment?.content}</Content>
 
           {showFrom && (
-            <Form onSubmit={handleCreateReply}>
+            <Form onSubmit={handleCreateReply} className="fade-in">
               <Textarea
                 placeholder="Type your reply here"
                 maxLength="250"

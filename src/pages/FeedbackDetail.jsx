@@ -11,6 +11,7 @@ import Comments from '../components/feedbackDetail/Comments';
 import CommentForm from '../components/feedbackDetail/CommentForm';
 import feedbackService from '../services/feedback';
 import EditFeedback from '../components/editFeedback/EditFeedback';
+import Loading from '../components/common/Loading';
 
 const Container = styled.div`
   display: flex;
@@ -37,6 +38,10 @@ export default function FeedbackDetail({ authUser, serverUser, setShowAlert, set
   );
   const [showEditPage, setShowEditPage] = useState(false);
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <>
       {showEditPage ? (
@@ -47,7 +52,7 @@ export default function FeedbackDetail({ authUser, serverUser, setShowAlert, set
         />
       ) : (
         <Layout>
-          <Container>
+          <Container className="form-animation">
             <Header
               showEditPage={showEditPage}
               setShowEditPage={setShowEditPage}
@@ -56,7 +61,6 @@ export default function FeedbackDetail({ authUser, serverUser, setShowAlert, set
             />
             <Feedback
               feedback={data}
-              isLoading={isLoading}
               serverUser={serverUser}
               setShowAlert={setShowAlert}
               setNotify={setNotify}

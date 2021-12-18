@@ -58,7 +58,7 @@ const CommentForm = ({ feedback, authUser }) => {
 
   const createComment = useMutation((update) => feedbackService.createComment(update), {
     onSuccess: () => {
-      queryClient.invalidateQueries('feedback', feedback.id);
+      queryClient.invalidateQueries('feedback');
     },
   });
 
@@ -99,9 +99,7 @@ const CommentForm = ({ feedback, authUser }) => {
           </Error>
         )}
 
-        <ButtonOne type="button" disabled={!authUser}>
-          Post Comment
-        </ButtonOne>
+        <ButtonOne disabled={!authUser}>Post Comment</ButtonOne>
       </Cta>
     </Form>
   );

@@ -34,7 +34,7 @@ const Cancel = styled(MdCancel)`
 const Alerts = ({ notify, showAlert, setShowAlert }) => (
   <>
     {showAlert && (
-      <Container>
+      <Container className="alert-animation">
         <AlertCard>
           <p>{notify}</p>
           <Cancel onClick={() => setShowAlert(!showAlert)} />

@@ -52,32 +52,27 @@ const Comment = styled(FaComment)`
   color: #cdd2ee;
 `;
 
-const Feedback = ({ feedback, isLoading, serverUser, setShowAlert, setNotify }) => {
-  if (isLoading) {
-    return 'Loading';
-  }
-  return (
-    <Container>
-      <DetailsContainer>
-        <Upvotes
-          feedback={feedback}
-          serverUser={serverUser}
-          setNotify={setNotify}
-          setShowAlert={setShowAlert}
-        />
-        <div>
-          <h3>{feedback?.title}</h3>
-          <p>{feedback?.description}</p>
-          <Tags text={feedback?.category} />
-        </div>
-      </DetailsContainer>
+const Feedback = ({ feedback, serverUser, setShowAlert, setNotify }) => (
+  <Container>
+    <DetailsContainer>
+      <Upvotes
+        feedback={feedback}
+        serverUser={serverUser}
+        setNotify={setNotify}
+        setShowAlert={setShowAlert}
+      />
+      <div>
+        <h3>{feedback?.title}</h3>
+        <p>{feedback?.description}</p>
+        <Tags text={feedback?.category} />
+      </div>
+    </DetailsContainer>
 
-      <CommentContainer>
-        <Comment />
-        <p>{feedback?.comments?.length}</p>
-      </CommentContainer>
-    </Container>
-  );
-};
+    <CommentContainer>
+      <Comment />
+      <p>{feedback?.comments?.length}</p>
+    </CommentContainer>
+  </Container>
+);
 
 export default Feedback;

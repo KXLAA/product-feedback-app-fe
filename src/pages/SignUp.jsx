@@ -88,7 +88,7 @@ export default function SignUp({ handleSignUp, onChange, newUser }) {
 
   return (
     <Background>
-      <MainLayout>
+      <MainLayout className="fade-in">
         <Form onSubmit={handleSignUp}>
           <Label htmlFor="full-name">Full Name</Label>
           <Input
