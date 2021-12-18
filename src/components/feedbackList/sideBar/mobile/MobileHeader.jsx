@@ -7,6 +7,8 @@ import Dropdown from '../../main/Dropdown';
 import { ButtonOne } from '../../../common/ui/Button';
 import Filter from '../Filter';
 import RoadMap from '../RoadMap';
+import Login from '../Login';
+import LoggedIn from './LoggedIn';
 
 const Container = styled.header`
   position: relative;
@@ -84,7 +86,16 @@ const Spacer = styled.div`
   width: 100;
 `;
 
-const MobileHeader = ({ setSort, sort, toggleAddPage, feedback, filter, setFilter }) => {
+const MobileHeader = ({
+  setSort,
+  sort,
+  toggleAddPage,
+  feedback,
+  filter,
+  setFilter,
+  authUser,
+  handleLogOut,
+}) => {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
@@ -95,9 +106,9 @@ const MobileHeader = ({ setSort, sort, toggleAddPage, feedback, filter, setFilte
           <p>Feedback Board</p>
         </HeaderTxt>
         {openMenu ? (
-          <Close onClick={() => setOpenMenu(!openMenu)} />
+          <Close className="fade-in" onClick={() => setOpenMenu(!openMenu)} />
         ) : (
-          <Menu onClick={() => setOpenMenu(!openMenu)} />
+          <Menu className="fade-in" onClick={() => setOpenMenu(!openMenu)} />
         )}
       </Container>
       {openMenu && <Background className="fade-in" onClick={() => setOpenMenu(false)} />}
@@ -109,6 +120,8 @@ const MobileHeader = ({ setSort, sort, toggleAddPage, feedback, filter, setFilte
 
       {openMenu && (
         <MobileMenu className="slide-in">
+          {authUser ? <LoggedIn authUser={authUser} handleLogOut={handleLogOut} /> : <Login />}
+          <Spacer />
           <Filter setFilter={setFilter} filter={filter} />
           <Spacer />
           <RoadMap feedback={feedback} />

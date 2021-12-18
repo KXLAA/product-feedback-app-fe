@@ -5,6 +5,7 @@
   "dependencies": {
     "@reach/listbox": "^0.16.2",
     "@reach/menu-button": "^0.16.2",
+    "@reach/tabs": "^0.16.4",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",

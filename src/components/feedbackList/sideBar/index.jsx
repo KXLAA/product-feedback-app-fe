@@ -69,8 +69,9 @@ const SideBar = ({
           feedback={feedback}
           setFilter={setFilter}
           filter={filter}
+          authUser={authUser}
+          handleLogOut={handleLogOut}
         />
-        {/* {authUser ? <LoggedIn authUser={authUser} handleLogOut={handleLogOut} /> : <Login />} */}
       </MediaQuery>
     </>
   );
