@@ -40,7 +40,7 @@ const Back = styled.div`
   }
 `;
 
-const Header = ({ toggleEdit }) => (
+const Header = ({ toggleAddPage }) => (
   <Container>
     <Alert>
       <Link to="/">
@@ -52,7 +52,7 @@ const Header = ({ toggleEdit }) => (
 
       <h3>Roadmap</h3>
     </Alert>
-    <ButtonOne onClick={toggleEdit}>+ Add Feedback</ButtonOne>
+    <ButtonOne onClick={toggleAddPage}>+ Add Feedback</ButtonOne>
   </Container>
 );
 

@@ -99,7 +99,7 @@ const NewFeedback = ({ toggleAddPage, feedback, authUser }) => {
         {!authUser && (
           <Error>
             Please <Link to="/auth/login">Sign in</Link> or <Link to="/auth/sign-up">Sign up </Link>
-            to comment.
+            to create new feedback.
           </Error>
         )}
       </Form>

@@ -19,7 +19,7 @@ const Card = styled(Container)`
   border-top: solid #62bcfa 6px;
 `;
 
-const LiveItem = ({ live, serverUser }) => (
+const LiveItem = ({ live, serverUser, setNotify, setShowAlert }) => (
   <Card>
     <RoadMapTxt>
       <div>
@@ -38,7 +38,12 @@ const LiveItem = ({ live, serverUser }) => (
     </FilterContainer>
 
     <Actions>
-      <Upvotes feedback={live} serverUser={serverUser} />
+      <Upvotes
+        feedback={live}
+        serverUser={serverUser}
+        setNotify={setNotify}
+        setShowAlert={setShowAlert}
+      />
       <Comment>
         <CommentIcon />
         <p>{live?.comments?.length}</p>

@@ -4,6 +4,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { TiDelete } from 'react-icons/ti';
 import MainLayout from '../components/common/Layout';
 
 const Background = styled.div`
@@ -102,6 +103,20 @@ const Error = styled.div`
   }
 `;
 
+const GoBack = styled(TiDelete)`
+  position: absolute;
+  color: #ffffff;
+  font-size: 48px;
+  left: 10px;
+  top: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    color: #d73737;
+  }
+`;
+
 export default function Login({ onChange, logIn, handleLogin, notify, setNotify }) {
   console.log(notify);
 
@@ -109,6 +124,9 @@ export default function Login({ onChange, logIn, handleLogin, notify, setNotify 
 
   return (
     <Background>
+      <Link to="/">
+        <GoBack />
+      </Link>
       <MainLayout className="fade-in">
         <Form onSubmit={handleLogin}>
           <Label htmlFor="email">User Name</Label>
@@ -145,7 +163,7 @@ export default function Login({ onChange, logIn, handleLogin, notify, setNotify 
           )}
 
           <SignUp>
-            Not signed in ? <Link to="/auth/sign-up">Sign up</Link> here{' '}
+            Dont have an account ? <Link to="/auth/sign-up">Sign up</Link> here{' '}
           </SignUp>
         </Form>
       </MainLayout>

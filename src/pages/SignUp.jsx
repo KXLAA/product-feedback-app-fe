@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate, Link } from 'react-router-dom';
+import { TiDelete } from 'react-icons/ti';
 import MainLayout from '../components/common/Layout';
 import userService from '../services/user';
 import loginService from '../services/login';
@@ -83,11 +84,39 @@ const WideBtn = styled.button`
   }
 `;
 
+const GoBack = styled(TiDelete)`
+  position: absolute;
+  color: #ffffff;
+  font-size: 48px;
+  left: 10px;
+  top: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    color: #d73737;
+  }
+`;
+
+const SignIn = styled.p`
+  text-align: center;
+
+  a {
+    text-decoration-line: underline;
+    color: #ad1fea;
+    font-weight: 700;
+  }
+`;
+
 export default function SignUp({ handleSignUp, onChange, newUser }) {
   const navigate = useNavigate();
 
   return (
     <Background>
+      <Link to="/">
+        <GoBack />
+      </Link>
+
       <MainLayout className="fade-in">
         <Form onSubmit={handleSignUp}>
           <Label htmlFor="full-name">Full Name</Label>
@@ -136,6 +165,9 @@ export default function SignUp({ handleSignUp, onChange, newUser }) {
           />
 
           <WideBtn> Sign Up </WideBtn>
+          <SignIn>
+            Have an Account ? <Link to="/auth/login">Sign In</Link> here{' '}
+          </SignIn>
         </Form>
       </MainLayout>
     </Background>

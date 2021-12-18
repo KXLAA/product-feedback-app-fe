@@ -162,6 +162,16 @@ button {
   }
 }
 
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
 .item-animation {
   animation: slide-up 0.3s ease-in-out;
 }

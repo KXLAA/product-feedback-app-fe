@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from 'react';
+import React from 'react';
 // import PropTypes from 'prop-types';
 import { HomePageGrid, GridItemSide, GridItemMain } from '../components/feedbackList/Layout';
 import Main from '../components/feedbackList/main';
@@ -21,13 +21,9 @@ export default function FeedbackList({
   sort,
   setNotify,
   setShowAlert,
+  toggleAddPage,
+  showAddPage,
 }) {
-  const [showAddPage, setShowAddPage] = useState(false);
-
-  const toggleAddPage = () => {
-    setShowAddPage(!showAddPage);
-  };
-
   return (
     <>
       {showAddPage ? (

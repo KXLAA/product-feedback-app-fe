@@ -119,6 +119,12 @@ export default function Pages() {
     enabled: !!authUser,
   });
 
+  const [showAddPage, setShowAddPage] = useState(false);
+
+  const toggleAddPage = () => {
+    setShowAddPage(!showAddPage);
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => setNotify(null), 5000);
     return () => clearTimeout(timer);
@@ -147,6 +153,8 @@ export default function Pages() {
                   serverUser={getUser?.data}
                   setShowAlert={setShowAlert}
                   setNotify={setNotify}
+                  toggleAddPage={toggleAddPage}
+                  showAddPage={showAddPage}
                 />
               }
             />
@@ -187,7 +195,16 @@ export default function Pages() {
 
             <Route
               path="/roadmap"
-              element={<Roadmap feedback={data} serverUser={getUser?.data} />}
+              element={
+                <Roadmap
+                  feedback={data}
+                  serverUser={getUser?.data}
+                  setNotify={setNotify}
+                  setShowAlert={setShowAlert}
+                  toggleAddPage={toggleAddPage}
+                  showAddPage={showAddPage}
+                />
+              }
             />
 
             <Route path="/your-upvotes" element={<Upvotes serverUser={getUser?.data} />} />

@@ -19,7 +19,7 @@ const Card = styled(Container)`
   border-top: solid #f49f85 6px;
 `;
 
-const PlannedItem = ({ planned, serverUser }) => (
+const PlannedItem = ({ planned, serverUser, setNotify, setShowAlert }) => (
   <Card>
     <RoadMapTxt>
       <div>
@@ -39,7 +39,12 @@ const PlannedItem = ({ planned, serverUser }) => (
     </FilterContainer>
 
     <Actions>
-      <Upvotes feedback={planned} serverUser={serverUser} />
+      <Upvotes
+        feedback={planned}
+        serverUser={serverUser}
+        setNotify={setNotify}
+        setShowAlert={setShowAlert}
+      />
       <Comment>
         <CommentIcon />
         <p>{planned?.comments?.length}</p>

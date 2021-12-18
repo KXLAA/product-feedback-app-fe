@@ -18,7 +18,7 @@ import {
 const Card = styled(Container)`
   border-top: solid #ad1fea 6px;
 `;
-const InProgressItem = ({ progress, serverUser }) => (
+const InProgressItem = ({ progress, serverUser, setNotify, setShowAlert }) => (
   <Card>
     <RoadMapTxt>
       <div>
@@ -37,7 +37,12 @@ const InProgressItem = ({ progress, serverUser }) => (
     </FilterContainer>
 
     <Actions>
-      <Upvotes feedback={progress} serverUser={serverUser} />
+      <Upvotes
+        feedback={progress}
+        serverUser={serverUser}
+        setNotify={setNotify}
+        setShowAlert={setShowAlert}
+      />
       <Comment>
         <CommentIcon />
         <p>{progress?.comments?.length}</p>
