@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ButtonBase = styled.button`
+const ButtonBase = styled.button`
   display: inline;
   padding: 12px 24px;
   border-radius: 10px;

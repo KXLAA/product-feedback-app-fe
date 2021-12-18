@@ -16,6 +16,7 @@ import Upvotes from './Upvotes';
 import Alerts from '../components/common/Alerts';
 import NotFound from './NotFound';
 import Loading from '../components/common/Loading';
+import Empty from '../components/feedbackList/main/Empty';
 
 export default function Pages() {
   const navigate = useNavigate();
@@ -212,7 +213,7 @@ export default function Pages() {
         </>
       )}
 
-      {isError && <p>error</p>}
+      {isError && <Empty />}
     </>
   );
 }

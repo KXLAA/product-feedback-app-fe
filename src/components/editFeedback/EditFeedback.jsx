@@ -5,23 +5,27 @@ import styled from 'styled-components';
 import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import {
-  Container,
   Form,
   InputContainer,
   Input,
   Textarea,
   ButtonContainer,
-  Layout,
-} from '../feedbackForm/Common';
+} from '../common/formElements/Inputs';
+import { Container, Layout } from '../common/formElements/FormLayout';
 import { ButtonThree, ButtonError, ButtonOne } from '../common/ui/Button';
-import UpdateDropDown from '../feedbackForm/UpdateDropDown';
-import DropDown from '../feedbackForm/DropDown';
 import feedbackService from '../../services/feedback';
 import Header from './Header';
+import { UpdateStatus, Category } from '../common/formElements/DropDowns';
+import device from '../common/MediaQueries';
 
 const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media ${device.mobile} {
+    flex-direction: column-reverse;
+    gap: 16px;
+  }
 `;
 
 const EditFeedback = ({ showEditPage, setShowEditPage, feedback }) => {
@@ -108,7 +112,7 @@ const EditFeedback = ({ showEditPage, setShowEditPage, feedback }) => {
               <h4>Category</h4>
               <p>Choose a category for your feedback</p>
             </div>
-            <DropDown setFields={setFields} fields={fields} />
+            <Category setFields={setFields} fields={fields} />
           </InputContainer>
 
           <InputContainer>
@@ -116,7 +120,7 @@ const EditFeedback = ({ showEditPage, setShowEditPage, feedback }) => {
               <h4>Update Status</h4>
               <p>Change feedback state</p>
             </div>
-            <UpdateDropDown setFields={setFields} fields={fields} />
+            <UpdateStatus setFields={setFields} fields={fields} />
           </InputContainer>
 
           <InputContainer>
@@ -132,8 +136,7 @@ const EditFeedback = ({ showEditPage, setShowEditPage, feedback }) => {
 
             <ButtonContainer>
               <ButtonThree>Cancel</ButtonThree>
-
-              <ButtonOne>Edit Feedback</ButtonOne>
+              <ButtonOne style={{ order: -1 }}>Save Changes</ButtonOne>
             </ButtonContainer>
           </Buttons>
         </Form>

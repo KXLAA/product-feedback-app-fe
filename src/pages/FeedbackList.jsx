@@ -27,9 +27,7 @@ export default function FeedbackList({
   return (
     <>
       {showAddPage ? (
-        <Layout>
-          <NewFeedback toggleAddPage={toggleAddPage} feedback={feedback} authUser={authUser} />
-        </Layout>
+        <NewFeedback toggleAddPage={toggleAddPage} feedback={feedback} authUser={authUser} />
       ) : (
         <MainLayout>
           <HomePageGrid>

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { React } from 'react';
 import styled from 'styled-components';
-import MediaQuery, { useMediaQuery } from 'react-responsive';
+import MediaQuery from 'react-responsive';
 import Header from './Header';
 import Feedback from './Feedback';
 import Empty from './Empty';
