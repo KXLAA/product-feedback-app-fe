@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable import/no-named-as-default */
 import React from 'react';
-// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { GoChevronUp } from 'react-icons/go';
 import { useMutation, useQueryClient } from 'react-query';
 import feedbackService from '../../../services/feedback';
 import userService from '../../../services/user';
+import device from '../MediaQueries';
 
 const Button = styled.div`
   width: 40px;
@@ -29,11 +30,24 @@ const Button = styled.div`
     background: #cfd7ff;
     transform: translateX(0rem) translateY(-0.125rem);
   }
+
+  @media ${device.mobile} {
+    flex-direction: row;
+    gap: 10px;
+    justify-items: center;
+    max-width: 69px;
+    height: 32px;
+    width: 100%;
+  }
 `;
 
 const Arrow = styled(GoChevronUp)`
   font-size: 16px;
   margin-bottom: 2px;
+
+  @media ${device.mobile} {
+    margin-bottom: 0px;
+  }
 `;
 
 const Upvotes = ({ feedback, serverUser, setNotify, setShowAlert }) => {

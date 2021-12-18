@@ -9,6 +9,7 @@ const Container = styled.div`
   align-items: center;
   position: relative;
   transition: all 2s ease-in-out;
+  z-index: 5;
 `;
 
 const AlertCard = styled.div`

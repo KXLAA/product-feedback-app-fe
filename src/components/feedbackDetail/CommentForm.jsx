@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable import/no-named-as-default */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useMutation, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
 import { ButtonOne } from '../common/ui/Button';
 import feedbackService from '../../services/feedback';
+import device from '../common/MediaQueries';
 
 const Form = styled.form`
   background: #ffffff;
@@ -45,6 +47,12 @@ const Cta = styled.div`
 const Error = styled.div`
   color: #d73737;
   font-weight: bold;
+
+  @media ${device.mobile} {
+    font-size: 13px;
+    line-height: 19px;
+    padding-left: 8px;
+  }
 
   a {
     text-decoration: underline;

@@ -3,7 +3,7 @@
 /* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { React } from 'react';
-import MediaQuery, { useMediaQuery } from 'react-responsive';
+import MediaQuery from 'react-responsive';
 import Header from './Header';
 import MobileHeader from './mobile/MobileHeader';
 import Filter from './Filter';
@@ -39,42 +39,38 @@ const SideBar = ({
   setSort,
   sort,
   toggleAddPage,
-}) => {
-  const isDesktop = useMediaQuery({ minWidth: 940 });
+}) => (
+  <>
+    <MediaQuery minWidth={630}>
+      <Container className="fade-in">
+        <MediaQuery minWidth={940}>
+          {authUser ? <LoggedIn authUser={authUser} handleLogOut={handleLogOut} /> : <Login />}
+        </MediaQuery>
 
-  return (
-    <>
-      <MediaQuery minWidth={630}>
-        <Container className="fade-in">
-          <MediaQuery minWidth={940}>
+        <User>
+          <MediaQuery maxWidth={940}>
             {authUser ? <LoggedIn authUser={authUser} handleLogOut={handleLogOut} /> : <Login />}
           </MediaQuery>
+          <Header />
+        </User>
 
-          <User>
-            <MediaQuery maxWidth={940}>
-              {authUser ? <LoggedIn authUser={authUser} handleLogOut={handleLogOut} /> : <Login />}
-            </MediaQuery>
-            <Header />
-          </User>
-
-          <Filter setFilter={setFilter} filter={filter} />
-          <RoadMap feedback={feedback} />
-        </Container>
-      </MediaQuery>
-      <MediaQuery maxWidth={630}>
-        <MobileHeader
-          setSort={setSort}
-          sort={sort}
-          toggleAddPage={toggleAddPage}
-          feedback={feedback}
-          setFilter={setFilter}
-          filter={filter}
-          authUser={authUser}
-          handleLogOut={handleLogOut}
-        />
-      </MediaQuery>
-    </>
-  );
-};
+        <Filter setFilter={setFilter} filter={filter} />
+        <RoadMap feedback={feedback} />
+      </Container>
+    </MediaQuery>
+    <MediaQuery maxWidth={630}>
+      <MobileHeader
+        setSort={setSort}
+        sort={sort}
+        toggleAddPage={toggleAddPage}
+        feedback={feedback}
+        setFilter={setFilter}
+        filter={filter}
+        authUser={authUser}
+        handleLogOut={handleLogOut}
+      />
+    </MediaQuery>
+  </>
+);
 
 export default SideBar;

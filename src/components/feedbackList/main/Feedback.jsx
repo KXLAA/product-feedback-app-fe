@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable import/no-named-as-default */
 import React from 'react';
 import styled from 'styled-components';
 import { FaComment } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import MediaQuery from 'react-responsive';
 import Upvotes from '../../common/ui/Upvotes';
 import Tags from '../../common/ui/Tags';
+import device from '../../common/MediaQueries';
 
 const Container = styled.div`
   background: #ffffff;
@@ -13,15 +16,28 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media ${device.mobile} {
+    flex-direction: column;
+  }
 `;
 
 const DetailsContainer = styled.div`
   display: flex;
   gap: 24px;
 
+  @media ${device.mobile} {
+    width: 100%;
+  }
+
   h3 {
     color: #3a4374;
     cursor: pointer;
+
+    @media ${device.mobile} {
+      font-size: 13px;
+      line-height: 19px;
+    }
   }
 
   p {
@@ -30,6 +46,11 @@ const DetailsContainer = styled.div`
     line-height: 23px;
     color: #647196;
     padding-bottom: 16px;
+
+    @media ${device.mobile} {
+      font-size: 13px;
+      line-height: 19px;
+    }
   }
 `;
 
@@ -53,30 +74,70 @@ const Comment = styled(FaComment)`
   color: #cdd2ee;
 `;
 
+const MobileCont = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-top: 16px;
+`;
+
 const Feedback = ({ feedback, serverUser, setNotify, setShowAlert }) => (
-  <Container className="item-animation">
-    <DetailsContainer>
-      <Upvotes
-        feedback={feedback}
-        serverUser={serverUser}
-        setShowAlert={setShowAlert}
-        setNotify={setNotify}
-      />
-      <div>
-        <h3>
-          <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>
-        </h3>
+  <>
+    <MediaQuery minWidth={630}>
+      <Container className="item-animation">
+        <DetailsContainer>
+          <Upvotes
+            feedback={feedback}
+            serverUser={serverUser}
+            setShowAlert={setShowAlert}
+            setNotify={setNotify}
+          />
+          <div>
+            <h3>
+              <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>
+            </h3>
 
-        <p>{feedback.description}</p>
-        <Tags text={feedback?.category} />
-      </div>
-    </DetailsContainer>
+            <p>{feedback.description}</p>
+            <Tags text={feedback?.category} />
+          </div>
+        </DetailsContainer>
 
-    <CommentContainer>
-      <Comment />
-      <p>{feedback.comments.length}</p>
-    </CommentContainer>
-  </Container>
+        <CommentContainer>
+          <Comment />
+          <p>{feedback.comments.length}</p>
+        </CommentContainer>
+      </Container>
+    </MediaQuery>
+
+    <MediaQuery maxWidth={630}>
+      <Container className="item-animation">
+        <DetailsContainer>
+          <div>
+            <h3>
+              <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>
+            </h3>
+
+            <p>{feedback.description}</p>
+            <Tags text={feedback?.category} />
+          </div>
+        </DetailsContainer>
+
+        <MobileCont>
+          <Upvotes
+            feedback={feedback}
+            serverUser={serverUser}
+            setShowAlert={setShowAlert}
+            setNotify={setNotify}
+          />
+          <CommentContainer>
+            <Comment />
+            <p>{feedback.comments.length}</p>
+          </CommentContainer>
+        </MobileCont>
+      </Container>
+    </MediaQuery>
+  </>
 );
 
 export default Feedback;

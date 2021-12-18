@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -11,12 +12,17 @@ import userService from '../../services/user';
 import { ButtonOne } from '../common/ui/Button';
 import feedbackService from '../../services/feedback';
 import Reply from './Reply';
+import device from '../common/MediaQueries';
 
 const Container = styled.div`
   display: flex;
   gap: 32px;
   padding-bottom: 32px;
   border-bottom: solid rgba(140, 146, 179, 0.25) 1px;
+
+  @media ${device.mobile} {
+    gap: 18px;
+  }
 `;
 
 const Header = styled.div`
@@ -39,12 +45,21 @@ const UserContainer = styled.div`
     font-size: 14px;
     line-height: 20px;
     color: #647196;
+
+    @media ${device.mobile} {
+      font-size: 13px;
+      line-height: 19px;
+    }
   }
 `;
 
 const CtaContainer = styled.div`
   display: flex;
   gap: 24px;
+
+  @media ${device.mobile} {
+    gap: 18px;
+  }
 `;
 
 const Delete = styled(TiDelete)`
@@ -68,6 +83,11 @@ const Content = styled.p`
   font-size: 15px;
   line-height: 22px;
   color: #647196;
+
+  @media ${device.mobile} {
+    font-size: 13px;
+    line-height: 19px;
+  }
 `;
 
 const UserComment = styled.div`
@@ -75,6 +95,10 @@ const UserComment = styled.div`
   flex-direction: column;
   gap: 16px;
   width: 100%;
+
+  @media ${device.mobile} {
+    gap: 10px;
+  }
 `;
 
 const Image = styled.img`
@@ -97,17 +121,31 @@ const Textarea = styled.textarea`
   line-height: 22px;
   color: #8c92b3;
   margin-bottom: 24px;
+
+  @media ${device.mobile} {
+    width: 100%;
+  }
 `;
 
 const Form = styled.form`
   display: flex;
   gap: 16px;
+
+  @media ${device.mobile} {
+    flex-direction: column;
+    gap: 0px;
+  }
 `;
 
 const Btn = styled(ButtonOne)`
   width: 23%;
   height: fit-content;
   text-align: center;
+
+  @media ${device.mobile} {
+    width: 50%;
+    align-self: flex-end;
+  }
 `;
 
 const Comment = ({ comment, authUser }) => {

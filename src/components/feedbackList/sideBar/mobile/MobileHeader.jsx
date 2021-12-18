@@ -60,6 +60,8 @@ const Cta = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 13px;
+  line-height: 19px;
 `;
 
 const MobileMenu = styled.div`
