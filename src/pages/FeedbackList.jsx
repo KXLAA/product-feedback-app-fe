@@ -40,6 +40,9 @@ export default function FeedbackList({
                 feedback={feedback}
                 setFilter={setFilter}
                 filter={filter}
+                setSort={setSort}
+                sort={sort}
+                toggleAddPage={toggleAddPage}
               />
             </GridItemSide>
             <GridItemMain>

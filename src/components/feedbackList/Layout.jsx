@@ -29,4 +29,9 @@ export const GridItemMain = styled.div`
   @media ${device.tablet} {
     width: 100%;
   }
+
+  @media ${device.mobile} {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 `;

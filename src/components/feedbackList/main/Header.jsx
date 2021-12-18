@@ -1,9 +1,11 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { HiOutlineLightBulb } from 'react-icons/hi';
 import Dropdown from './Dropdown';
 import { ButtonOne } from '../../common/ui/Button';
+import device from '../../common/MediaQueries';
 
 const Container = styled.div`
   background: #373f68;
@@ -21,11 +23,17 @@ const SuggestionCount = styled.div`
 
   h3 {
     padding-right: 16px;
+    @media ${device.tablet} {
+      display: none;
+    }
   }
 `;
 
 const Icon = styled(HiOutlineLightBulb)`
   font-size: 24px;
+  @media ${device.tablet} {
+    display: none;
+  }
 `;
 
 const Header = ({ feedback, toggleAddPage, setSort, sort }) => (

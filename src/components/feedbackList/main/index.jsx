@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { React } from 'react';
 import styled from 'styled-components';
+import MediaQuery, { useMediaQuery } from 'react-responsive';
 import Header from './Header';
 import Feedback from './Feedback';
 import Empty from './Empty';
@@ -22,7 +23,10 @@ const Main = ({
   setShowAlert,
 }) => (
   <Container>
-    <Header setSort={setSort} feedback={feedback} toggleAddPage={toggleAddPage} sort={sort} />
+    <MediaQuery minWidth={630}>
+      <Header setSort={setSort} feedback={feedback} toggleAddPage={toggleAddPage} sort={sort} />
+    </MediaQuery>
+
     {feedback?.length === 0 ? (
       <Empty />
     ) : (

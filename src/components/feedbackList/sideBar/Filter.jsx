@@ -14,10 +14,12 @@ const Container = styled.div`
 
   @media ${device.tablet} {
     flex: 1;
+    max-width: 250px;
   }
 `;
 const Button = styled.div`
   display: inline-block;
+  height: fit-content;
   padding: 6px 16px;
   color: ${(props) => props.color || '#4661e6'};
   background: ${(props) => props.bg || '#f2f4fe'};
