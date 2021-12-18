@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/prop-types */
 /* eslint-disable no-undef */
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { TiDelete } from 'react-icons/ti';
@@ -118,8 +118,6 @@ const GoBack = styled(TiDelete)`
 `;
 
 export default function Login({ onChange, logIn, handleLogin, notify, setNotify }) {
-  console.log(notify);
-
   const borderRed = notify === 'Wrong credentials' ? 'solid 1.5px red' : 'none';
 
   return (
@@ -170,3 +168,14 @@ export default function Login({ onChange, logIn, handleLogin, notify, setNotify 
     </Background>
   );
 }
+
+Login.propTypes = {
+  logIn: PropTypes.shape({
+    password: PropTypes.string,
+    username: PropTypes.string,
+  }).isRequired,
+  handleLogin: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  notify: PropTypes.bool.isRequired,
+  setNotify: PropTypes.func.isRequired,
+};

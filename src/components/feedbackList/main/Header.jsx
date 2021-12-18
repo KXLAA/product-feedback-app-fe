@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { HiOutlineLightBulb } from 'react-icons/hi';
+import PropTypes from 'prop-types';
 import Dropdown from './Dropdown';
 import { ButtonOne } from '../../common/ui/Button';
 import device from '../../common/MediaQueries';
@@ -49,3 +50,24 @@ const Header = ({ feedback, toggleAddPage, setSort, sort }) => (
 );
 
 export default Header;
+
+Header.propTypes = {
+  feedback: PropTypes.arrayOf(PropTypes.object).isRequired,
+  authUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+  toggleAddPage: PropTypes.func.isRequired,
+  setSort: PropTypes.func.isRequired,
+  sort: PropTypes.shape({
+    query: PropTypes.string,
+    value: PropTypes.string,
+  }).isRequired,
+};
+
+Header.defaultProps = {
+  authUser: undefined,
+};

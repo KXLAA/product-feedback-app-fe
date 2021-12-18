@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-import MediaQuery, { useMediaQuery } from 'react-responsive';
+import MediaQuery from 'react-responsive';
+import PropTypes from 'prop-types';
 import MainLayout from '../components/common/Layout';
 import { PageGrid, ItemContainer } from '../components/roadmap/Layout';
 import Planned from '../components/roadmap/planned/Planned';
@@ -8,7 +8,6 @@ import InProgress from '../components/roadmap/inProgress/InProgress';
 import Live from '../components/roadmap/live/Live';
 import Header from '../components/roadmap/Header';
 import NewFeedback from '../components/newFeedback/NewFeedback';
-import { Layout } from '../components/feedbackForm/Common';
 import RodmapMobile from '../components/roadmap/mobile';
 
 export default function Roadmap({
@@ -25,9 +24,9 @@ export default function Roadmap({
   return (
     <>
       {showAddPage ? (
-        <Layout>
+        <>
           <NewFeedback toggleAddPage={toggleAddPage} />
-        </Layout>
+        </>
       ) : (
         <MediaQuery minWidth={630}>
           <MainLayout className="form-animation">
@@ -78,3 +77,22 @@ export default function Roadmap({
     </>
   );
 }
+
+Roadmap.propTypes = {
+  feedback: PropTypes.arrayOf(PropTypes.object).isRequired,
+  serverUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+  setNotify: PropTypes.func.isRequired,
+  setShowAlert: PropTypes.func.isRequired,
+  toggleAddPage: PropTypes.func.isRequired,
+  showAddPage: PropTypes.bool.isRequired,
+};
+
+Roadmap.defaultProps = {
+  serverUser: undefined,
+};

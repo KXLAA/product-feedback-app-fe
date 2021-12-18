@@ -4,6 +4,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import device from '../../common/MediaQueries';
 
 const Container = styled.div`
@@ -103,3 +104,7 @@ const RoadMap = ({ feedback }) => {
 };
 
 export default RoadMap;
+
+RoadMap.propTypes = {
+  feedback: PropTypes.arrayOf(PropTypes.object).isRequired,
+};

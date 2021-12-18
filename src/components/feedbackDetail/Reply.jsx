@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
+import PropTypes from 'prop-types';
 import { TiDelete } from 'react-icons/ti';
 import feedbackService from '../../services/feedback';
 
@@ -108,3 +108,14 @@ const Reply = ({ reply, authUser }) => {
 };
 
 export default Reply;
+
+Reply.propTypes = {
+  authUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }).isRequired,
+  reply: PropTypes.arrayOf(PropTypes.object).isRequired,
+};

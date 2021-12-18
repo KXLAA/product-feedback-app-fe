@@ -1,14 +1,13 @@
 /* eslint-disable no-shadow */
-/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import {
-  Listbox,
   ListboxInput,
   ListboxButton,
   ListboxPopover,
   ListboxList,
   ListboxOption,
 } from '@reach/listbox';
+import PropTypes from 'prop-types';
 import '@reach/listbox/styles.css';
 
 import React, { useState } from 'react';
@@ -43,7 +42,7 @@ const PopOver = styled(ListboxPopover)`
   }
 `;
 
-const Dropdown = ({ feedback, setSort, sort }) => {
+const Dropdown = ({ setSort, sort }) => {
   const [value, setValue] = useState(sort.value);
 
   const handleChange = (value) => {
@@ -81,3 +80,11 @@ const Dropdown = ({ feedback, setSort, sort }) => {
 };
 
 export default Dropdown;
+
+Dropdown.propTypes = {
+  sort: PropTypes.shape({
+    query: PropTypes.string,
+    value: PropTypes.string,
+  }).isRequired,
+  setSort: PropTypes.func.isRequired,
+};

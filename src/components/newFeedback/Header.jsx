@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { BiChevronLeft } from 'react-icons/bi';
+import PropTypes from 'prop-types';
 
 const Alert = styled.div`
   display: flex;
@@ -39,3 +39,7 @@ export const Header = ({ toggleAddPage }) => (
 );
 
 export default Header;
+
+Header.propTypes = {
+  toggleAddPage: PropTypes.func.isRequired,
+};

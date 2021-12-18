@@ -1,9 +1,9 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
@@ -64,3 +64,18 @@ const LoggedIn = ({ authUser, handleLogOut }) => {
 };
 
 export default LoggedIn;
+
+LoggedIn.propTypes = {
+  authUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+  handleLogOut: PropTypes.func.isRequired,
+};
+
+LoggedIn.defaultProps = {
+  authUser: undefined,
+};

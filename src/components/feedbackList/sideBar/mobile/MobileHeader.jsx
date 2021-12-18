@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import { BiMenu } from 'react-icons/bi';
 import { IoCloseSharp } from 'react-icons/io5';
+import PropTypes from 'prop-types';
 import Dropdown from '../../main/Dropdown';
 import { ButtonOne } from '../../../common/ui/Button';
 import Filter from '../Filter';
@@ -99,6 +99,7 @@ const MobileHeader = ({
   handleLogOut,
 }) => {
   const [openMenu, setOpenMenu] = useState(false);
+  console.log(filter);
 
   return (
     <>
@@ -134,3 +135,27 @@ const MobileHeader = ({
 };
 
 export default MobileHeader;
+
+MobileHeader.propTypes = {
+  feedback: PropTypes.arrayOf(PropTypes.object).isRequired,
+  authUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+  toggleAddPage: PropTypes.func.isRequired,
+  handleLogOut: PropTypes.func.isRequired,
+  setFilter: PropTypes.func.isRequired,
+  setSort: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
+  sort: PropTypes.shape({
+    query: PropTypes.string,
+    value: PropTypes.string,
+  }).isRequired,
+};
+
+MobileHeader.defaultProps = {
+  authUser: undefined,
+};

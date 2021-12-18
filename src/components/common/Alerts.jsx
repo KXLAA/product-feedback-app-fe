@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { MdCancel } from 'react-icons/md';
+import PropTypes from 'prop-types';
 
 const Container = styled.div`
   display: flex;
@@ -46,3 +46,9 @@ const Alerts = ({ notify, showAlert, setShowAlert }) => (
 );
 
 export default Alerts;
+
+Alerts.propTypes = {
+  notify: PropTypes.bool.isRequired,
+  showAlert: PropTypes.bool.isRequired,
+  setShowAlert: PropTypes.func.isRequired,
+};

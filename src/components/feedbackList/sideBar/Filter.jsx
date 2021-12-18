@@ -1,7 +1,7 @@
 /* eslint-disable import/no-named-as-default */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import device from '../../common/MediaQueries';
 
 const Container = styled.div`
@@ -89,3 +89,8 @@ const Filter = ({ setFilter, filter }) => (
 );
 
 export default Filter;
+
+Filter.propTypes = {
+  setFilter: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
+};

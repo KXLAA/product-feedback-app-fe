@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Tags from '../../common/ui/Tags';
 import Upvotes from '../../common/ui/Upvotes';
@@ -54,3 +54,33 @@ const PlannedItem = ({ planned, serverUser, setNotify, setShowAlert }) => (
 );
 
 export default PlannedItem;
+
+PlannedItem.propTypes = {
+  planned: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    category: PropTypes.string,
+    upvotes: PropTypes.number,
+    status: PropTypes.string,
+    description: PropTypes.string,
+    comments: PropTypes.arrayOf(PropTypes.object),
+    user: PropTypes.shape({
+      id: PropTypes.string,
+      username: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  }).isRequired,
+  serverUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+  setNotify: PropTypes.func.isRequired,
+  setShowAlert: PropTypes.func.isRequired,
+};
+
+PlannedItem.defaultProps = {
+  serverUser: undefined,
+};

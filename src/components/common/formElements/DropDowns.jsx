@@ -1,6 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
 import {
   ListboxInput,
   ListboxButton,
@@ -9,6 +7,7 @@ import {
   ListboxOption,
 } from '@reach/listbox';
 import '@reach/listbox/styles.css';
+import PropTypes from 'prop-types';
 
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
@@ -81,6 +80,13 @@ export const Category = ({ fields, setFields }) => {
   );
 };
 
+Category.propTypes = {
+  fields: PropTypes.shape({
+    category: PropTypes.string,
+  }).isRequired,
+  setFields: PropTypes.func.isRequired,
+};
+
 export const UpdateStatus = ({ fields, setFields }) => {
   const [value, setValue] = useState(fields.status);
 
@@ -103,4 +109,10 @@ export const UpdateStatus = ({ fields, setFields }) => {
       </ListboxInput>
     </>
   );
+};
+UpdateStatus.propTypes = {
+  fields: PropTypes.shape({
+    status: PropTypes.string,
+  }).isRequired,
+  setFields: PropTypes.func.isRequired,
 };

@@ -1,14 +1,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useNavigate, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { TiDelete } from 'react-icons/ti';
 import MainLayout from '../components/common/Layout';
-import userService from '../services/user';
-import loginService from '../services/login';
-import feedbackService from '../services/feedback';
 
 const Background = styled.div`
   min-height: 100vh;
@@ -109,8 +107,6 @@ const SignIn = styled.p`
 `;
 
 export default function SignUp({ handleSignUp, onChange, newUser }) {
-  const navigate = useNavigate();
-
   return (
     <Background>
       <Link to="/">
@@ -173,3 +169,14 @@ export default function SignUp({ handleSignUp, onChange, newUser }) {
     </Background>
   );
 }
+
+SignUp.propTypes = {
+  newUser: PropTypes.shape({
+    name: PropTypes.string,
+    password: PropTypes.string,
+    email: PropTypes.string,
+    username: PropTypes.string,
+  }).isRequired,
+  handleSignUp: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+};

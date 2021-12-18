@@ -1,8 +1,8 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable no-undef */
-/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import { React } from 'react';
+import PropTypes from 'prop-types';
 import MediaQuery from 'react-responsive';
 import Header from './Header';
 import MobileHeader from './mobile/MobileHeader';
@@ -74,3 +74,27 @@ const SideBar = ({
 );
 
 export default SideBar;
+
+SideBar.propTypes = {
+  feedback: PropTypes.arrayOf(PropTypes.object).isRequired,
+  authUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+  toggleAddPage: PropTypes.func.isRequired,
+  handleLogOut: PropTypes.func.isRequired,
+  setSort: PropTypes.func.isRequired,
+  sort: PropTypes.shape({
+    query: PropTypes.string,
+    value: PropTypes.string,
+  }).isRequired,
+  setFilter: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
+};
+
+SideBar.defaultProps = {
+  authUser: undefined,
+};

@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { BiChevronLeft } from 'react-icons/bi';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ButtonTwo } from '../common/ui/Button';
 
@@ -55,3 +55,29 @@ const Header = ({ showEditPage, setShowEditPage, authUser, feedback }) => (
 );
 
 export default Header;
+
+Header.propTypes = {
+  feedback: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    category: PropTypes.string,
+    upvotes: PropTypes.number,
+    status: PropTypes.string,
+    description: PropTypes.string,
+    comments: PropTypes.arrayOf(PropTypes.object),
+    user: PropTypes.shape({
+      id: PropTypes.string,
+      username: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  }).isRequired,
+  authUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }).isRequired,
+  showEditPage: PropTypes.bool.isRequired,
+  setShowEditPage: PropTypes.func.isRequired,
+};

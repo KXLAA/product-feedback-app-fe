@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import PlannedItem from './PlannedItem';
 import { Header } from '../Common';
 
@@ -22,3 +22,20 @@ const Planned = ({ planned, serverUser, setNotify, setShowAlert }) => (
 );
 
 export default Planned;
+
+Planned.propTypes = {
+  planned: PropTypes.arrayOf(PropTypes.object).isRequired,
+  serverUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+  setNotify: PropTypes.func.isRequired,
+  setShowAlert: PropTypes.func.isRequired,
+};
+
+Planned.defaultProps = {
+  serverUser: undefined,
+};

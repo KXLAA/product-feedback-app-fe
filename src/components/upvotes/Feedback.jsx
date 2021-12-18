@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { FaComment } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
@@ -86,3 +86,18 @@ const Feedback = ({ liked, serverUser }) => {
 };
 
 export default Feedback;
+
+Feedback.propTypes = {
+  liked: PropTypes.arrayOf(PropTypes.object).isRequired,
+  serverUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+};
+
+Feedback.defaultProps = {
+  serverUser: undefined,
+};

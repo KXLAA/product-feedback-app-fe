@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Feedback from '../components/upvotes/Feedback';
 import Header from '../components/upvotes/Header';
 import MainLayout from '../components/common/Layout';
@@ -25,3 +25,18 @@ function Upvotes({ serverUser }) {
 }
 
 export default Upvotes;
+
+Upvotes.propTypes = {
+  serverUser: PropTypes.shape({
+    token: PropTypes.string,
+    liked: PropTypes.arrayOf(PropTypes.string),
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+};
+
+Upvotes.defaultProps = {
+  serverUser: undefined,
+};

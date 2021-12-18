@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { BiChevronLeft } from 'react-icons/bi';
+import PropTypes from 'prop-types';
 
 const Container = styled.div`
   background: #ffff;
@@ -96,3 +97,17 @@ const Header = ({ serverUser }) => (
 );
 
 export default Header;
+
+Header.propTypes = {
+  serverUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+};
+
+Header.defaultProps = {
+  serverUser: undefined,
+};

@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable import/no-named-as-default */
 import React from 'react';
 import styled from 'styled-components';
 import { GoChevronUp } from 'react-icons/go';
 import { useMutation, useQueryClient } from 'react-query';
+import PropTypes from 'prop-types';
 import feedbackService from '../../../services/feedback';
 import userService from '../../../services/user';
 import device from '../MediaQueries';
@@ -109,6 +109,33 @@ const Upvotes = ({ feedback, serverUser, setNotify, setShowAlert }) => {
 
 export default Upvotes;
 
-// Upvotes.propTypes = {
-//   number: PropTypes.number.isRequired,
-// };
+Upvotes.propTypes = {
+  feedback: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    category: PropTypes.string,
+    upvotes: PropTypes.number,
+    status: PropTypes.string,
+    description: PropTypes.string,
+    comments: PropTypes.arrayOf(PropTypes.object),
+    user: PropTypes.shape({
+      id: PropTypes.string,
+      username: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  }).isRequired,
+  serverUser: PropTypes.shape({
+    id: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    feedback: PropTypes.arrayOf(PropTypes.string),
+    comments: PropTypes.arrayOf(PropTypes.string),
+    liked: PropTypes.arrayOf(PropTypes.string),
+  }),
+  setShowAlert: PropTypes.func.isRequired,
+  setNotify: PropTypes.func.isRequired,
+};
+
+Upvotes.defaultProps = {
+  serverUser: undefined,
+};

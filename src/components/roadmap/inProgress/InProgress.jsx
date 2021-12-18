@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import InProgressItem from './InProgressItem';
 import { Header } from '../Common';
 
@@ -24,3 +25,20 @@ function InProgress({ inProgress, serverUser, setNotify, setShowAlert }) {
 }
 
 export default InProgress;
+
+InProgress.propTypes = {
+  inProgress: PropTypes.arrayOf(PropTypes.object).isRequired,
+  serverUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+  setNotify: PropTypes.func.isRequired,
+  setShowAlert: PropTypes.func.isRequired,
+};
+
+InProgress.defaultProps = {
+  serverUser: undefined,
+};

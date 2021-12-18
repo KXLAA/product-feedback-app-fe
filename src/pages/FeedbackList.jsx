@@ -2,16 +2,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 // import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { HomePageGrid, GridItemSide, GridItemMain } from '../components/feedbackList/Layout';
 import Main from '../components/feedbackList/main';
 import SideBar from '../components/feedbackList/sideBar/index';
 import MainLayout from '../components/common/Layout';
 import NewFeedback from '../components/newFeedback/NewFeedback';
-import { Layout } from '../components/feedbackForm/Common';
 
 export default function FeedbackList({
   feedback,
-  setFeedback,
   handleLogOut,
   authUser,
   serverUser,
@@ -48,7 +47,6 @@ export default function FeedbackList({
                 setSort={setSort}
                 sort={sort}
                 feedback={feedback}
-                setFeedback={setFeedback}
                 toggleAddPage={toggleAddPage}
                 serverUser={serverUser}
                 setShowAlert={setShowAlert}
@@ -61,3 +59,38 @@ export default function FeedbackList({
     </>
   );
 }
+
+FeedbackList.propTypes = {
+  feedback: PropTypes.arrayOf(PropTypes.object).isRequired,
+  authUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+  serverUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+  setFilter: PropTypes.func.isRequired,
+  setNotify: PropTypes.func.isRequired,
+  setShowAlert: PropTypes.func.isRequired,
+  toggleAddPage: PropTypes.func.isRequired,
+  showAddPage: PropTypes.bool.isRequired,
+  setSort: PropTypes.func.isRequired,
+  sort: PropTypes.shape({
+    query: PropTypes.string,
+    value: PropTypes.string,
+  }).isRequired,
+  filter: PropTypes.string.isRequired,
+  handleLogOut: PropTypes.func.isRequired,
+};
+
+FeedbackList.defaultProps = {
+  authUser: undefined,
+  serverUser: undefined,
+};

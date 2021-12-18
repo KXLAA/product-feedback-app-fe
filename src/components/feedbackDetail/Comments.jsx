@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Comment from './Comment';
 
 const Container = styled.div`
@@ -28,3 +28,28 @@ const Comments = ({ comments, feedback, authUser }) => (
 );
 
 export default Comments;
+
+Comments.propTypes = {
+  feedback: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    category: PropTypes.string,
+    upvotes: PropTypes.number,
+    status: PropTypes.string,
+    description: PropTypes.string,
+    comments: PropTypes.arrayOf(PropTypes.object),
+    user: PropTypes.shape({
+      id: PropTypes.string,
+      username: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  }).isRequired,
+  authUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }).isRequired,
+  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+};

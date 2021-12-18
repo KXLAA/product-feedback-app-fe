@@ -2,6 +2,7 @@
 import { React } from 'react';
 import styled from 'styled-components';
 import MediaQuery from 'react-responsive';
+import PropTypes from 'prop-types';
 import Header from './Header';
 import Feedback from './Feedback';
 import Empty from './Empty';
@@ -12,16 +13,7 @@ const Container = styled.section`
   gap: 24px;
 `;
 
-const Main = ({
-  feedback,
-  setFeedback,
-  toggleAddPage,
-  serverUser,
-  setSort,
-  sort,
-  setNotify,
-  setShowAlert,
-}) => (
+const Main = ({ feedback, toggleAddPage, serverUser, setSort, sort, setNotify, setShowAlert }) => (
   <Container>
     <MediaQuery minWidth={630}>
       <Header setSort={setSort} feedback={feedback} toggleAddPage={toggleAddPage} sort={sort} />
@@ -36,7 +28,6 @@ const Main = ({
             feedbackList={feedback}
             feedback={feed}
             key={feed.id}
-            setFeedback={setFeedback}
             serverUser={serverUser}
             setShowAlert={setShowAlert}
             setNotify={setNotify}
@@ -48,3 +39,24 @@ const Main = ({
 );
 
 export default Main;
+
+Main.propTypes = {
+  feedback: PropTypes.arrayOf(PropTypes.object).isRequired,
+  authUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+  toggleAddPage: PropTypes.func.isRequired,
+  setSort: PropTypes.func.isRequired,
+  sort: PropTypes.shape({
+    query: PropTypes.string,
+    value: PropTypes.string,
+  }).isRequired,
+};
+
+Main.defaultProps = {
+  authUser: undefined,
+};

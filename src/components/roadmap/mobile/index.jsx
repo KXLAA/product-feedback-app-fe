@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs';
+import PropTypes from 'prop-types';
 import '@reach/tabs/styles.css';
 import styled from 'styled-components';
 import Header from './Header';
@@ -85,3 +85,23 @@ const RodmapMobile = ({
 );
 
 export default RodmapMobile;
+
+RodmapMobile.propTypes = {
+  planned: PropTypes.arrayOf(PropTypes.object).isRequired,
+  live: PropTypes.arrayOf(PropTypes.object).isRequired,
+  inProgress: PropTypes.arrayOf(PropTypes.object).isRequired,
+  serverUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
+  setNotify: PropTypes.func.isRequired,
+  setShowAlert: PropTypes.func.isRequired,
+  toggleAddPage: PropTypes.func.isRequired,
+};
+
+RodmapMobile.defaultProps = {
+  serverUser: undefined,
+};

@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { BiChevronLeft } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import { ButtonOne } from '../common/ui/Button';
@@ -57,3 +58,7 @@ const Header = ({ toggleAddPage }) => (
 );
 
 export default Header;
+
+Header.propTypes = {
+  toggleAddPage: PropTypes.func.isRequired,
+};

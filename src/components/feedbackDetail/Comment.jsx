@@ -2,8 +2,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { RiReplyFill } from 'react-icons/ri';
@@ -240,3 +240,20 @@ const Comment = ({ comment, authUser }) => {
 };
 
 export default Comment;
+
+Comment.propTypes = {
+  comment: PropTypes.shape({
+    id: PropTypes.string,
+    user: PropTypes.string,
+    feedback: PropTypes.string,
+    content: PropTypes.string,
+    replies: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+  authUser: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    avatar: PropTypes.string,
+  }).isRequired,
+};

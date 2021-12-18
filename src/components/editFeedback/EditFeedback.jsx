@@ -1,8 +1,8 @@
 /* eslint-disable import/no-named-as-default */
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useMutation, useQueryClient } from 'react-query';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import {
   Form,
@@ -64,6 +64,7 @@ const EditFeedback = ({ showEditPage, setShowEditPage, feedback }) => {
     deleteFeedback.mutate(feedback.id);
   };
 
+  console.log(feedback);
   return (
     <Layout>
       <Container className="form-animation">
@@ -146,3 +147,22 @@ const EditFeedback = ({ showEditPage, setShowEditPage, feedback }) => {
 };
 
 export default EditFeedback;
+
+EditFeedback.propTypes = {
+  feedback: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    category: PropTypes.string,
+    upvotes: PropTypes.number,
+    status: PropTypes.string,
+    description: PropTypes.string,
+    comments: PropTypes.arrayOf(PropTypes.object),
+    user: PropTypes.shape({
+      id: PropTypes.string,
+      username: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  }).isRequired,
+  showEditPage: PropTypes.bool.isRequired,
+  setShowEditPage: PropTypes.func.isRequired,
+};
