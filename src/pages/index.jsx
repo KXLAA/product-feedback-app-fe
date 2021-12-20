@@ -104,7 +104,7 @@ export default function Pages() {
   const [filter, setFilter] = useState('');
   const [sort, setSort] = useState({ query: '&sort=mostUpvotes', value: 'Most Upvotes' });
 
-  const { data, isLoading, isError, error } = useQuery(['feedbackList', filter, sort.query], () =>
+  const { data, isLoading, isError } = useQuery(['feedbackList', filter, sort.query], () =>
     feedbackService.getFeedback(filter, sort.query)
   );
 
