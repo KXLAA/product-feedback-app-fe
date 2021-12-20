@@ -1,5 +1,8 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable no-nested-ternary */
 import React from 'react';
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs';
+import { Tabs, TabList, Tab, TabPanels, TabPanel, useTabsContext } from '@reach/tabs';
 import PropTypes from 'prop-types';
 import '@reach/tabs/styles.css';
 import styled from 'styled-components';
@@ -27,6 +30,20 @@ const Container = styled.div`
   padding-right: 24px;
 `;
 
+function CustomTab({ index, ...props }) {
+  const { selectedIndex, focusedIndex } = useTabsContext();
+  return (
+    <Tab
+      style={{
+        borderBottom: `4px solid ${
+          selectedIndex === index ? '#AD1FEA' : focusedIndex === index ? '#8C92B3' : '#8C92B3'
+        }`,
+      }}
+      {...props}
+    />
+  );
+}
+
 const RodmapMobile = ({
   toggleAddPage,
   planned,
@@ -41,9 +58,9 @@ const RodmapMobile = ({
 
     <Tabs>
       <Heading>
-        <Tab>Planned ({planned?.length})</Tab>
-        <Tab>In-Progress ({inProgress?.length})</Tab>
-        <Tab>Live ({live?.length})</Tab>
+        <CustomTab index={0}>Planned ({planned?.length})</CustomTab>
+        <CustomTab index={1}>In-Progress ({inProgress?.length})</CustomTab>
+        <CustomTab index={2}>Live ({live?.length})</CustomTab>
       </Heading>
 
       <TabPanels>

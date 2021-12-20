@@ -20,7 +20,7 @@ const Main = ({ feedback, toggleAddPage, serverUser, setSort, sort, setNotify, s
     </MediaQuery>
 
     {feedback?.length === 0 ? (
-      <Empty />
+      <Empty toggleAddPage={toggleAddPage} />
     ) : (
       <>
         {feedback?.map((feed) => (
@@ -41,7 +41,7 @@ const Main = ({ feedback, toggleAddPage, serverUser, setSort, sort, setNotify, s
 export default Main;
 
 Main.propTypes = {
-  feedback: PropTypes.arrayOf(PropTypes.object).isRequired,
+  feedback: PropTypes.arrayOf(PropTypes.object),
   authUser: PropTypes.shape({
     token: PropTypes.string,
     username: PropTypes.string,
@@ -59,4 +59,5 @@ Main.propTypes = {
 
 Main.defaultProps = {
   authUser: undefined,
+  feedback: undefined,
 };

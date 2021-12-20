@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
@@ -7,6 +8,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { TiDelete } from 'react-icons/ti';
 import MainLayout from '../components/common/Layout';
+import device from '../components/common/MediaQueries';
+import { ButtonOne } from '../components/common/ui/Button';
 
 const Background = styled.div`
   min-height: 100vh;
@@ -20,6 +23,11 @@ const Background = styled.div`
   justify-content: center;
   align-items: center;
 
+  @media ${device.mobile} {
+    padding-top: 52px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
   h1 {
     font-size: 72px;
     line-height: 104px;
@@ -35,11 +43,16 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: 464px;
+  max-width: 464px;
+  width: 100%;
   padding: 48px;
   border-radius: 10px;
   margin: 0 auto;
   background-color: #ffffff;
+
+  @media ${device.mobile} {
+    padding: 24px;
+  }
 `;
 
 const Input = styled.input`
@@ -55,31 +68,10 @@ const Label = styled.label`
   font-weight: 700;
 `;
 
-const WideBtn = styled.button`
+const WideBtn = styled(ButtonOne)`
   width: 100%;
-  text-align: center;
   padding: 24px;
-  font-size: 16px;
   margin-top: 24px;
-  background: #ad1fea;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
-  color: #f2f4fe;
-  cursor: pointer;
-  outline: none;
-  border: none;
-
-  &:hover {
-    color: #ffffff;
-    background: #c75af6;
-    transform: translateX(0rem) translateY(-0.125rem);
-  }
-  &:active {
-    transform: translateX(0rem) translateY(0.125rem);
-  }
 `;
 
 const GoBack = styled(TiDelete)`
@@ -90,6 +82,10 @@ const GoBack = styled(TiDelete)`
   top: 10px;
   transition: all 0.3s ease;
   cursor: pointer;
+
+  @media ${device.mobile} {
+    padding-bottom: 24px;
+  }
 
   &:hover {
     color: #d73737;

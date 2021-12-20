@@ -88,7 +88,7 @@ Category.propTypes = {
 };
 
 export const UpdateStatus = ({ fields, setFields }) => {
-  const [value, setValue] = useState(fields.status);
+  const [value, setValue] = useState(fields.status || 'suggestion');
 
   useEffect(() => {
     setFields((prev) => ({ ...prev, status: value }));

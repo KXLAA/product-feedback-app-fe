@@ -8,6 +8,7 @@ import Main from '../components/feedbackList/main';
 import SideBar from '../components/feedbackList/sideBar/index';
 import MainLayout from '../components/common/Layout';
 import NewFeedback from '../components/newFeedback/NewFeedback';
+import Empty from '../components/feedbackList/main/Empty';
 
 export default function FeedbackList({
   feedback,
@@ -42,6 +43,7 @@ export default function FeedbackList({
                 toggleAddPage={toggleAddPage}
               />
             </GridItemSide>
+
             <GridItemMain>
               <Main
                 setSort={setSort}

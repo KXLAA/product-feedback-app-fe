@@ -1,10 +1,14 @@
+/* eslint-disable import/no-named-as-default */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { ButtonOne } from '../../common/ui/Button';
+import device from '../../common/MediaQueries';
 
 const Container = styled.div`
   height: 650px;
-  width: 825px;
+  max-width: 825px;
+  width: 100%;
   border-radius: 10px;
   background: #ffffff;
   display: flex;
@@ -14,6 +18,10 @@ const Container = styled.div`
 
 const EmptyContainer = styled.div`
   text-align: center;
+
+  @media ${device.tablet} {
+    padding: 24px;
+  }
 
   img {
     width: 150px;
@@ -43,11 +51,12 @@ const EmptyTxt = styled.div`
     text-align: center;
     font-weight: 400;
     color: #647196;
-    width: 410px;
+    max-width: 410px;
+    width: 100%;
   }
 `;
 
-const Empty = () => (
+const Empty = ({ toggleAddPage }) => (
   <Container>
     <EmptyContainer>
       <img src="illustration-empty.svg" alt="empty" />
@@ -58,9 +67,13 @@ const Empty = () => (
           to improve our app.
         </p>
       </EmptyTxt>
-      <ButtonOne>+ Add Feedback</ButtonOne>
+      <ButtonOne onClick={toggleAddPage}>+ Add Feedback</ButtonOne>
     </EmptyContainer>
   </Container>
 );
 
 export default Empty;
+
+Empty.propTypes = {
+  toggleAddPage: PropTypes.func.isRequired,
+};
