@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable import/no-named-as-default */
 import React from 'react';
 import styled from 'styled-components';
@@ -5,6 +6,7 @@ import { FaComment } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
+import { format } from 'fecha';
 import Upvotes from '../../common/ui/Upvotes';
 import Tags from '../../common/ui/Tags';
 import device from '../../common/MediaQueries';
@@ -29,28 +31,29 @@ const DetailsContainer = styled.div`
   @media ${device.mobile} {
     width: 100%;
   }
+`;
 
-  h3 {
-    color: #3a4374;
-    cursor: pointer;
+const Title = styled.h3`
+  color: #3a4374;
+  cursor: pointer;
 
-    @media ${device.mobile} {
-      font-size: 13px;
-      line-height: 19px;
-    }
-  }
-
-  p {
-    font-weight: 400;
+  @media ${device.mobile} {
     font-size: 16px;
-    line-height: 23px;
-    color: #647196;
-    padding-bottom: 16px;
+    line-height: 19px;
+    padding-bottom: 4px;
+  }
+`;
 
-    @media ${device.mobile} {
-      font-size: 13px;
-      line-height: 19px;
-    }
+const Description = styled.p`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #647196;
+  padding-bottom: 16px;
+
+  @media ${device.mobile} {
+    font-size: 14px;
+    line-height: 19px;
   }
 `;
 
@@ -82,63 +85,112 @@ const MobileCont = styled.div`
   padding-top: 16px;
 `;
 
-const Feedback = ({ feedback, serverUser, setNotify, setShowAlert }) => (
-  <>
-    <MediaQuery minWidth={630}>
-      <Container className="item-animation">
-        <DetailsContainer>
-          <Upvotes
-            feedback={feedback}
-            serverUser={serverUser}
-            setShowAlert={setShowAlert}
-            setNotify={setNotify}
-          />
-          <div>
-            <h3>
-              <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>
-            </h3>
+const User = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 16px;
+  img {
+    width: 40px;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+  }
 
-            <p>{feedback.description}</p>
-            <Tags text={feedback?.category} />
-          </div>
-        </DetailsContainer>
+  h4 {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.194444px;
+    color: #3a4374;
+  }
 
-        <CommentContainer>
-          <Comment />
-          <p>{feedback.comments.length}</p>
-        </CommentContainer>
-      </Container>
-    </MediaQuery>
+  p {
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 19px;
+    color: #647196;
+  }
+`;
 
-    <MediaQuery maxWidth={630}>
-      <Container className="item-animation">
-        <DetailsContainer>
-          <div>
-            <h3>
-              <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>
-            </h3>
+const Feedback = ({ feedback, serverUser, setNotify, setShowAlert }) => {
+  console.log(feedback);
 
-            <p>{feedback.description}</p>
-            <Tags text={feedback?.category} />
-          </div>
-        </DetailsContainer>
+  return (
+    <>
+      <MediaQuery minWidth={630}>
+        <Container className="item-animation">
+          <DetailsContainer>
+            <Upvotes
+              feedback={feedback}
+              serverUser={serverUser}
+              setShowAlert={setShowAlert}
+              setNotify={setNotify}
+            />
 
-        <MobileCont>
-          <Upvotes
-            feedback={feedback}
-            serverUser={serverUser}
-            setShowAlert={setShowAlert}
-            setNotify={setNotify}
-          />
+            <Link to={`/feedback-list/${feedback.id}`}>
+              <div>
+                <User>
+                  <img src={feedback.user.avatar} alt={feedback.user.name} />
+
+                  <div>
+                    <h4>{feedback.user.name}</h4>
+                    <p>{format(new Date(feedback.createdAt), 'dddd MMM Do, YYYY')}</p>
+                  </div>
+                </User>
+
+                <Title>{feedback.title}</Title>
+
+                <Description>{feedback.description}</Description>
+                <Tags text={feedback?.category} />
+              </div>
+            </Link>
+          </DetailsContainer>
+
           <CommentContainer>
             <Comment />
-            <p>{feedback.comments.length}</p>
+            <p>{feedback?.comments?.length}</p>
           </CommentContainer>
-        </MobileCont>
-      </Container>
-    </MediaQuery>
-  </>
-);
+        </Container>
+      </MediaQuery>
+
+      <MediaQuery maxWidth={630}>
+        <Container className="item-animation">
+          <DetailsContainer>
+            <div>
+              <User>
+                <img src={feedback.user.avatar} alt={feedback.user.name} />
+
+                <div>
+                  <h4>{feedback?.user.name}</h4>
+                  <p>{format(new Date(feedback.createdAt), 'dddd MMM Do, YYYY')}</p>
+                </div>
+              </User>
+              <Title>
+                <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>
+              </Title>
+
+              <Description>{feedback.description}</Description>
+              <Tags text={feedback?.category} />
+            </div>
+          </DetailsContainer>
+
+          <MobileCont>
+            <Upvotes
+              feedback={feedback}
+              serverUser={serverUser}
+              setShowAlert={setShowAlert}
+              setNotify={setNotify}
+            />
+            <CommentContainer>
+              <Comment />
+              <p>{feedback.comments.length}</p>
+            </CommentContainer>
+          </MobileCont>
+        </Container>
+      </MediaQuery>
+    </>
+  );
+};
 
 export default Feedback;
 
@@ -155,6 +207,7 @@ Feedback.propTypes = {
       id: PropTypes.string,
       username: PropTypes.string,
       name: PropTypes.string,
+      avatar: PropTypes.string,
     }),
   }).isRequired,
   serverUser: PropTypes.shape({

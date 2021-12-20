@@ -1,9 +1,11 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { BiChevronLeft } from 'react-icons/bi';
 import PropTypes from 'prop-types';
+import device from '../common/MediaQueries';
 
 const Container = styled.div`
   background: #ffff;
@@ -14,6 +16,10 @@ const Container = styled.div`
   margin-bottom: 48px;
   justify-content: space-between;
   align-items: center;
+
+  @media ${device.mobile} {
+    flex-direction: column;
+  }
 `;
 
 const UserContainer = styled.div`
@@ -24,6 +30,10 @@ const UserContainer = styled.div`
 
   h3 {
     padding-right: 16px;
+
+    @media ${device.mobile} {
+      padding-right: 0px;
+    }
   }
 
   img {
@@ -62,6 +72,11 @@ const Back = styled.div`
 const Info = styled.div`
   text-align: right;
 
+  @media ${device.mobile} {
+    text-align: center;
+    padding-top: 8px;
+  }
+
   p {
     font-weight: 700;
     width: 150px;
@@ -90,7 +105,10 @@ const Header = ({ serverUser }) => (
         </div>
       </UserContainer>
       <Info>
-        <p>You have upvoted {serverUser?.liked.length} suggestions</p>
+        <p>
+          You have upvoted {serverUser?.liked.length}{' '}
+          {serverUser?.liked.length === 1 ? 'suggestion' : 'suggestions'}
+        </p>
       </Info>
     </Container>
   </>

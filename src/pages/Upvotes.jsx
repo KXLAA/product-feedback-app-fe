@@ -13,7 +13,6 @@ const Layout = styled(MainLayout)`
 `;
 
 function Upvotes({ serverUser }) {
-  console.log(serverUser);
   return (
     <Layout>
       <Header serverUser={serverUser} />

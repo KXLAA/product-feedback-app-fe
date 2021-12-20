@@ -56,7 +56,7 @@ const PopOver = styled(ListboxPopover)`
 `;
 
 export const Category = ({ fields, setFields }) => {
-  const [value, setValue] = useState(fields.category);
+  const [value, setValue] = useState(fields.category || 'feature');
 
   useEffect(() => {
     setFields((prev) => ({ ...prev, category: value }));

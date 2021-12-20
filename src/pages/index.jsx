@@ -25,8 +25,8 @@ export default function Pages() {
   const [showAlert, setShowAlert] = useState(false);
 
   const [logIn, setLogIn] = useState({
-    username: '',
-    password: '',
+    username: 'velvetround',
+    password: 'velvetround',
   });
 
   const [newUser, setNewUser] = useState({
@@ -116,9 +116,13 @@ export default function Pages() {
     feedbackService.getFeedback(filter, sort.query)
   );
 
-  const getUser = useQuery(['user', authUser?.id], () => userService.getUser(authUser?.id), {
-    enabled: !!authUser,
-  });
+  const getUser = useQuery(
+    ['feedbackList', 'user', authUser?.id],
+    () => userService.getUser(authUser?.id),
+    {
+      enabled: !!authUser,
+    }
+  );
 
   const [showAddPage, setShowAddPage] = useState(false);
 
