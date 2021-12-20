@@ -84,7 +84,7 @@ const NewFeedback = ({ toggleAddPage, feedback, authUser }) => {
               <h4>Feedback Title</h4>
               <p>Add a short, descriptive headline</p>
             </div>
-            <Input value={fields.title} name="title" onChange={handleOnChange} />
+            <Input value={fields.title} name="title" onChange={handleOnChange} required />
           </InputContainer>
           <InputContainer>
             <div>
@@ -98,7 +98,12 @@ const NewFeedback = ({ toggleAddPage, feedback, authUser }) => {
               <h4>Feedback Detail</h4>
               <p>Include any specific comments on what should be improved, added, etc.</p>
             </div>
-            <Textarea value={fields.description} onChange={handleOnChange} name="description" />
+            <Textarea
+              value={fields.description}
+              onChange={handleOnChange}
+              name="description"
+              required
+            />
           </InputContainer>
           <ButtonContainer>
             <ButtonOne disabled={!authUser}>Add Feedback</ButtonOne>

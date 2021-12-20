@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:4000/api/feedback-list';
-const commentUrl = 'http://localhost:4000/api/comments';
-const replyUrl = 'http://localhost:4000/api/replies';
+const baseUrl = '/api/feedback-list';
+const commentUrl = '/api/comments';
+const replyUrl = '/api/replies';
 
 let token = null;
 

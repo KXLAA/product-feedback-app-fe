@@ -60,9 +60,6 @@ export default function Pages() {
       setLogIn({ username: '', password: '' });
     } catch (error) {
       setNotify('Wrong credentials');
-      setTimeout(() => {
-        setNotify(null);
-      }, 5000);
     }
   };
 
