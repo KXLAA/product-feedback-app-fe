@@ -18,6 +18,11 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateX(0.15rem) translateY(-0.3125rem);
+  }
 
   @media ${device.mobile} {
     flex-direction: column;
