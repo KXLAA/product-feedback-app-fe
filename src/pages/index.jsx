@@ -18,6 +18,8 @@ import NotFound from './NotFound';
 import Loading from '../components/common/Loading';
 import Error from './Error';
 
+const randomNumber = Math.floor(Math.random() * 2000 + 1);
+
 export default function Pages() {
   const navigate = useNavigate();
   const [authUser, setAuthUser] = useState(null);
@@ -77,27 +79,20 @@ export default function Pages() {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
-
     const newUserObj = {
       username: newUser.username,
       name: newUser.name,
       email: newUser.email,
       password: newUser.password,
+      avatar: `https://avatars.dicebear.com/api/human/${randomNumber}.svg`,
     };
 
     try {
       const createdUser = await userService.createUser(newUserObj);
-      const user = await loginService.login({
-        username: createdUser.username,
-        password: createdUser.password,
-      });
-      window.localStorage.setItem('loggedUser', JSON.stringify(user));
-      feedbackService.setToken(user.token);
-      setAuthUser(user);
-      navigate('/');
+      setLogIn({ username: createdUser.username, password: newUserObj.password });
+      navigate('/auth/login');
       setNewUser({ username: '', name: '', password: '', email: '' });
     } catch (error) {
-      console.log(error.message);
       setNotify('oops username already exists');
     }
   };
@@ -133,7 +128,7 @@ export default function Pages() {
   }, [notify]);
 
   if (isError) {
-    return <Error error={error} />;
+    return <Error />;
   }
   return (
     <>

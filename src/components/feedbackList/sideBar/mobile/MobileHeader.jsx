@@ -99,7 +99,6 @@ const MobileHeader = ({
   handleLogOut,
 }) => {
   const [openMenu, setOpenMenu] = useState(false);
-  console.log(filter);
 
   return (
     <>

@@ -112,85 +112,81 @@ const User = styled.div`
   }
 `;
 
-const Feedback = ({ feedback, serverUser, setNotify, setShowAlert }) => {
-  console.log(feedback);
+const Feedback = ({ feedback, serverUser, setNotify, setShowAlert }) => (
+  <>
+    <MediaQuery minWidth={630}>
+      <Container className="item-animation">
+        <DetailsContainer>
+          <Upvotes
+            feedback={feedback}
+            serverUser={serverUser}
+            setShowAlert={setShowAlert}
+            setNotify={setNotify}
+          />
 
-  return (
-    <>
-      <MediaQuery minWidth={630}>
-        <Container className="item-animation">
-          <DetailsContainer>
-            <Upvotes
-              feedback={feedback}
-              serverUser={serverUser}
-              setShowAlert={setShowAlert}
-              setNotify={setNotify}
-            />
-
-            <Link to={`/feedback-list/${feedback.id}`}>
-              <div>
-                <User>
-                  <img src={feedback.user.avatar} alt={feedback.user.name} />
-
-                  <div>
-                    <h4>{feedback.user.name}</h4>
-                    <p>{format(new Date(feedback.createdAt), 'dddd MMM Do, YYYY')}</p>
-                  </div>
-                </User>
-
-                <Title>{feedback.title}</Title>
-
-                <Description>{feedback.description}</Description>
-                <Tags text={feedback?.category} />
-              </div>
-            </Link>
-          </DetailsContainer>
-
-          <CommentContainer>
-            <Comment />
-            <p>{feedback?.comments?.length}</p>
-          </CommentContainer>
-        </Container>
-      </MediaQuery>
-
-      <MediaQuery maxWidth={630}>
-        <Container className="item-animation">
-          <DetailsContainer>
+          <Link to={`/feedback-list/${feedback.id}`}>
             <div>
               <User>
                 <img src={feedback.user.avatar} alt={feedback.user.name} />
 
                 <div>
-                  <h4>{feedback?.user.name}</h4>
+                  <h4>{feedback.user.name}</h4>
                   <p>{format(new Date(feedback.createdAt), 'dddd MMM Do, YYYY')}</p>
                 </div>
               </User>
-              <Title>
-                <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>
-              </Title>
+
+              <Title>{feedback.title}</Title>
 
               <Description>{feedback.description}</Description>
               <Tags text={feedback?.category} />
             </div>
-          </DetailsContainer>
+          </Link>
+        </DetailsContainer>
 
-          <MobileCont>
-            <Upvotes
-              feedback={feedback}
-              serverUser={serverUser}
-              setShowAlert={setShowAlert}
-              setNotify={setNotify}
-            />
-            <CommentContainer>
-              <Comment />
-              <p>{feedback.comments.length}</p>
-            </CommentContainer>
-          </MobileCont>
-        </Container>
-      </MediaQuery>
-    </>
-  );
-};
+        <CommentContainer>
+          <Comment />
+          <p>{feedback?.comments?.length}</p>
+        </CommentContainer>
+      </Container>
+    </MediaQuery>
+
+    <MediaQuery maxWidth={630}>
+      <Container className="item-animation">
+        <DetailsContainer>
+          <div>
+            <User>
+              <img src={feedback.user.avatar} alt={feedback.user.name} />
+
+              <div>
+                <h4>{feedback?.user.name}</h4>
+                <p>{format(new Date(feedback.createdAt), 'dddd MMM Do, YYYY')}</p>
+              </div>
+            </User>
+            <Title>
+              <Link to={`/feedback-list/${feedback.id}`}>{feedback.title}</Link>
+            </Title>
+
+            <Description>{feedback.description}</Description>
+            <Tags text={feedback?.category} />
+          </div>
+        </DetailsContainer>
+
+        <MobileCont>
+          <Upvotes
+            feedback={feedback}
+            serverUser={serverUser}
+            setShowAlert={setShowAlert}
+            setNotify={setNotify}
+          />
+          <CommentContainer>
+            <Comment />
+            <p>{feedback.comments.length}</p>
+          </CommentContainer>
+        </MobileCont>
+      </Container>
+    </MediaQuery>
+  </>
+);
 
 export default Feedback;
 

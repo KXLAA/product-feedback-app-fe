@@ -48,8 +48,6 @@ export default function FeedbackDetail({ authUser, serverUser, setShowAlert, set
     return <Loading />;
   }
 
-  console.log(serverUser);
-
   return (
     <>
       {showEditPage ? (

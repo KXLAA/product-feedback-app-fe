@@ -1,6 +1,5 @@
 /* eslint-disable import/no-named-as-default */
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import device from '../components/common/MediaQueries';
@@ -47,8 +46,7 @@ const EmptyTxt = styled.div`
   }
 `;
 
-function Error({ error }) {
-  console.log(error);
+function Error() {
   return (
     <Container>
       <EmptyContainer>
@@ -65,9 +63,3 @@ function Error({ error }) {
 }
 
 export default Error;
-
-Error.propTypes = {
-  error: PropTypes.shape({
-    Error: PropTypes.string,
-  }).isRequired,
-};

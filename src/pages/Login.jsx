@@ -137,14 +137,9 @@ export default function Login({ onChange, logIn, handleLogin, notify, setNotify 
             type="password"
             value={logIn.password}
             onChange={onChange}
-            required="true"
+            required
             style={{ border: `${borderRed}` }}
           />
-          {/* {notify === 'Can’t be empty' && (
-            <Error>
-              <p>{notify}</p>
-            </Error>
-          )} */}
 
           <WideBtn> Login </WideBtn>
           {notify === 'Wrong credentials' && (
@@ -152,7 +147,6 @@ export default function Login({ onChange, logIn, handleLogin, notify, setNotify 
               <p>Wrong credentials</p>
             </Error>
           )}
-
           <SignUp>
             Dont have an account ? <Link to="/auth/sign-up">Sign up</Link> here{' '}
           </SignUp>

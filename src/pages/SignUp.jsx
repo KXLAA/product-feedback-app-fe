@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -64,6 +64,18 @@ const Input = styled.input`
   background-color: rgba(59, 130, 246, 0.1);
 `;
 
+const Error = styled.div`
+  text-align: left;
+
+  p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #d73737;
+  }
+`;
+
 const Label = styled.label`
   font-weight: 700;
 `;
@@ -103,6 +115,14 @@ const SignIn = styled.p`
 `;
 
 export default function SignUp({ handleSignUp, onChange, newUser }) {
+  const [validation, setValidation] = useState(null);
+
+  const handleValidation = () => {
+    if (newUser.password.length < 5) {
+      setValidation('Password must be at least 5 Characters');
+    }
+  };
+
   return (
     <Background>
       <Link to="/">
@@ -154,7 +174,13 @@ export default function SignUp({ handleSignUp, onChange, newUser }) {
             onChange={onChange}
             required
             minlength="5"
+            onBlur={handleValidation}
           />
+          {validation && (
+            <Error>
+              <p>{validation}</p>
+            </Error>
+          )}
 
           <WideBtn> Sign Up </WideBtn>
           <SignIn>

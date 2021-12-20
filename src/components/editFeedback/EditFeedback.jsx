@@ -64,7 +64,6 @@ const EditFeedback = ({ showEditPage, setShowEditPage, feedback }) => {
     deleteFeedback.mutate(feedback.id);
   };
 
-  console.log(feedback);
   return (
     <Layout>
       <Container className="form-animation">
