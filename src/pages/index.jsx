@@ -15,7 +15,6 @@ import userService from '../services/user';
 import Upvotes from './Upvotes';
 import Alerts from '../components/common/Alerts';
 import NotFound from './NotFound';
-import Loading from '../components/common/Loading';
 import Error from './Error';
 
 const randomNumber = Math.floor(Math.random() * 2000 + 1);
