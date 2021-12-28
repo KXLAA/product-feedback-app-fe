@@ -23,6 +23,7 @@ export default function FeedbackList({
   setShowAlert,
   toggleAddPage,
   showAddPage,
+  isLoading,
 }) {
   return (
     <>
@@ -46,6 +47,7 @@ export default function FeedbackList({
 
             <GridItemMain>
               <Main
+                isLoading={isLoading}
                 setSort={setSort}
                 sort={sort}
                 feedback={feedback}
@@ -91,6 +93,7 @@ FeedbackList.propTypes = {
   }).isRequired,
   filter: PropTypes.string.isRequired,
   handleLogOut: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 FeedbackList.defaultProps = {

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Header from './Header';
 import Feedback from './Feedback';
 import Empty from './Empty';
+import Loading from '../../common/Loading';
 
 const Container = styled.section`
   display: flex;
@@ -13,7 +14,16 @@ const Container = styled.section`
   gap: 24px;
 `;
 
-const Main = ({ feedback, toggleAddPage, serverUser, setSort, sort, setNotify, setShowAlert }) => (
+const Main = ({
+  feedback,
+  toggleAddPage,
+  serverUser,
+  setSort,
+  sort,
+  setNotify,
+  setShowAlert,
+  isLoading,
+}) => (
   <Container>
     <MediaQuery minWidth={630}>
       <Header setSort={setSort} feedback={feedback} toggleAddPage={toggleAddPage} sort={sort} />
@@ -23,16 +33,20 @@ const Main = ({ feedback, toggleAddPage, serverUser, setSort, sort, setNotify, s
       <Empty toggleAddPage={toggleAddPage} />
     ) : (
       <>
-        {feedback?.map((feed) => (
-          <Feedback
-            feedbackList={feedback}
-            feedback={feed}
-            key={feed.id}
-            serverUser={serverUser}
-            setShowAlert={setShowAlert}
-            setNotify={setNotify}
-          />
-        ))}
+        {isLoading ? (
+          <Loading />
+        ) : (
+          feedback?.map((feed) => (
+            <Feedback
+              feedbackList={feedback}
+              feedback={feed}
+              key={feed.id}
+              serverUser={serverUser}
+              setShowAlert={setShowAlert}
+              setNotify={setNotify}
+            />
+          ))
+        )}
       </>
     )}
   </Container>

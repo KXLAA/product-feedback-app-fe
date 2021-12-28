@@ -21,5 +21,6 @@ export const Container = styled.div`
   gap: 32px;
   max-width: 540px;
   width: 100%;
+  margin: 24px;
   position: relative;
 `;

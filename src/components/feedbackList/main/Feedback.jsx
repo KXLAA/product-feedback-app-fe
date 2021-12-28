@@ -21,7 +21,7 @@ const Container = styled.div`
   transition: all 0.3s ease;
 
   &:hover {
-    transform: translateX(0.15rem) translateY(-0.3125rem);
+    transform: translateX(0) translateY(-0.1rem);
   }
 
   @media ${device.mobile} {

@@ -132,78 +132,76 @@ export default function Pages() {
   }
   return (
     <>
-      {isLoading && <Loading />}
-      <>
-        {notify && <Alerts notify={notify} showAlert={showAlert} setShowAlert={setShowAlert} />}
-        <Routes>
-          <Route path="*" element={<NotFound />} />
-          <Route
-            path="/"
-            element={
-              <FeedbackList
-                feedback={data}
-                setFilter={setFilter}
-                filter={filter}
-                setSort={setSort}
-                sort={sort}
-                handleLogOut={handleLogOut}
-                authUser={authUser}
-                serverUser={getUser?.data}
-                setShowAlert={setShowAlert}
-                setNotify={setNotify}
-                toggleAddPage={toggleAddPage}
-                showAddPage={showAddPage}
-              />
-            }
-          />
-          <Route
-            path="/auth/login"
-            element={
-              <Login
-                handleLogin={handleLogin}
-                onChange={handleLogInChange}
-                logIn={logIn}
-                notify={notify}
-                setShowAlert={setShowAlert}
-                setNotify={setNotify}
-              />
-            }
-          />
-          <Route
-            path="/auth/sign-up"
-            element={
-              <SignUp handleSignUp={handleSignUp} onChange={handleSignUpChange} newUser={newUser} />
-            }
-          />
-          <Route
-            path="/feedback-list/:id"
-            element={
-              <FeedbackDetail
-                authUser={authUser}
-                serverUser={getUser?.data}
-                setNotify={setNotify}
-                setShowAlert={setShowAlert}
-              />
-            }
-          />
+      {notify && <Alerts notify={notify} showAlert={showAlert} setShowAlert={setShowAlert} />}
+      <Routes>
+        <Route path="*" element={<NotFound />} />
+        <Route
+          path="/"
+          element={
+            <FeedbackList
+              isLoading={isLoading}
+              feedback={data}
+              setFilter={setFilter}
+              filter={filter}
+              setSort={setSort}
+              sort={sort}
+              handleLogOut={handleLogOut}
+              authUser={authUser}
+              serverUser={getUser?.data}
+              setShowAlert={setShowAlert}
+              setNotify={setNotify}
+              toggleAddPage={toggleAddPage}
+              showAddPage={showAddPage}
+            />
+          }
+        />
+        <Route
+          path="/auth/login"
+          element={
+            <Login
+              handleLogin={handleLogin}
+              onChange={handleLogInChange}
+              logIn={logIn}
+              notify={notify}
+              setShowAlert={setShowAlert}
+              setNotify={setNotify}
+            />
+          }
+        />
+        <Route
+          path="/auth/sign-up"
+          element={
+            <SignUp handleSignUp={handleSignUp} onChange={handleSignUpChange} newUser={newUser} />
+          }
+        />
+        <Route
+          path="/feedback-list/:id"
+          element={
+            <FeedbackDetail
+              authUser={authUser}
+              serverUser={getUser?.data}
+              setNotify={setNotify}
+              setShowAlert={setShowAlert}
+            />
+          }
+        />
 
-          <Route
-            path="/roadmap"
-            element={
-              <Roadmap
-                feedback={data}
-                serverUser={getUser?.data}
-                setNotify={setNotify}
-                setShowAlert={setShowAlert}
-                toggleAddPage={toggleAddPage}
-                showAddPage={showAddPage}
-              />
-            }
-          />
+        <Route
+          path="/roadmap"
+          element={
+            <Roadmap
+              feedback={data}
+              serverUser={getUser?.data}
+              setNotify={setNotify}
+              setShowAlert={setShowAlert}
+              toggleAddPage={toggleAddPage}
+              showAddPage={showAddPage}
+            />
+          }
+        />
 
-          <Route path="/your-upvotes" element={<Upvotes serverUser={getUser?.data} />} />
-        </Routes>
-      </>
+        <Route path="/your-upvotes" element={<Upvotes serverUser={getUser?.data} />} />
+      </Routes>
     </>
   );
 }
