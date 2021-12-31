@@ -6,6 +6,7 @@ const Container = styled.footer`
   color: black;
   padding: 16px 24px;
   display: flex;
+  gap: 24px;
   justify-content: center;
   align-items: center;
   a {
@@ -23,6 +24,9 @@ function Footer() {
     <Container className="fade-in">
       <a target="_blank" href="https://kxlaa.com/" rel="noreferrer">
         Coded by KXLAA 🤙
+      </a>
+      <a target="_blank" href="https://github.com/KXLAA/product-feedback-app-fe" rel="noreferrer">
+        View Code
       </a>
     </Container>
   );
