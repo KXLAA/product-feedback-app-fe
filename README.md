@@ -18,8 +18,6 @@ This is a Full Stack Application, you can view the backend code here -> [Backend
     - [Continued development](#continued-development)
   - [Author](#author)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
-
 ## Overview
 
 ### The challenge
