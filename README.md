@@ -1,26 +1,31 @@
-# Frontend Mentor - Product feedback app solution
+# Product feedback rewrite
 
-This is a solution to the [Product feedback app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+I want rewrite that uses serverless functions on AWS & Dynamo DB as the database layer on the backend. Probably play around with Docker and Terraform for deployments & some CI & CD with Github Actions. Would probably be easier to rewrite it with Next.js & Typescript with Next.js serverless functions, but where's the fun in that?. Would also want some redis action in there, idk.
 
-This is a Full Stack Application, you can view the backend code here -> [Backend](https://github.com/KXLAA/product-feedback-app)
+The whole application would be managed in a mono repo with Turbo Repo.
 
-## Table of contents
+## Backend
 
-- [Frontend Mentor - Product feedback app solution](#frontend-mentor---product-feedback-app-solution)
-  - [Table of contents](#table-of-contents)
-  - [Overview](#overview)
-    - [The challenge](#the-challenge)
-    - [Demo](#demo)
-    - [Links](#links)
-  - [My process](#my-process)
-    - [Built with](#built-with)
-    - [What I learned](#what-i-learned)
-    - [Continued development](#continued-development)
-  - [Author](#author)
+- [x] Nest JS
+- [x] AWS services: Lambda, S3, Dynamo DB
+- [x] Serverless Framework
+- [x] Docker
+- [x] **GraphQL
+- [x] Github Actions
+- [x] Test's for the backend ?
 
-## Overview
+## Frontend
 
-### The challenge
+- [x] ~~Static Front end using Astro~~
+- [x] App with Next Js & Typescript
+- [x] Authentication with Next Auth
+- [x] Forms: React hook Form
+- [x] Styling: Stitches
+- [x] Components: Radix
+- [x] Relay or Apollo as a GQL client ?
+
+
+## Application Spec & Features
 
 Users should be able to:
 
@@ -31,42 +36,4 @@ Users should be able to:
 - [x] Sort suggestions by most/least upvotes and most/least comments
 - [x] Filter suggestions by category
 - [x] Add comments and replies to a product feedback request
-- [x] Upvote product feedback requests
-
-### Demo
-
-![](./demo/project-demo.gif)
-
-### Links
-
-- Solution URL: [Github](https://your-solution-url.com)
-- Live Site URL: [Product Feedback App](https://product-feedback-fem.herokuapp.com/)
-
-## My process
-
-### Built with
-
-- [React](https://reactjs.org/) - JS library
-- [Styled Components](https://styled-components.com/) - For styles
-- [React Responsive](https://www.npmjs.com/package/react-responsive) - For responsive design
-- [React Router](https://reactrouter.com/) - For page routing
-- [React Query](https://react-query.tanstack.com/) - For data fetching, caching & state management
-- [Axios](https://axios-http.com/docs/intro) - For Api calls
-- [Mongo DB](https://www.mongodb.com/) & [Mongoose](https://mongoosejs.com/)
-- [Node js](https://nodejs.org/en/) & [Express](https://expressjs.com/)
-- [Jest](https://jestjs.io/) for Backend integration Tests
-- [JWT](https://jwt.io/) for authentication
-
-### What I learned
-
-This was my first full-stack application as a front end developer. I have to say the full-stack world is fascinating. This project definitely took me out of my comfort zone. I learnt how to work with data and databases. I also learn how to create Api's that connected my database to my front end application. It was quite fun.
-
-### Continued development
-
-I plan to add a drag and drop functionality on the roadmap page, I have made a branch for that feature, it's quite a challenge but I think I would be able to implement it.
-
-## Author
-
-- Website - [KXLAA](https://kxlaa.com/)
-- Frontend Mentor - [@KXLAA](https://www.frontendmentor.io/profile/KXLAA)
-- Twitter - [@KXLAA\_](https://twitter.com/KXLAA_)
+- [x] Upvote product feedback requestså
