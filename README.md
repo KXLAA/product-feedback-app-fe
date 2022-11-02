@@ -1,39 +1,27 @@
-# Product feedback rewrite
+# Create T3 App
 
-I want rewrite that uses serverless functions on AWS & Dynamo DB as the database layer on the backend. Probably play around with Docker and Terraform for deployments & some CI & CD with Github Actions. Would probably be easier to rewrite it with Next.js & Typescript with Next.js serverless functions, but where's the fun in that?. Would also want some redis action in there, idk.
+This is an app bootstrapped according to the [init.tips](https://init.tips) stack, also known as the T3-Stack.
 
-The whole application would be managed in a mono repo with Turbo Repo.
+## What's next? How do I make an app with this?
 
-## Backend
+We try to keep this project as simple as possible, so you can start with the most basic configuration and then move on to more advanced configuration.
 
-- [x] Nest JS
-- [x] AWS services: Lambda, S3, Dynamo DB
-- [x] Serverless Framework
-- [x] Docker
-- [x] **GraphQL
-- [x] Github Actions
-- [x] Test's for the backend ?
+If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
 
-## Frontend
+- [Next-Auth.js](https://next-auth.js.org)
+- [Prisma](https://prisma.io)
+- [TailwindCSS](https://tailwindcss.com)
+- [tRPC](https://trpc.io)
 
-- [x] ~~Static Front end using Astro~~
-- [x] App with Next Js & Typescript
-- [x] Authentication with Next Auth
-- [x] Forms: React hook Form
-- [x] Styling: Stitches
-- [x] Components: Radix
-- [x] Relay or Apollo as a GQL client ?
+We also [roll our own docs](https://beta.create.t3.gg) with some summary information and links to the respective documentation.
 
+Also checkout these awesome tutorials on `create-t3-app`.
 
-## Application Spec & Features
+- [Build a Blog With the T3 Stack - tRPC, TypeScript, Next.js, Prisma & Zod](https://www.youtube.com/watch?v=syEWlxVFUrY)
+- [Build a Live Chat Application with the T3 Stack - TypeScript, Tailwind, tRPC](https://www.youtube.com/watch?v=dXRRY37MPuk)
+- [Build a full stack app with create-t3-app](https://www.nexxel.dev/blog/ct3a-guestbook)
+- [A first look at create-t3-app](https://dev.to/ajcwebdev/a-first-look-at-create-t3-app-1i8f)
 
-Users should be able to:
+## How do I deploy this?
 
-- [x] View the optimal layout for the app depending on their device's screen size
-- [x] See hover states for all interactive elements on the page
-- [x] Create, read, update, and delete product feedback requests
-- [x] Receive form validations when trying to create/edit feedback requests
-- [x] Sort suggestions by most/least upvotes and most/least comments
-- [x] Filter suggestions by category
-- [x] Add comments and replies to a product feedback request
-- [x] Upvote product feedback requestså
+Follow our deployment guides for [Vercel](https://beta.create.t3.gg/en/deployment/vercel) and [Docker](https://beta.create.t3.gg/en/deployment/docker) for more information.
