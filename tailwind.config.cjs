@@ -11,6 +11,12 @@ module.exports = {
   },
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    fontSize: {
+      ...defaultTheme.fontSize,
+      sm: ["13px", "19px"],
+      base: ["15px", "22px"],
+      lg: ["16px", "23px"],
+    },
     colors: {
       transparent: "transparent",
       current: "currentColor",

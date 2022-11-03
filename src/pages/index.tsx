@@ -1,6 +1,15 @@
 import Head from "next/head";
+import React from "react";
+
+import { Button } from "@/components/common/Button";
+import { FilterTag } from "@/components/common/FilterTag";
+import { GoBack } from "@/components/common/GoBack";
+import { Heading } from "@/components/common/Heading";
+import { Text } from "@/components/common/Text";
+import { Upvote } from "@/components/common/Upvote";
 
 export default function Home() {
+  const [active, setActive] = React.useState(false);
   return (
     <>
       <Head>
@@ -9,7 +18,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container mx-auto flex min-h-screen flex-col items-center justify-center p-4">
-        <h1>KXLAA</h1>
+        <Heading as="h4">KXLAA</Heading>
+        <Text size="sm" as="span">
+          This is a test
+        </Text>
+        <div className="flex w-full gap-4">
+          <Button>Button 1</Button>
+          <Button intent="secondary">Button 2</Button>
+          <Button intent="tertiary">Button 3</Button>
+          <Button intent="danger">Button 4</Button>
+          <GoBack href="/" variant="fill" />
+          <Upvote onClick={() => setActive(!active)} active={active}>
+            33
+          </Upvote>
+          <FilterTag onClick={() => setActive(!active)} active={active}>
+            UX
+          </FilterTag>
+        </div>
       </main>
     </>
   );
