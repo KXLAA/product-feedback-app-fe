@@ -108,9 +108,9 @@ model Reply {
   commentId String
   comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
 
-  replies   Reply[] @relation("ReplyToReply")
-  parent    Reply?  @relation("ReplyToReply", fields: [parent_id], references: [id])
-  parent_id String?
+  replies  Reply[] @relation("ReplyToReply")
+  parent   Reply?  @relation("ReplyToReply", fields: [parentId], references: [id])
+  parentId String?
 }
 
 model Upvote {
