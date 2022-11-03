@@ -15,6 +15,7 @@
     "jsx": "preserve",
     "incremental": true,
     "noUncheckedIndexedAccess": true,
+    "types": ["jest", "@testing-library/jest-dom"],
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"]
