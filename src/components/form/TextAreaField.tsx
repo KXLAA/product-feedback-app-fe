@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { cva } from "class-variance-authority";
 import type { Control } from "react-hook-form";
 
 import { useHandleForm } from "@/utils/use-handle-form";
 
+import { RenderIf } from "../common/RenderIf";
 import { Label, useLabel } from "./Label";
 
 export interface TextAreaFieldProps {
@@ -25,6 +27,12 @@ export function TextAreaField(props: TextAreaFieldProps) {
   return (
     <Label label={label} description={description} error={error}>
       <Textarea {...rest} />
+
+      <RenderIf condition={!!rest.maxLength}>
+        <span className="text-left text-sm text-blue-200">
+          {rest.maxLength! - (rest.value?.length || 0)} characters left
+        </span>
+      </RenderIf>
     </Label>
   );
 }
