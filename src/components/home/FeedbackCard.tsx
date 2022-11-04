@@ -1,18 +1,17 @@
 import { cva } from "class-variance-authority";
 import Link from "next/link";
-import React from "react";
 
-import { CommentIcon } from "@/components/common/CommentIcon";
 import { FilterTag } from "@/components/common/FilterTag";
 import { Text } from "@/components/common/Text";
 import { Upvote } from "@/components/common/Upvote";
+import { CommentIcon } from "@/components/icons/CommentIcon";
 
 interface FeedbackCardProps {
+  id: string;
   heading: string;
   content: string;
   upvotes: number;
   comments: number;
-  commentLink: string;
   categories: string[];
 }
 
@@ -22,16 +21,22 @@ export function FeedbackCard({
   content,
   categories,
   comments,
-  commentLink,
+  id,
 }: FeedbackCardProps) {
   return (
     <div className="flex w-full justify-between rounded bg-white py-7 px-8 shadow-sm">
       <div className="flex gap-10">
         <Upvote>{upvotes}</Upvote>
         <div>
-          <Text size="xl" className="mb-1 font-bold text-blue-400">
-            {heading}
-          </Text>
+          <Link href={`/feedback/${id}`}>
+            <Text
+              size="xl"
+              className="mb-1 font-bold text-blue-400 transition hover:opacity-50"
+            >
+              {heading}
+            </Text>
+          </Link>
+
           <Text size="lg" className="text-blue-400">
             {content}
           </Text>
@@ -44,7 +49,10 @@ export function FeedbackCard({
           </div>
         </div>
       </div>
-      <Link href={commentLink} className={comment({ empty: comments === 0 })}>
+      <Link
+        href={`/feedback/${id}`}
+        className={comment({ empty: comments === 0 })}
+      >
         <CommentIcon />
         <Text size="lg" className="font-bold text-blue-400">
           {comments}
