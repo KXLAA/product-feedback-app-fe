@@ -15,13 +15,11 @@ export function MainLayout({ children }: MainLayoutProps) {
   const isHome = router.pathname === "/";
   return (
     <div className={`${jost.className} flex min-h-screen pb-6`}>
-      <div className="relative mx-auto flex w-full max-w-[1110px] items-start justify-center gap-8">
+      <div className="relative mx-auto flex w-full max-w-[1110px] flex-col items-start justify-center gap-8 md:flex-row">
         <RenderIf condition={isHome}>
           <SideBar />
         </RenderIf>
-        <div className="flex h-full w-full flex-col items-center justify-start gap-6 pt-8">
-          {children}
-        </div>
+        <div className="h-full w-full">{children}</div>
       </div>
     </div>
   );

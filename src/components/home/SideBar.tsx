@@ -9,7 +9,7 @@ import { Text } from "@/components/common/Text";
 
 export function SideBar() {
   return (
-    <FadeInOut className="scrollbar-y sticky top-8 flex w-full max-w-[255px] flex-col items-start gap-6">
+    <FadeInOut className="md:scrollbar-y flex w-full flex-row items-start gap-6 md:sticky md:top-8 md:max-w-[255px] md:flex-col">
       <Header />
       <Filters />
       <Roadmap />

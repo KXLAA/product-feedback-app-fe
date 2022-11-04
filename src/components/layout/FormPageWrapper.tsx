@@ -18,7 +18,7 @@ export function FormPageWrapper({
   icon,
 }: FormPageWrapperProps) {
   return (
-    <FadeInOut className="flex w-full max-w-[540px] flex-col items-center justify-center gap-14">
+    <FadeInOut className="m-8 mx-auto flex w-full max-w-[540px] flex-col items-center justify-center gap-14">
       <GoBack href={goBackLink} className="self-start" />
 
       <div className="relative flex w-full flex-col gap-10 rounded bg-white p-11 shadow-sm">
@@ -35,7 +35,9 @@ export function FormPageWrapper({
           {heading}
         </Text>
 
-        <div className="flex w-full flex-col gap-6">{children}</div>
+        <div className="flex w-full flex-col items-center gap-6">
+          {children}
+        </div>
       </div>
     </FadeInOut>
   );
