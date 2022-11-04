@@ -10,17 +10,20 @@ const filter = cva(
     "justify-center",
     "rounded-[10px]",
     "bg-blue-100",
-    "text-blue-400",
+    "text-blue-500",
     "font-bold",
     "text-sm",
     "border-transparent",
     "transition",
-    "hover:bg-[##3A4374]",
+    "hover:bg-[#CFD7FF]",
   ],
   {
     variants: {
       active: {
         true: ["!bg-blue-500", "!text-white"],
+      },
+      nonInteractive: {
+        true: ["hover:bg-blue-100"],
       },
     },
   }
@@ -30,14 +33,26 @@ export interface FilterTagProps
   extends React.HTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof filter> {
   children: React.ReactNode;
+  nonInteractive?: boolean;
 }
 
 export function FilterTag({
   className,
   active,
   children,
+  nonInteractive,
   ...props
 }: FilterTagProps) {
+  if (nonInteractive) {
+    return (
+      <span
+        className={filter({ class: className, nonInteractive: nonInteractive })}
+        {...props}
+      >
+        {children}
+      </span>
+    );
+  }
   return (
     <button className={filter({ active, class: className })} {...props}>
       {children}

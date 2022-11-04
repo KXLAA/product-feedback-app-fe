@@ -16,6 +16,13 @@ module.exports = {
       sm: ["13px", "19px"],
       base: ["15px", "22px"],
       lg: ["16px", "23px"],
+      xl: ["18px", "26px"],
+      "2xl": ["20px", "29px"],
+      "3xl": ["24px", "35px"],
+    },
+    borderRadius: {
+      ...defaultTheme.borderRadius,
+      DEFAULT: "10px",
     },
     colors: {
       transparent: "transparent",

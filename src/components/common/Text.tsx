@@ -1,12 +1,15 @@
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
 
-const text = cva(["text-blue-400"], {
+const text = cva([], {
   variants: {
     size: {
-      sm: ["text-sm", "font-semibold"],
-      md: ["text-base", "font-normal"],
-      lg: ["text-lg", "font-normal"],
+      sm: ["text-sm"],
+      md: ["text-base"],
+      lg: ["text-lg"],
+      xl: ["text-xl"],
+      "2xl": ["text-2xl"],
+      "3xl": ["text-3xl"],
     },
   },
   defaultVariants: {

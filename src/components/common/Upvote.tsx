@@ -26,7 +26,7 @@ const upvote = cva(
     "text-sm",
     "border-transparent",
     "transition",
-    "hover:bg-[##3A4374]",
+    "hover:bg-[#CFD7FF]",
   ],
   {
     variants: {
