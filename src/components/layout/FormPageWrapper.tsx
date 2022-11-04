@@ -1,3 +1,4 @@
+import { FadeInOut } from "@/components/animation/FadeInOut";
 import { GoBack } from "@/components/common/GoBack";
 import { RenderIf } from "@/components/common/RenderIf";
 import { Text } from "@/components/common/Text";
@@ -17,7 +18,7 @@ export function FormPageWrapper({
   icon,
 }: FormPageWrapperProps) {
   return (
-    <div className="flex w-full max-w-[540px] flex-col items-center justify-center gap-14">
+    <FadeInOut className="flex w-full max-w-[540px] flex-col items-center justify-center gap-14">
       <GoBack href={goBackLink} className="self-start" />
 
       <div className="relative flex w-full flex-col gap-10 rounded bg-white p-11 shadow-sm">
@@ -36,6 +37,6 @@ export function FormPageWrapper({
 
         <div className="flex w-full flex-col gap-6">{children}</div>
       </div>
-    </div>
+    </FadeInOut>
   );
 }

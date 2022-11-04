@@ -6,10 +6,11 @@ import { Text } from "@/components/common/Text";
 // import { EmptyFeedback } from "@/components/home/EmptyFeedback";
 import { FeedbackCard } from "@/components/home/FeedbackCard";
 import { InfoIcon } from "@/components/icons/InfoIcon";
+import { PageLayout } from "@/components/layout/PageLayout";
 
 export default function Home() {
   return (
-    <>
+    <PageLayout>
       <Header className="sticky top-8 flex h-[72px] items-center justify-between px-6">
         <div>
           <Text
@@ -31,7 +32,7 @@ export default function Home() {
         ))}
       </div>
       {/* <EmptyFeedback /> */}
-    </>
+    </PageLayout>
   );
 }
 

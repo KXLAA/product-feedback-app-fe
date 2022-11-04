@@ -1,4 +1,5 @@
 import { cva } from "class-variance-authority";
+import { FadeInOut } from "components/animation/FadeInOut";
 import Link from "next/link";
 import React from "react";
 
@@ -8,11 +9,11 @@ import { Text } from "@/components/common/Text";
 
 export function SideBar() {
   return (
-    <div className="scrollbar-y sticky top-8 flex w-full max-w-[255px] flex-col items-start gap-6">
+    <FadeInOut className="scrollbar-y sticky top-8 flex w-full max-w-[255px] flex-col items-start gap-6">
       <Header />
       <Filters />
       <Roadmap />
-    </div>
+    </FadeInOut>
   );
 }
 
