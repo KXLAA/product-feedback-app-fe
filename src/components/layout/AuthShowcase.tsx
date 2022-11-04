@@ -19,7 +19,7 @@ export function AuthShowcase() {
         <p className="text-2xl text-blue-500">{secretMessage}</p>
       )}
       <button
-        className="rounded-md border border-black bg-violet-50 px-4 py-2 text-xl shadow-lg hover:bg-violet-100"
+        className="bg-violet-50 hover:bg-violet-100 rounded-md border border-black px-4 py-2 text-xl shadow-lg"
         onClick={sessionData ? () => signOut() : () => signIn()}
       >
         {sessionData ? "Sign out" : "Sign in"}
