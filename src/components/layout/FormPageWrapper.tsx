@@ -20,9 +20,9 @@ export function FormPageWrapper({
     <div className="flex w-full max-w-[540px] flex-col items-center justify-center gap-14">
       <GoBack href={goBackLink} className="self-start" />
 
-      <div className="relative w-full gap-[75px] rounded bg-white p-11 shadow-sm">
+      <div className="relative flex w-full flex-col gap-10 rounded bg-white p-11 shadow-sm">
         <RenderIf condition={!!icon}>
-          <div className="radial-gradient absolute bottom-28 flex h-14 w-14 items-center justify-center rounded-full">
+          <div className="radial-gradient absolute -top-6 flex h-14 w-14 items-center justify-center rounded-full">
             {addPropsToChildren(icon, {
               size: 20,
               className: "text-white",
@@ -34,7 +34,7 @@ export function FormPageWrapper({
           {heading}
         </Text>
 
-        <div className="w-full">{children}</div>
+        <div className="flex w-full flex-col gap-6">{children}</div>
       </div>
     </div>
   );
