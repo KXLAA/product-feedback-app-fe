@@ -17,6 +17,7 @@ const button = cva(
     "flex",
     "justify-center",
     "items-center",
+    "whitespace-nowrap",
   ],
   {
     variants: {

@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 
 import { Button } from "@/components/common/Button";
 import { GoBack } from "@/components/common/GoBack";
+import { AddComment } from "@/components/feedback/AddComment";
+import { Comments } from "@/components/feedback/Comments";
 import { FeedbackCard } from "@/components/home/FeedbackCard";
 import { PageLayout } from "@/components/layout/PageLayout";
 
@@ -17,8 +19,12 @@ export default function Feedback() {
           <Button intent="secondary">Edit Feedback</Button>
         </Link>
       </div>
-      <div className="flex w-full">
+      <div className="flex w-full flex-col gap-6">
         <FeedbackCard {...mockFeedback} />
+
+        <Comments />
+
+        <AddComment />
       </div>
     </PageLayout>
   );

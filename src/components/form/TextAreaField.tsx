@@ -47,7 +47,7 @@ type TextAreaProps = Omit<TextAreaFieldProps, "label" | "description"> & {
   error?: string;
 };
 
-function Textarea({ error, className, ...rest }: TextAreaProps) {
+export function Textarea({ error, className, ...rest }: TextAreaProps) {
   const fieldProps = useLabel();
   return (
     <textarea
