@@ -1,25 +1,24 @@
-import { cva } from "class-variance-authority";
 import Link from "next/link";
 
+import { CommentButton } from "@/components/common/CommentButton";
 import { FilterTag } from "@/components/common/FilterTag";
 import { Text } from "@/components/common/Text";
 import { Upvote } from "@/components/common/Upvote";
-import { CommentIcon } from "@/components/icons/CommentIcon";
 
 interface FeedbackCardProps {
   id: string;
-  heading: string;
+  title: string;
   content: string;
-  upvotes: number;
-  comments: number;
-  categories: string[];
+  upvotes?: number;
+  comments?: number;
+  category: string;
 }
 
 export function FeedbackCard({
   upvotes,
-  heading,
+  title,
   content,
-  categories,
+  category,
   comments,
   id,
 }: FeedbackCardProps) {
@@ -33,39 +32,21 @@ export function FeedbackCard({
               size="xl"
               className="mb-1 font-bold text-blue-400 transition hover:opacity-50"
             >
-              {heading}
+              {title}
             </Text>
           </Link>
 
           <Text size="lg" className="text-blue-400">
             {content}
           </Text>
-          <div className="flex gap-2">
-            {categories.map((category) => (
-              <FilterTag nonInteractive className="mt-3 w-fit" key={category}>
-                {category}
-              </FilterTag>
-            ))}
-          </div>
+
+          <FilterTag nonInteractive className="mt-3 w-fit" key={category}>
+            {category}
+          </FilterTag>
         </div>
       </div>
-      <Link
-        href={`/feedback/${id}`}
-        className={comment({ empty: comments === 0 })}
-      >
-        <CommentIcon />
-        <Text size="lg" className="font-bold text-blue-400">
-          {comments}
-        </Text>
-      </Link>
+
+      <CommentButton href={`/feedback/${id}`} comments={comments} />
     </div>
   );
 }
-
-const comment = cva(["flex items-center gap-2"], {
-  variants: {
-    empty: {
-      true: ["opacity-50"],
-    },
-  },
-});

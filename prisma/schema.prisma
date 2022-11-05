@@ -76,13 +76,14 @@ model Feedback {
   title     String
   content   String
   category  String
-  status    String
   userId    String
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   comments  Comment[]
   upvotes   Upvote[]
   media     Media?    @relation(fields: [mediaId], references: [id])
   mediaId   String?
+  status    Status?   @relation(fields: [statusId], references: [id])
+  statusId  String?
 }
 
 model Comment {
@@ -132,5 +133,13 @@ model Media {
   size      Int
   key       String     @unique
   url       String     @unique
+  feedback  Feedback[]
+}
+
+model Status {
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  name      String
   feedback  Feedback[]
 }

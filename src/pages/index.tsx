@@ -7,6 +7,7 @@ import { Text } from "@/components/common/Text";
 import { FeedbackCard } from "@/components/home/FeedbackCard";
 import { InfoIcon } from "@/components/icons/InfoIcon";
 import { PageLayout } from "@/components/layout/PageLayout";
+import { mockFeedback } from "@/components/mocks";
 
 export default function Home() {
   return (
@@ -35,88 +36,3 @@ export default function Home() {
     </PageLayout>
   );
 }
-
-const mockFeedback = [
-  {
-    id: "63e2004e-6334-490b-8880-685394da45a5",
-    heading: "Add a dark theme option",
-    content:
-      "It would help people with light sensitivities and who prefer dark mode.",
-    upvotes: 99,
-    comments: 4,
-    categories: ["Feature"],
-  },
-  {
-    id: "50e2e305-5839-4a5e-90b3-b51fbb3ca36e",
-    heading: "Q&A within the challenge hubs",
-    content: "Challenge-specific Q&A would make for easy reference.",
-    upvotes: 65,
-    comments: 1,
-    categories: ["Feature"],
-  },
-  {
-    id: "1e2ff77c-b839-4b82-95bf-2d103e9dd44b",
-    heading: "Allow image/video upload ",
-    content: "Images and screencasts can enhance comments on solutions.",
-    upvotes: 52,
-    comments: 2,
-    categories: ["Enhancement"],
-  },
-  {
-    id: "f484c1ec-6a09-4190-b72b-3415ccf98bb4",
-    heading: "Ability to follow others",
-    content: "Stay updated on comments and solutions other people post.",
-    upvotes: 42,
-    comments: 3,
-    categories: ["Feature", "Enhancement"],
-  },
-  {
-    id: "a36405d7-64a8-4cd7-80ce-435715c2b3b6",
-    heading: "Preview images not loading",
-    content: "Challenge preview images are missing when you apply a filter.",
-    upvotes: 3,
-    comments: 0,
-    categories: ["Bug"],
-  },
-  {
-    id: "63e2004e-6334-490b-8880-685394da45a5",
-    heading: "Add a dark theme option",
-    content:
-      "It would help people with light sensitivities and who prefer dark mode.",
-    upvotes: 99,
-    comments: 4,
-    categories: ["Feature"],
-  },
-  {
-    id: "50e2e305-5839-4a5e-90b3-b51fbb3ca36e",
-    heading: "Q&A within the challenge hubs",
-    content: "Challenge-specific Q&A would make for easy reference.",
-    upvotes: 65,
-    comments: 1,
-    categories: ["Feature"],
-  },
-  {
-    id: "1e2ff77c-b839-4b82-95bf-2d103e9dd44b",
-    heading: "Allow image/video upload ",
-    content: "Images and screencasts can enhance comments on solutions.",
-    upvotes: 52,
-    comments: 2,
-    categories: ["Enhancement"],
-  },
-  {
-    id: "f484c1ec-6a09-4190-b72b-3415ccf98bb4",
-    heading: "Ability to follow others",
-    content: "Stay updated on comments and solutions other people post.",
-    upvotes: 42,
-    comments: 3,
-    categories: ["Feature", "Enhancement"],
-  },
-  {
-    id: "a36405d7-64a8-4cd7-80ce-435715c2b3b6",
-    heading: "Preview images not loading",
-    content: "Challenge preview images are missing when you apply a filter.",
-    upvotes: 3,
-    comments: 0,
-    categories: ["Bug"],
-  },
-];
