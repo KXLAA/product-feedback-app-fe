@@ -1,15 +1,17 @@
-import { FeedbackCategory } from "@/types";
+import { useFeedback } from "@/contexts/FeedbackContext";
+import { FeedbackCategory, FeedbackStatus } from "@/types";
 
 import type { InputField, SelectField, TextAreaField } from "./Form";
 import { FormFieldType } from "./Form";
 
-export function useFeedback() {
+export function useFeedbackForm() {
+  const { control, errors } = useFeedback();
   const heading: InputField = {
     type: FormFieldType.Input,
-    name: "heading",
+    name: "title",
     label: "Feedback Title",
     description: "Add a short, descriptive headline",
-    error: "error",
+    error: errors.title?.message,
   };
 
   const content: TextAreaField = {
@@ -19,7 +21,7 @@ export function useFeedback() {
     description:
       "Include any specific comments on what should be improved, added, etc.",
     className: "h-24",
-    error: "error",
+    error: errors.content?.message,
   };
 
   const category: SelectField = {
@@ -35,12 +37,27 @@ export function useFeedback() {
       { label: "Bug", value: FeedbackCategory.Bug },
     ],
     defaultValue: "bug",
-    error: "error",
+    error: errors.category?.message,
   };
 
-  const fields = [heading, content, category];
+  const status: SelectField = {
+    type: FormFieldType.Select,
+    name: "status",
+    label: "Update Status",
+    description: "Change feature state",
+    options: [
+      { label: "Planned", value: FeedbackStatus.Planned },
+      { label: "In-Progress", value: FeedbackStatus.InProgress },
+      { label: "Live", value: FeedbackStatus.Live },
+    ],
+    defaultValue: "planned",
+    error: errors.status?.message,
+  };
+
+  const fields = [heading, content, status, category];
 
   return {
     fields,
+    control,
   };
 }

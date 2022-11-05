@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import { RenderIf } from "@/components/common/RenderIf";
 import { SideBar } from "@/components/home/SideBar";
+import { FeedbackProvider } from "@/contexts/FeedbackContext";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -20,7 +21,7 @@ export function MainLayout({ children }: MainLayoutProps) {
       <RenderIf condition={isHome}>
         <SideBar />
       </RenderIf>
-      <>{children}</>
+      <FeedbackProvider>{children}</FeedbackProvider>
     </div>
   );
 }

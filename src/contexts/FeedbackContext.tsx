@@ -1,32 +1,38 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
 import React from "react";
 import type {
   Control,
-  DeepMap,
-  FieldError,
+  FieldErrorsImpl,
   UseFormRegister,
-  UseFormReset,
-  UseFormSetValue,
 } from "react-hook-form";
-import { useForm, UseFormTrigger } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+
+import { FeedbackCategory, FeedbackStatus } from "@/types";
+
+const validationSchema = yup.object().shape({
+  title: yup.string().required("Cant be empty"),
+  content: yup.string().required("Cant be empty"),
+  category: yup
+    .mixed<FeedbackCategory>()
+    .oneOf(Object.values(FeedbackCategory)),
+  status: yup.mixed<FeedbackStatus>().oneOf(Object.values(FeedbackStatus)),
+});
 
 type FeedbackFormValue = {
-  heading: string;
+  title: string;
   content: string;
-  category: string;
-  status?: string;
+  category?: FeedbackCategory;
+  status?: FeedbackStatus;
 };
 
 type FeedbackContextState = {
-  feedbackId?: string;
   control: Control<FeedbackFormValue>;
   register: UseFormRegister<FeedbackFormValue>;
-  errors: DeepMap<FeedbackFormValue, FieldError>;
+  errors: FieldErrorsImpl<FeedbackFormValue>;
   onSubmit: () => void;
-  onReset: () => void;
   watch: (name?: string) => FeedbackFormValue;
-  reset: UseFormReset<FeedbackFormValue>;
-  setValue: UseFormSetValue<FeedbackFormValue>;
 };
 
 const FeedbackContext = React.createContext<FeedbackContextState>(
@@ -42,32 +48,54 @@ export function useFeedback() {
 }
 
 export function FeedbackProvider(props: { children: React.ReactNode }) {
-  const [selectedFilter, setSelectedFilter] = React.useState<string[]>([]);
-  const handleFilter = (filter: string) => {
-    if (filter === "all") {
-      setSelectedFilter([]);
-    } else {
-      if (selectedFilter.includes(filter)) {
-        setSelectedFilter(selectedFilter.filter((f) => f !== filter));
-      } else {
-        setSelectedFilter([...selectedFilter, filter]);
-      }
-    }
-  };
+  const router = useRouter();
+  // const [selectedFilter, setSelectedFilter] = React.useState<string[]>([]);
+  // const handleFilter = (filter: string) => {
+  //   if (filter === "all") {
+  //     setSelectedFilter([]);
+  //   } else {
+  //     if (selectedFilter.includes(filter)) {
+  //       setSelectedFilter(selectedFilter.filter((f) => f !== filter));
+  //     } else {
+  //       setSelectedFilter([...selectedFilter, filter]);
+  //     }
+  //   }
+  // };
 
-  const CATEGORIES = [
-    { label: "Feature", value: "feature" },
-    { label: "UI", value: "ui" },
-    { label: "UX", value: "ux" },
-    { label: "Enhancement", value: "enhancement" },
-    { label: "Bug", value: "bug" },
-  ];
+  const {
+    control,
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm<FeedbackFormValue>({
+    // defaultValues: getFormDefaultValues(theme),
+    resolver: yupResolver(validationSchema),
+  });
 
-  const STATUS = [
-    { label: "Planned", value: "planned" },
-    { label: "In-Progress", value: "in-progress" },
-    { label: "Live", value: "live" },
-  ];
+  // const onReset = (defaultValue?: FeedbackFormValue) => {
+  //   reset({
+  //     ...{},
+  //     ...(defaultValue || {}),
+  //   });
+  // };
 
-  return <>{props.children}</>;
+  const onSubmit = handleSubmit(async (values: FeedbackFormValue) => {
+    console.log(values);
+  });
+
+  return (
+    <FeedbackContext.Provider
+      value={{
+        control,
+        register,
+        errors,
+        onSubmit,
+        watch,
+      }}
+    >
+      {props.children}
+    </FeedbackContext.Provider>
+  );
 }
