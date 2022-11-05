@@ -8,6 +8,7 @@ interface LabelProps {
   description?: string;
   children: React.ReactNode;
   error?: string;
+  hidden?: boolean;
 }
 
 export function Label(props: LabelProps) {
@@ -15,7 +16,9 @@ export function Label(props: LabelProps) {
     useField(props);
 
   return (
-    <fieldset className="flex w-full flex-col gap-4">
+    <fieldset
+      className={`flex w-full flex-col gap-4 ${props.hidden ? "hidden" : ""}`}
+    >
       <div className="flex flex-col">
         <label
           {...labelProps}

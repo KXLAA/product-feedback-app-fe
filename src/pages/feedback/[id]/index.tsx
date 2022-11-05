@@ -10,14 +10,14 @@ export default function Feedback() {
   const router = useRouter();
   const { id } = router.query;
   return (
-    <PageLayout className="m-8 mx-auto flex max-w-[720px] flex-col gap-6">
-      <div className="flex w-full  justify-between">
+    <PageLayout className="max-w-[720px]">
+      <div className="mb-8 flex w-full justify-between">
         <GoBack href="/" />
         <Link href={`/feedback/${id}/edit`}>
           <Button intent="secondary">Edit Feedback</Button>
         </Link>
       </div>
-      <div className="flex w-full  justify-between">
+      <div className="flex w-full">
         <FeedbackCard {...mockFeedback} />
       </div>
     </PageLayout>

@@ -11,7 +11,7 @@ import { PageLayout } from "@/components/layout/PageLayout";
 export default function Home() {
   return (
     <PageLayout>
-      <Header className="sticky top-8 mb-8 flex h-[72px] items-center justify-between px-6">
+      <Header className="sticky top-8 flex h-[72px] items-center justify-between px-6">
         <div>
           <Text
             size="xl"
@@ -26,7 +26,7 @@ export default function Home() {
           <Button>+ Add Feedback</Button>
         </Link>
       </Header>
-      <div className="mt-6 flex w-full flex-col gap-5">
+      <div className="flex w-full flex-col gap-5">
         {mockFeedback.map((feedback) => (
           <FeedbackCard key={feedback.id} {...feedback} />
         ))}

@@ -10,7 +10,7 @@ export function PageLayout(props: PageLayoutProps) {
   return (
     <FadeInOut
       noInitial={props.noInitial}
-      className={`flex h-full w-full flex-col items-center ${props.className}`}
+      className={`m-8 mx-auto flex h-full w-full flex-col items-center ${props.className}`}
     >
       {props.children}
     </FadeInOut>

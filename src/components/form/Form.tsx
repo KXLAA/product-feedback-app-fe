@@ -21,15 +21,15 @@ type Field = {
   onChange?: (...event: any[]) => void;
 };
 
-interface InputField extends Field, TextInputFieldProps {
+export interface InputField extends Field, TextInputFieldProps {
   type: FormFieldType.Input;
 }
 
-interface TextAreaField extends Field, TextAreaFieldProps {
+export interface TextAreaField extends Field, TextAreaFieldProps {
   type: FormFieldType.Textarea;
 }
 
-interface SelectField extends Field, SelectFieldProps {
+export interface SelectField extends Field, SelectFieldProps {
   type: FormFieldType.Select;
 }
 

@@ -18,18 +18,24 @@ export interface SelectFieldProps {
   defaultValue?: string;
   control?: Control<any>;
   name: string;
+  hidden?: boolean;
 }
 
 export function SelectField(props: SelectFieldProps) {
   const form = useHandleForm(props);
 
-  const { label, description, error, ...rest } = {
+  const { label, description, error, hidden, ...rest } = {
     ...form,
     ...props,
   };
 
   return (
-    <Label label={label} description={description} error={error}>
+    <Label
+      label={label}
+      description={description}
+      error={error}
+      hidden={hidden}
+    >
       <Select {...rest} />
     </Label>
   );

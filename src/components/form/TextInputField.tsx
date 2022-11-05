@@ -12,16 +12,22 @@ export interface TextInputFieldProps {
   control?: Control<any>;
   name: string;
   defaultValue?: string;
+  hidden?: boolean;
 }
 export function TextInputField(props: TextInputFieldProps) {
   const form = useHandleForm(props);
-  const { label, description, error, ...rest } = {
+  const { label, description, error, hidden, ...rest } = {
     ...form,
     ...props,
   };
 
   return (
-    <Label label={label} description={description} error={error}>
+    <Label
+      label={label}
+      description={description}
+      error={error}
+      hidden={hidden}
+    >
       <Input {...rest} />
     </Label>
   );

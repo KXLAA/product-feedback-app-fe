@@ -16,16 +16,22 @@ export interface TextAreaFieldProps {
   required?: boolean;
   maxLength?: number;
   defaultValue?: string;
+  hidden?: boolean;
 }
 export function TextAreaField(props: TextAreaFieldProps) {
   const form = useHandleForm(props);
-  const { label, description, error, ...rest } = {
+  const { label, description, error, hidden, ...rest } = {
     ...form,
     ...props,
   };
 
   return (
-    <Label label={label} description={description} error={error}>
+    <Label
+      label={label}
+      description={description}
+      error={error}
+      hidden={hidden}
+    >
       <Textarea {...rest} />
 
       <RenderIf condition={!!rest.maxLength}>

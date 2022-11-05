@@ -14,13 +14,13 @@ export function MainLayout({ children }: MainLayoutProps) {
   const router = useRouter();
   const isHome = router.pathname === "/";
   return (
-    <div className={`${jost.className} flex min-h-screen pb-6`}>
-      <div className="relative mx-auto flex w-full max-w-[1110px] flex-col items-start justify-center gap-8 md:flex-row">
-        <RenderIf condition={isHome}>
-          <SideBar />
-        </RenderIf>
-        <div className="h-full w-full">{children}</div>
-      </div>
+    <div
+      className={`${jost.className} relative mx-auto flex min-h-screen w-full max-w-[1110px] items-start justify-center gap-8`}
+    >
+      <RenderIf condition={isHome}>
+        <SideBar />
+      </RenderIf>
+      <>{children}</>
     </div>
   );
 }
