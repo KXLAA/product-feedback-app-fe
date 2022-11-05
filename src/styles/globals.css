@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.radial-gradient {
+  background: radial-gradient(
+    128.88% 128.88% at 103.9% -10.39%,
+    #e84d70 0%,
+    #a337f6 53.09%,
+    #28a7ed 100%
+  );
+}
+
+body {
+  background: #f7f8fd;
+}

@@ -1,4 +1,9 @@
 import { Jost } from "@next/font/google";
+import { useRouter } from "next/router";
+
+import { RenderIf } from "@/components/common/RenderIf";
+import { SideBar } from "@/components/home/SideBar";
+import { FeedbackProvider } from "@/contexts/FeedbackContext";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -7,11 +12,16 @@ interface MainLayoutProps {
 const jost = Jost({ subsets: ["latin"] });
 
 export function MainLayout({ children }: MainLayoutProps) {
+  const router = useRouter();
+  const isHome = router.pathname === "/";
   return (
     <div
-      className={`${jost.className} flex min-h-screen flex-col overflow-hidden md:max-h-screen md:flex-row`}
+      className={`${jost.className} relative mx-auto flex min-h-screen w-full max-w-[1110px] items-start justify-center gap-8`}
     >
-      {children}
+      <RenderIf condition={isHome}>
+        <SideBar />
+      </RenderIf>
+      <FeedbackProvider>{children}</FeedbackProvider>
     </div>
   );
 }

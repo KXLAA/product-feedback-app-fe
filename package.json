@@ -16,6 +16,8 @@
     "test:ci": "jest --ci --passWithNoTests --runInBand -u"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.4",
+    "@hookform/resolvers": "^2.9.10",
     "@next-auth/prisma-adapter": "^1.0.4",
     "@next/font": "^13.0.1",
     "@prisma/client": "^4.5.0",
@@ -24,11 +26,17 @@
     "@trpc/next": "10.0.0-rc.0",
     "@trpc/react-query": "10.0.0-rc.0",
     "@trpc/server": "10.0.0-rc.0",
+    "class-variance-authority": "^0.2.4",
+    "framer-motion": "^7.6.4",
+    "lucide-react": "^0.98.0",
     "next": "13.0.0",
     "next-auth": "^4.15.0",
     "react": "18.2.0",
+    "react-aria": "^3.20.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.39.1",
     "superjson": "1.9.1",
+    "yup": "^0.32.11",
     "zod": "^3.18.0"
   },
   "devDependencies": {
