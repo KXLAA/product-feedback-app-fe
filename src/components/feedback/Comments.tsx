@@ -2,7 +2,7 @@ import React from "react";
 
 import { motion } from "@/components/animation/motion";
 import { Button } from "@/components/common/Button";
-import { RenderIf } from "@/components/common/RenderIf";
+import { Show } from "@/components/common/Show";
 import { Text } from "@/components/common/Text";
 import { Textarea } from "@/components/form/TextAreaField";
 
@@ -30,9 +30,9 @@ function Comment({ divider }: CommentProps) {
 
   return (
     <>
-      <RenderIf condition={divider}>
+      <Show when={divider}>
         <Divider />
-      </RenderIf>
+      </Show>
 
       <div className="relative flex w-full items-start gap-8">
         <div className="h-10 w-10 shrink-0 rounded-full bg-gray-400" />
@@ -58,7 +58,7 @@ function Comment({ divider }: CommentProps) {
             it currently has.
           </Text>
 
-          <RenderIf condition={isReplying}>
+          <Show when={isReplying}>
             <motion.div
               className="flex w-full items-start gap-4"
               initial={{ opacity: 0, y: 10 }}
@@ -69,7 +69,7 @@ function Comment({ divider }: CommentProps) {
               <Textarea className="h-20" name="reply" />
               <Button className="w-fit">Post Reply</Button>
             </motion.div>
-          </RenderIf>
+          </Show>
         </div>
       </div>
     </>

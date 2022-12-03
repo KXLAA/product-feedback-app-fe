@@ -20,12 +20,12 @@ interface ColumnProps {
   feedback: FeedbackType[];
 }
 export function Column({ id, heading, description, feedback }: ColumnProps) {
-  const { setNodeRef, isOver } = useDroppable({
+  const { setNodeRef } = useDroppable({
     id,
   });
 
   return (
-    <div className="flex w-full max-w-[350px] flex-col gap-8 ">
+    <div className="flex h-full w-full max-w-[350px] flex-col gap-8">
       <div>
         <Text size="xl" className="font-bold text-blue-400">
           {heading} ({feedback.length})
@@ -127,6 +127,8 @@ const feedbackCardStyles = cva(
     "flex-col",
     "gap-4",
     "bg-white",
+    "drop-shadow-md",
+    "cursor-grab active:cursor-grabbing",
   ],
   {
     variants: {

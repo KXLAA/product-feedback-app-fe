@@ -14,14 +14,9 @@ interface FeedbackCardProps {
   category: string;
 }
 
-export function FeedbackCard({
-  upvotes,
-  title,
-  content,
-  category,
-  comments,
-  id,
-}: FeedbackCardProps) {
+export function FeedbackCard(props: FeedbackCardProps) {
+  const { upvotes, title, content, category, comments, id } = props;
+
   return (
     <div className="flex w-full justify-between rounded bg-white py-7 px-8 shadow-sm">
       <div className="flex gap-10">

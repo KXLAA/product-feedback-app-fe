@@ -14,6 +14,6 @@
 
 - [ ] Implement recursive ui for threaded replies
 - [ ] Build out Edit Feedback page
-- [ ] Build out roadmap page
-- [ ] Multi container drag and drop on roadmap page
+- [x] Build out roadmap page
+- [x] Multi container drag and drop on roadmap page
 - [ ] Loading cards on roadmap and home page
