@@ -1,8 +1,8 @@
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import NextAuth, { type NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
 import DiscordProvider from "next-auth/providers/discord";
+import GitHubProvider from "next-auth/providers/github";
 
 import { env } from "@/env/server.mjs";
 import { prisma } from "@/server/db/client";
@@ -24,28 +24,12 @@ export const authOptions: NextAuthOptions = {
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
     }),
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        username: {
-          label: "Email",
-          type: "email",
-          placeholder: "Email address",
-        },
-        password: {
-          label: "Password",
-          type: "password",
-          placeholder: "Password",
-        },
-      },
-      authorize: async (credentials) => {
-        const user = await prisma.user.findUnique({
-          where: { email: credentials?.username },
-        });
-        return user;
-      },
+    GitHubProvider({
+      clientId: env.GITHUB_ID,
+      clientSecret: env.GITHUB_SECRET,
     }),
   ],
+  secret: process.env.SECRET,
 };
 
 export default NextAuth(authOptions);

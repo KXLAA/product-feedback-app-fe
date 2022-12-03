@@ -6,12 +6,14 @@ import { Text } from "@/components/common/Text";
 // import { EmptyFeedback } from "@/components/home/EmptyFeedback";
 import { FeedbackCard } from "@/components/home/FeedbackCard";
 import { InfoIcon } from "@/components/icons/InfoIcon";
+import { AuthShowcase } from "@/components/layout/AuthShowcase";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { mockFeedback } from "@/components/mocks";
 
 export default function Home() {
   return (
     <PageLayout>
+      <AuthShowcase />
       <Header className="sticky top-8 flex h-[72px] items-center justify-between px-6">
         <div>
           <Text
