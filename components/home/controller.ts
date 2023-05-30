@@ -1,6 +1,21 @@
 import React from "react";
 
+import { mockFeedback } from "@/components/mocks";
+import type { FeedbackType } from "@/types";
+
 export type Status = "planned" | "in-progress" | "live";
+
+export interface HomeController {
+  state: {
+    feedback: FeedbackType[];
+    filters: { label: string; value: string }[];
+    status: { label: string; value: number }[];
+  };
+  actions: {
+    handleFilterClick: (filter: string) => void;
+    isFilterActive: (filter: string) => boolean;
+  };
+}
 
 export function useHomeController() {
   const [selectedFilter, setSelectedFilter] = React.useState<string[]>([]);
@@ -21,14 +36,12 @@ export function useHomeController() {
   ];
 
   const handleFilterClick = (filter: string) => {
-    if (filter === "all") {
-      setSelectedFilter([]);
+    if (filter === "all") setSelectedFilter([]);
+
+    if (selectedFilter.includes(filter)) {
+      setSelectedFilter(selectedFilter.filter((f) => f !== filter));
     } else {
-      if (selectedFilter.includes(filter)) {
-        setSelectedFilter(selectedFilter.filter((f) => f !== filter));
-      } else {
-        setSelectedFilter([...selectedFilter, filter]);
-      }
+      setSelectedFilter([...selectedFilter, filter]);
     }
   };
 
@@ -40,6 +53,18 @@ export function useHomeController() {
   };
 
   return {
+    state: {
+      filters: FILTERS,
+      status: STATUS,
+      feedback: mockFeedback,
+    },
+    actions: {
+      handleFilterClick,
+      isFilterActive: (filter: string) => {
+        if (filter === "all") selectedFilter.length === 0;
+        return selectedFilter.includes(filter);
+      },
+    },
     filters: FILTERS,
     status: STATUS,
     handleFilterClick,

@@ -11,11 +11,28 @@ import { Text } from "@/components/common/Text";
 import type { Status } from "@/components/home/controller";
 import { useHomeController } from "@/components/home/controller";
 
-export function SideBar() {
-  const { filters, status, handleFilterClick, active } = useHomeController();
-  const { data: sessionData } = useSession();
+function FilterPanel() {
+  const { filters, handleFilterClick, active } = useHomeController();
 
-  console.log(sessionData);
+  return (
+    <div className="flex  w-full flex-wrap  rounded-[10px] bg-white p-6 shadow-sm">
+      {[...filters].map((filter) => (
+        <FilterTag
+          key={filter.value}
+          className="mb-3.5 ml-2 last:mb-0"
+          onClick={() => handleFilterClick(filter.value)}
+          active={active(filter.value)}
+        >
+          {filter.label}
+        </FilterTag>
+      ))}
+    </div>
+  );
+}
+
+export function SideBar() {
+  const { status } = useHomeController();
+  const { data: sessionData } = useSession();
 
   return (
     <FadeInOut className="scrollbar-y sticky flex w-full max-w-[255px] flex-col items-start gap-6 md:top-8">
@@ -46,18 +63,7 @@ export function SideBar() {
         />
       </div>
 
-      <div className="flex  w-full flex-wrap  rounded-[10px] bg-white p-6 shadow-sm">
-        {[...filters].map((filter) => (
-          <FilterTag
-            key={filter.value}
-            className="mb-3.5 ml-2 last:mb-0"
-            onClick={() => handleFilterClick(filter.value)}
-            active={active(filter.value)}
-          >
-            {filter.label}
-          </FilterTag>
-        ))}
-      </div>
+      <FilterPanel />
 
       <div className="flex w-full flex-col items-center gap-6 rounded-[10px] bg-white p-6 shadow-sm">
         <div className="flex w-full items-center justify-between">

@@ -1,14 +1,17 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/router";
 import React from "react";
 import type {
   Control,
   FieldErrorsImpl,
   UseFormRegister,
+  UseFormReset,
+  UseFormSetValue,
+  UseFormTrigger,
 } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
+import type { FeedbackType } from "@/types";
 import { FeedbackCategory, FeedbackStatus } from "@/types";
 
 const validationSchema = yup.object().shape({
@@ -28,11 +31,30 @@ type FeedbackFormValue = {
 };
 
 type FeedbackContextState = {
-  control: Control<FeedbackFormValue>;
-  register: UseFormRegister<FeedbackFormValue>;
-  errors: FieldErrorsImpl<FeedbackFormValue>;
-  onSubmit: () => void;
-  watch: (name?: string) => FeedbackFormValue;
+  state?: {
+    feedbackId: string;
+    feedback: FeedbackType;
+    feedbackLoading?: boolean;
+  };
+  actions: {
+    onSubmit: () => Promise<void>;
+    onReset: () => void;
+  };
+  form: {
+    control: Control<FeedbackFormValue>;
+    register: UseFormRegister<FeedbackFormValue>;
+    errors: FieldErrorsImpl<FeedbackFormValue>;
+    trigger: UseFormTrigger<FeedbackFormValue>;
+    reset: UseFormReset<FeedbackFormValue>;
+    watch: (name?: string) => FeedbackFormValue;
+    isDirty: boolean;
+    dirtyFields: Partial<
+      Readonly<{
+        [K in keyof FeedbackFormValue]: boolean | undefined;
+      }>
+    >;
+    setValue: UseFormSetValue<FeedbackFormValue>;
+  };
 };
 
 const FeedbackContext = React.createContext<FeedbackContextState>(
@@ -48,38 +70,18 @@ export function useFeedback() {
 }
 
 export function FeedbackProvider(props: { children: React.ReactNode }) {
-  const router = useRouter();
-  // const [selectedFilter, setSelectedFilter] = React.useState<string[]>([]);
-  // const handleFilter = (filter: string) => {
-  //   if (filter === "all") {
-  //     setSelectedFilter([]);
-  //   } else {
-  //     if (selectedFilter.includes(filter)) {
-  //       setSelectedFilter(selectedFilter.filter((f) => f !== filter));
-  //     } else {
-  //       setSelectedFilter([...selectedFilter, filter]);
-  //     }
-  //   }
-  // };
-
   const {
     control,
     register,
     handleSubmit,
     watch,
     reset,
-    formState: { errors },
+    trigger,
+    setValue,
+    formState: { errors, isDirty, dirtyFields },
   } = useForm<FeedbackFormValue>({
-    // defaultValues: getFormDefaultValues(theme),
     resolver: yupResolver(validationSchema),
   });
-
-  // const onReset = (defaultValue?: FeedbackFormValue) => {
-  //   reset({
-  //     ...{},
-  //     ...(defaultValue || {}),
-  //   });
-  // };
 
   const onSubmit = handleSubmit(async (values: FeedbackFormValue) => {
     console.log(values);
@@ -88,11 +90,21 @@ export function FeedbackProvider(props: { children: React.ReactNode }) {
   return (
     <FeedbackContext.Provider
       value={{
-        control,
-        register,
-        errors,
-        onSubmit,
-        watch,
+        form: {
+          control,
+          register,
+          errors,
+          trigger,
+          reset,
+          isDirty,
+          dirtyFields,
+          setValue,
+          watch,
+        },
+        actions: {
+          onSubmit,
+          onReset: reset,
+        },
       }}
     >
       {props.children}

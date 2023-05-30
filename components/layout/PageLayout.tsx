@@ -1,4 +1,5 @@
 import { FadeInOut } from "@/components/animation/FadeInOut";
+import { cx } from "@/utils/cx";
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -10,7 +11,9 @@ export function PageLayout(props: PageLayoutProps) {
   return (
     <FadeInOut
       noInitial={props.noInitial}
-      className={`m-8 mx-auto flex h-full w-full flex-col items-center ${props.className}`}
+      className={cx(
+        `m-8 mx-auto flex h-full w-full flex-col items-center ${props.className}`
+      )}
     >
       {props.children}
     </FadeInOut>

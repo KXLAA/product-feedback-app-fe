@@ -5,7 +5,11 @@ import type { InputField, SelectField, TextAreaField } from "./Form";
 import { FormFieldType } from "./Form";
 
 export function useFeedbackForm() {
-  const { control, errors } = useFeedback();
+  const {
+    form: { control, errors, reset },
+    actions: { onSubmit },
+  } = useFeedback();
+
   const heading: InputField = {
     type: FormFieldType.Input,
     name: "title",
@@ -57,7 +61,7 @@ export function useFeedbackForm() {
   const fields = [heading, content, status, category];
 
   return {
-    fields,
-    control,
+    form: { fields, control, reset },
+    crateFeedback: onSubmit,
   };
 }

@@ -5,7 +5,7 @@ import { GoBack } from "@/components/common/GoBack";
 import { Header } from "@/components/common/Header";
 import { Text } from "@/components/common/Text";
 import { PageLayout } from "@/components/layout/PageLayout";
-import { RoadmapGrid } from "@/components/roadmap/RoadmapGrid";
+import { RoadMapGrid } from "@/components/roadmap/RoadmapGrid";
 
 export default function Roadmap() {
   return (
@@ -21,7 +21,7 @@ export default function Roadmap() {
           <Button>+ Add Feedback</Button>
         </Link>
       </Header>
-      <RoadmapGrid />
+      <RoadMapGrid />
     </PageLayout>
   );
 }
